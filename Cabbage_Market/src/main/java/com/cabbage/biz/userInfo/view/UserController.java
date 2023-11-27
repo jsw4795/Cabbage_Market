@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,15 +22,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cabbage.biz.userInfo.user.UserService;
 import com.cabbage.biz.userInfo.user.UserVO;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RequestMapping("/user")
 @Controller
 public class UserController {
-	@Autowired
-	private UserService userService;
-
-	public UserController() {
-		System.out.println("========> UserController() 객체 생성");
-	}
+	
+	private final UserService userService;
 
 	@GetMapping("/login")
 	public String getLoginPage() {

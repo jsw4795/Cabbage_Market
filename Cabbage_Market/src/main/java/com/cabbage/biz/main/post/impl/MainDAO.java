@@ -15,10 +15,10 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@Repository()
+@Repository
 public class MainDAO {
 	
-	private SqlSessionTemplate mybatis;
+	private final SqlSessionTemplate mybatis;
 	
 	//글입력
     @Transactional

@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	@Autowired
-	private UserDAO userDAO;
+	private final UserDAO userDAO;
 
 	@Override
 	public UserVO getUser(UserVO vo) {

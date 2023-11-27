@@ -4,18 +4,19 @@ import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class MailController {
 	
-	@Autowired
-	JavaMailSenderImpl mailSender;
+	private final JavaMailSenderImpl mailSender;
 
 	//이메일 인증
 	@PostMapping("/user/EmailAuth")

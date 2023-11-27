@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class UserDAO {
 
 	@Autowired
-	private SqlSessionTemplate mybatis;
+	private final SqlSessionTemplate mybatis;
 
 	public UserVO getUser(UserVO vo) {
 		return mybatis.selectOne("userDAO.getUser", vo);
