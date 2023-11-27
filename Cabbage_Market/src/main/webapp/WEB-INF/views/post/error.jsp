@@ -14,13 +14,16 @@
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
-<nav class="navbar nav-global fixed-top navbar-expand-sm">
+<!-- <nav class="navbar nav-global fixed-top navbar-expand-sm">
         <div class="container">
             <a class="navbar-brand" href="javascript:history.back()">
                 <img src="/resources/pic/cabbage.png" width="100px" height="50px">
             </a>
         </div>
-    </nav>
+    </nav> -->
+    
+    <!-- header -->
+	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
 
     <div class="container container-sm container-detail">
         <p class="product-price" style="font-weight:bold;">잘못된 접근입니다.</p>

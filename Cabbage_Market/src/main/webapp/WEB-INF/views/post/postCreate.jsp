@@ -17,13 +17,16 @@
 
 </head>
 <body>
-	<nav class="navbar nav-global fixed-top navbar-expand-sm">
+	<!-- <nav class="navbar nav-global fixed-top navbar-expand-sm">
         <div class="container">
             <a class="navbar-brand" href="javascript:history.back()">
                 <img src="/resources/pic/cabbage.png" width="100px" height="50px">
             </a>
         </div>
-    </nav>
+    </nav> -->
+    
+    <!-- header -->
+	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
 
     <div class="sell-form">
         <form action="insertPost" method="post" enctype="multipart/form-data">

@@ -27,7 +27,7 @@
 			<header class="css-19lthbi">
 				<div class="container">
 					<!--TODO : main화면 URL 추가해야함 -->
-					<a href="#"><img src="/resources/pic/Cabbage_Logo.png"
+					<a href="/"><img src="/resources/pic/Cabbage_Logo.png"
 						alt="배추 로고" class="css-1nmpalf"></a>
 					<button class="common-bg-hover  css-1ca43ff">
 						<img class="menu-profile-img"

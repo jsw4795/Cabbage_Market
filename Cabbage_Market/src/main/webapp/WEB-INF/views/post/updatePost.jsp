@@ -21,14 +21,17 @@
 <script src="/resources/js/post/postUpdate.js"></script>
 </head>
 <body>
-	<nav class="navbar nav-global fixed-top navbar-expand-sm">
+	<!-- <nav class="navbar nav-global fixed-top navbar-expand-sm">
         <div class="container">
             <a class="navbar-brand" href="javascript:history.back()">
                 <img src="/resources/pic/cabbage.png" width="100px" height="50px">
             </a>
         </div>
     </nav>
-
+ -->
+ 
+ <!-- header -->
+	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
     <div class="sell-form">
         <form id="updateForm" action="updatePost" method="post" enctype="multipart/form-data">
         	<input type="hidden" name="postId" value="${post.postId }">	<!-- 세션으로 로그인한 아이디 할당 -->

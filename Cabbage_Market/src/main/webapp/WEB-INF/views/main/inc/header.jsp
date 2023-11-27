@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<link rel="stylesheet" href="/resources/css/main/main.css" />
 <link rel="stylesheet" href="/resources/css/main/main_included_jiwon.css" />
 <link rel="stylesheet" href="/resources/css/main/main_haeun.css" />
 <div id="gnb-root">
