@@ -162,6 +162,11 @@ public class PostController {
     	PostVO post = postService.getPayPost(vo);
     	String sellerNickname = userService.getUserById(post.getSellerId()).getUserName();
     	
+    	String fileName = postService.getOnePic(vo);
+    	if(fileName != null) {
+    		post.setFileName(fileName);
+    	}
+    	
     	model.addAttribute("userId", userId);
     	model.addAttribute("userNickname", userNickname);
     	model.addAttribute("sellerNickname", sellerNickname);

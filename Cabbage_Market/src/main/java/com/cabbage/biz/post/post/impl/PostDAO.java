@@ -15,6 +15,11 @@ public class PostDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	// 결제관련
+	public String getOnePic(PostVO vo) {
+		return mybatis.selectOne("postDAO.getOnePic", vo);
+	}
+	
 	/* 게시글 등록 기능 관련 */		//------------------------------------------------------
 	//게시글 등록
 	public void insertPost(PostVO vo) {

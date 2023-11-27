@@ -157,4 +157,10 @@
 		WHERE P.POST_ID = #{postId}
 	</select>
 	
+	<select id="getOnePic" parameterType="post" resultType="String">
+		SELECT FILE_NAME FROM FILES
+		WHERE FILE_ID = (SELECT FILE_ID FROM POST_PIC WHERE POST_ID = #{postId}
+		AND ROWNUM <![CDATA[<=]]> 1)
+	</select>
+	
 </mapper>

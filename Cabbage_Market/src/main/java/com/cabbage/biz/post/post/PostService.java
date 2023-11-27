@@ -35,4 +35,5 @@ public interface PostService {
 	
 	//결제 관련
 	PostVO getPayPost(PostVO vo);
+	String getOnePic(PostVO vo);
 }

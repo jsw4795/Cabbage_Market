@@ -151,18 +151,65 @@ const Toast = Swal.mixin({
 <title>결제 페이지</title>
 </head>
 <body>
-<h4>판매자 : ${sellerNickname }</h4>
-<h4>상품 게시글 제목 : ${post.postTitle }</h4>
-<c:set var="formattedPrice" value="${post.postPrice}" />
 
-<h4>원래 가격 : <fmt:formatNumber value="${post.postPrice}" type="currency" />원</h4> 
-<h4>결제 가격 : <fmt:formatNumber value="${finalPrice}" type="currency" />원</h4> 
+	<table class="table_basic order_cart_table">
+		<colgroup>
+			<col width="120px">
+			<col width="100px">
+			<col width="80px">
 
-<h4>결제 방법 선택</h4> 
+			<col width="100px" class="charge ">
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col">상품 정보</th>
+				<th scope="col">판매자</th>
+				<th scope="col">상품 가격</th>
+				<th scope="col">결제금액</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="td_product">
+					<div class="connect_img">
+					<c:choose>
+					    <c:when test="${not empty post.fileName}">
+					        <img src="/resources/pic/postPic/${post.fileName}">
+					    </c:when>
+					    <c:otherwise>
+					        <p>-</p>
+					    </c:otherwise>
+					</c:choose>
+					</div>
+					<div class="article_info connect_info">
+						<div class="box_product">
+							게시글 제목 <br> 
+							 <strong> <span style="color: #09f;"> </span> <span
+								style="color: #f00;"> </span> ${post.postTitle }
+							</strong>
+						</div>
+					</div>
+				</td>
+				<td><strong>${post.sellerId }</strong></td>
+
+				<td><fmt:formatNumber type="number" value="${post.postPrice }" />원</td>
+
+				<td class="price"><strong> <fmt:formatNumber type="number" value="${finalPrice }" />원</strong></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="info">
+			<ul class="list_section">
+				<li>· 상품에 대한 가격과 <span class="strong">결제 가격 변동</span>에 주의하세요.</li>
+				<li>· 반드시 판매자와 협의 후 결제를 진행해주세요.</li>
+				<li>· 판매자의 고의적인 행각을 제외한 본 상품에 대한 책임은 구매자 본인에게 있습니다.</li>
+			</ul>
+	</div>
+	<h4>결제 방법 선택</h4> 
 <hr>
 
-<button onclick="kakaoPay()">카카오페이</button>
-<button onclick="tossPay()">토스페이</button>
+<button onclick="kakaoPay()">카카오페이</button><br>
+<button onclick="tossPay()">토스페이</button><br>
 <button onclick="kgPay()">KG이니시스(카드결제)</button>
 	
 </body>
