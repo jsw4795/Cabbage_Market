@@ -8,15 +8,14 @@ import org.springframework.stereotype.Service;
 import com.cabbage.biz.userInfo.user.UserService;
 import com.cabbage.biz.userInfo.user.UserVO;
 
+import lombok.RequiredArgsConstructor;
 
+
+@RequiredArgsConstructor
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
-
-	public UserServiceImpl() {
-		System.out.println(">> UserServiceImpl() 객체 생성");
-	}
 
 	@Override
 	public UserVO getUser(UserVO vo) {

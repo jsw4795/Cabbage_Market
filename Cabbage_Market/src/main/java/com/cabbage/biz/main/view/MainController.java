@@ -29,7 +29,6 @@ public class MainController {
 	// 프로젝트 시작 시 실행
 	@RequestMapping(value = "/")
 	public String home(Model model, HttpSession session) {
-		System.out.println("홈컨트롤러 홈메소드 시작");
 		
 		if (null == session.getAttribute("userId")) {
 			List<PostVO> postS = postService.getPostListForNew();

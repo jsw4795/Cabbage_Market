@@ -8,16 +8,14 @@ import org.springframework.stereotype.Service;
 import com.cabbage.biz.main.post.PostService;
 import com.cabbage.biz.main.post.PostVO;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service("mainPostService")
 public class PostServiceImpl implements PostService {
 	@Autowired //타입이 일치하는 객체(인스턴스) 주입
 	private final MainDAO postDAO;
 	
-	public PostServiceImpl(MainDAO postDAO) {
-		System.out.println(">> PostServiceImpl() 객체 생성");
-        this.postDAO = postDAO;
-	}
-
 	@Override
 	public List<PostVO> getPostListForNew() {
 		return postDAO.getPostListForNew();	
@@ -74,24 +72,5 @@ public class PostServiceImpl implements PostService {
 		postDAO.updatePost(vo);
 		
 	}
-
-	@Override
-	public void deletePost(PostVO vo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public PostVO getPost(PostVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<PostVO> getPostList(PostVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 }
