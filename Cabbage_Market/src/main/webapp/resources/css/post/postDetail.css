@@ -200,6 +200,7 @@ select {
 
 .container-sm {
 	max-width: 680px;
+	margin-top: 160px;
 }
 
 .form-control {

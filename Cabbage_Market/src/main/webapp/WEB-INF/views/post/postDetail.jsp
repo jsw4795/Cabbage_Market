@@ -35,13 +35,16 @@
 		post : 게시글 정보 postPic : 해당 게시글 이미지  
 		user: 해당 게시글 판매자 정보 anotherPost: 판매자의 다른 상품
 -->
-    <nav class="navbar nav-global fixed-top navbar-expand-sm">
+   <!--  <nav class="navbar nav-global fixed-top navbar-expand-sm">
         <div class="container">
             <a class="navbar-brand" href="javascript:history.back()">
                 <img src="/resources/pic/cabbage.png" width="100px" height="50px">
             </a>
         </div>
-    </nav>
+    </nav> -->
+
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
 
     <div class="container container-sm container-detail">
     

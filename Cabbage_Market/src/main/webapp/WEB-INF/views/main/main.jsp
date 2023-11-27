@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,23 +22,6 @@
         // JavaScript를 사용하여 리다이렉션 수행
         window.location.href = url;
     }
-    
-    function login(id) {
-    	// 이동하고자 하는 URL 설정
-        var url = '/login?userId=' + id; // 실제로는 적절한 URL로 변경해야 합니다.
-
-        // JavaScript를 사용하여 리다이렉션 수행
-        window.location.href = url;
-    }
-    
-    function logout() {
-    	// 이동하고자 하는 URL 설정
-        var url = '/logout;' // 실제로는 적절한 URL로 변경해야 합니다.
-
-        // JavaScript를 사용하여 리다이렉션 수행
-        window.location.href = url;
-    }
-    
 </script>
 </head>
 <body class="hoian-kr">
@@ -72,7 +56,7 @@
 				</div>
 			</div>
 		</section>
-		<c:if test="${not empty userId and recomendPostById != null}">
+		<c:if test="${not empty userId and fn:length(recomendPostById) > 0}">
 		<section class="fleamarket-article-list">
 			<!-- <h1 class="text-center article-list-title">중고거래 인기매물</h1> -->
 			<div class="cards-wrap" style="width:1024px;">
@@ -469,41 +453,5 @@
 <script src="/resources/js/main/sse.js"></script>	
 
 </c:if>
-<script>
-// 페이지 로딩 후 실행할 함수
-document.addEventListener("DOMContentLoaded", function () {
-    // 숫자가 0이면 display를 none으로 설정
-    var alrimCount = document.getElementById('alrimCount');
-    if (alrimCount.innerText === '0') {
-        alrimCount.style.display = 'none';
-    }
-});
-
-function toggleDiv(type) {
-    var myPageDiv = document.getElementById(type);
-
-    if (type === 'alrim') {
-        var alrimCount = document.getElementById('alrimCount');
-
-        if (!myPageDiv.style.display || myPageDiv.style.display === 'none') {
-            myPageDiv.style.display = 'block';
-
-        	 // 'alrimCount' ID를 가진 요소가 존재하는지 확인
-            if (alrimCount) {
-                alrimCount.innerHTML = '0';
-                alrimCount.style.display = 'none';
-            }
-        } else {
-            myPageDiv.style.display = 'none';
-        }
-    } else {
-        if (!myPageDiv.style.display || myPageDiv.style.display === 'none') {
-            myPageDiv.style.display = 'block';
-        } else {
-            myPageDiv.style.display = 'none';
-        }
-    }
-}
-</script>
 </body>
 </html>
