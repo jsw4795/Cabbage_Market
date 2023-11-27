@@ -21,7 +21,9 @@ public class LoginCheckFilter implements Filter{
 	private static final String[] whiteList = 
 		{"/", "/user/login", "/user/logout", "/user/findAccount", "/user/signUp", "/user/loginIn", "/user/joinUser", "/user/ConfirmId"
 		, "/user/ConfirmNick", "/user/ConfirmPhone", "/user/findId", "/user/findPw", "/user/EmailAuth", "/user/EmailAuth2"
-		, "/search/*", "/post/getPost/*", "/resources/*"};
+		, "/search/*", "/post/getPost/*", "/resources/*"
+		
+		, "/chat/testIndex", "/chat/testRequest"};
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -39,7 +41,7 @@ public class LoginCheckFilter implements Filter{
 		if(isLoginCheckPath(requestURI)) {
 			HttpSession session = httpRequest.getSession(false);
 	        if (session == null || session.getAttribute("userId") == null) {
-	          httpResponse.sendRedirect("/login");
+	          httpResponse.sendRedirect("/user/login");
 	          return;
 	        }
 		}

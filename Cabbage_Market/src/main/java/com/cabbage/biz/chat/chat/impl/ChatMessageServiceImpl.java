@@ -71,21 +71,26 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 			chatMessage.setFinalPrice(finalPrice);
 		}
 		
+		String payStatus = chatMessage.getPayStatus();
 
 		// 삭제 요청, 결제 취소요청 일 때는 안해도 됨
-		if (!messageType.equals("DEL") && !chatMessage.getPayStatus().equals("CANCEL") && !chatMessage.getPayStatus().equals("FINISH")) {
+		if (!messageType.equals("DEL") ) {
 			
-			// 혹시나 1000자 넘어서 들어오면 차단
-			int contentLength = chatMessage.getMessageContent() == null ? 0 : chatMessage.getMessageContent().length();
-			if(contentLength > 1000 || contentLength < 1)
-				return;
+			if(!messageType.equals("PAY") || (messageType.equals("PAY") && payStatus.equals("WAITING"))) {
+				// 혹시나 1000자 넘어서 들어오면 차단
+				int contentLength = chatMessage.getMessageContent() == null ? 0 : chatMessage.getMessageContent().length();
+				if(contentLength > 1000 || contentLength < 1)
+					return;
+				
+				// 현재 chatMessageVO를 DB에 저장
+				chatDAO.insertChatMessage(chatMessage);
+				// 현재 채팅방의 상대 유저에 안읽은 메세지 개수 1 증가
+				chatDAO.updateUnreadMessageCount(chatMessage);
+				
+				chatMessage.setUploadPic(null); // 업로드 파일 데이터 삭제 하고 전송
+				
+			}
 			
-			// 현재 chatMessageVO를 DB에 저장
-			chatDAO.insertChatMessage(chatMessage);
-			// 현재 채팅방의 상대 유저에 안읽은 메세지 개수 1 증가
-			chatDAO.updateUnreadMessageCount(chatMessage);
-
-			chatMessage.setUploadPic(null); // 업로드 파일 데이터 삭제 하고 전송
 		}
 		
 		

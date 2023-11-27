@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notiDAO">
+
+	<!-- 관심상품 포스팅 되었는지 확인하기 -->
+	<select id="checkWishKeyWord" parameterType="map" resultType="map">
+	SELECT wish_keyword.user_id, MAX(wish_keyword.wish_keyword) AS wish_keyword
+    FROM post
+    JOIN wish_keyword 
+    ON #{postTitle} LIKE '%' || wish_keyword.wish_keyword || '%' 
+    OR #{postContent} LIKE '%' || wish_keyword.wish_keyword || '%'
+    GROUP BY wish_keyword.user_id
+	</select>
+	
+	<insert id="insertNoti" parameterType="noti">
+	<selectKey keyProperty="notiId" resultType="Long" order="AFTER">
+        SELECT noti_id_seq.NEXTVAL FROM DUAL
+    </selectKey>
+	INSERT INTO NOTIFICATION (
+	  NOTI_ID,
+	  USER_ID,
+	  POST_ID,
+	  NOTI_TYPE,
+	  NOTI_CONTENT,
+	  NOTI_URL,
+	  NOTI_DATE
+	) VALUES
+		(noti_id_seq.NEXTVAL, 
+		#{userId}, #{postId}, #{notiType}, #{notiContent}, #{notiUrl}, 
+		SYSDATE
+	)
+	</insert>
+
+
+      
+</mapper>
+	

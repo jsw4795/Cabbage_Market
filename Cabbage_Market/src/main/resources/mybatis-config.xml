@@ -22,6 +22,10 @@
 		<typeAlias type="com.cabbage.biz.post.post.PostVO" alias="post" />
 	<!-- ==================================== User ===================================== -->
 	<typeAlias type="com.cabbage.biz.userInfo.user.UserVO" alias="user"/>
+	<!-- ==================================== Main ===================================== -->
+		<typeAlias type="com.cabbage.biz.main.post.PostVO" alias="mainPost"/>
+	<!-- ==================================== Noti ===================================== -->
+		<typeAlias type="com.cabbage.biz.noti.NotiVO" alias="noti"/>
 	</typeAliases>
  	
  
@@ -35,6 +39,12 @@
 		<mapper resource="mappings/post/PostMapper.xml"/>
 	<!-- ==================================== User ===================================== -->
 		<mapper resource="mappings/user/UserMapper.xml"/>
+	<!-- ==================================== User ===================================== -->
+		<mapper resource="mappings/user/UserMapper.xml"/>
+	<!-- ==================================== Main ===================================== -->
+		<mapper resource="mappings/main/PostMapper.xml"/>
+	<!-- ==================================== Noti ===================================== -->
+		<mapper resource="mappings/noti/NotiMapper.xml"/>
 	</mappers>
 	
 	
