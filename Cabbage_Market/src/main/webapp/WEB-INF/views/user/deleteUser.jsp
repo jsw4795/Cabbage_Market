@@ -43,7 +43,7 @@
 		<div class="find">
 			<div class="imgback">
 				<img class="back"
-					src="/resources/pic/profilePic/arrow-left-solid.svg" id="back">
+					src="/resources/pic/img/arrow-left-solid.svg" id="back">
 			</div>
 			<div class="findinfo">
 				<h2>회원탈퇴</h2>

@@ -106,33 +106,34 @@
 				USER_PHONE = #{userPhone}
 		WHERE USER_ID = #{userId}
 	</update>
-	
-	<insert id="profileUpload" parameterType="user">
-		<selectKey keyProperty="fileId" resultType="int" order="BEFORE">
-        SELECT NVL(MAX(FILE_ID), 0) + 1 AS FILE_ID FROM FILES
-    	</selectKey>
-		INSERT INTO FILES (USER_ID, FILE_ID, FILE_NAME)
-    	VALUES (#{userId}, (SELECT NVL(MAX(FILE_ID),0) + 1 FROM FILES), #{fileName})
-	</insert>	
-		
-	<insert id="profileUpload2" parameterType="user">
-		INSERT INTO PROFILE_PIC(USER_ID, FILE_ID)
-    	VALUES (#{userId}, #{fileId})
-	</insert>
-	
-	<update id="profileUpload3" parameterType="user">
-		UPDATE USERS
-			SET USER_PROFILE = #{fileName} 
-		WHERE USER_ID = #{userId}
-	</update>
+	<update id="profileUpload" parameterType="user">
+		UPDATE FILES
+		SET 
+			FILE_NAME = #{fileName}
+		WHERE
+			FILE_ID = (SELECT FILE_ID FROM PROFILE_PIC WHERE USER_ID = #{userId})
+	</update>	
 	
 	<delete id="deleteUser" parameterType="user">
 		DELETE FROM USERS WHERE USER_ID = #{userId};
 	</delete>
 	
 	<insert id="wishKeyword">
-		INSERT INTO WISH_KEYWORD(USER_ID, FILE_ID)
+		INSERT INTO WISH_KEYWORD(USER_ID, WISH_KEYWORD)
     	VALUES (#{userId}, #{wishKeyword})
 	</insert>
+	
+	<delete id="deleteWish" parameterType="user">
+		DELETE FROM POST_WISH_LIST WHERE USER_ID = #{userId} AND POST_ID = #{postId}
+	</delete>
+	
+	<delete id="deleteWishKeyword" parameterType="user">
+		DELETE FROM WISH_KEYWORD WHERE USER_ID = #{userId} AND WISH_KEYWORD = #{wishKeyword}
+	</delete>
+	
+	<select id="keywordList" parameterType="user" resultType="user">
+		SELECT * FROM WISH_KEYWORD 
+		WHERE USER_ID = #{userId}
+	</select>
 	
 </mapper>

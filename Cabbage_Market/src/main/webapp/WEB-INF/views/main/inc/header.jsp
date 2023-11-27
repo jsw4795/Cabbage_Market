@@ -99,21 +99,21 @@
 					</button>
 				</c:if>
 				<c:if test="${empty userId}">
-					<button type="button" onclick="login('test1')"
+					<a type="button" href="/user/login"
 						class="button-haeun1">
 						<img class="img-haeun4" src="/resources/pic/img/user_icon.png"
 							width="23" height="25" alt="마이페이지 버튼 이미지">
-					</button>
+					</a>
 
 				</c:if>
 				<c:if test="${not empty userId}">
 					<div class="none-haeun" id="my">
 						<!-- style="z-index: 1000; position:fixed; padding-top:120px;" -->
 						<ul class="none-haeun-ul">
-							<li class="none-haeun-li"><a class="none-haeun-a" href="#">
+							<li class="none-haeun-li"><a class="none-haeun-a" href="/user/myInfo">
 									마이페이지 </a></li>
 							<li style="margin-top: 4px;"><a class="none-haeun-a"
-								onclick="logout()" href="#"> 로그아웃 </a></li>
+								onclick="logout()" href="/user/logout"> 로그아웃 </a></li>
 						</ul>
 					</div>
 

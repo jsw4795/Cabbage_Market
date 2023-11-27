@@ -28,11 +28,10 @@ public interface UserService {
 
 	void profileUpload(UserVO vo);
 	
-	void profileUpload2(UserVO vo);
-	
-	void profileUpload3(UserVO vo);
-	
 	void userUpdate(UserVO vo);
 	
 	void wishKeyword(UserVO vo);
+	List<UserVO> keywordList(UserVO vo);
+	void deleteWish(UserVO vo);
+	void deleteWishKeyword(UserVO vo);
 }

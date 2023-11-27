@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.util.PatternMatchUtils;
 
-@WebFilter(urlPatterns = "/*", asyncSupported = true)
+
 public class LoginCheckFilter implements Filter{
 	// TODO : 추가 필요
 	private static final String[] whiteList = 

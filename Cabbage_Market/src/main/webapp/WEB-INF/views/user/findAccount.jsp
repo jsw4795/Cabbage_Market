@@ -22,7 +22,7 @@
 	<div class="wrap">
 		<div class="find">
 			<form id="findIdForm" action="findId" method="post">
-				<img class="back" src="/resources/pic/profilePic/arrow-left-solid.svg" id="back">
+				<img class="back" src="/resources/pic/img/arrow-left-solid.svg" id="back">
 				<h2>아이디 찾기</h2>
 				<div class="findinfo">
 					<h4>이름</h4>
@@ -43,7 +43,7 @@
 
 		<div class="find">
 			<form id="findPwForm" action="findPw" method="post">
-				<img class="back" src="/resources/pic/profilePic/arrow-left-solid.svg" id="back2">
+				<img class="back" src="/resources/pic/img/arrow-left-solid.svg" id="back2">
 				<h2>비밀번호 찾기</h2>
 				<div class="findinfo">
 					<h4>아이디</h4>

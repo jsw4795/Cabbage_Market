@@ -78,26 +78,32 @@ public class UserServiceImpl implements UserService {
 		userDAO.profileUpload(vo);
 	}
 	
-	@Override
-	public void profileUpload2(UserVO vo) {
-		userDAO.profileUpload2(vo);
-	}
-	
-	@Override
-	public void profileUpload3(UserVO vo) {
-		userDAO.profileUpload3(vo);
-	}
 	
 	@Override
 	public void userUpdate(UserVO vo) {
 		userDAO.userUpdate(vo);
 	}
 	
+	
 	@Override
 	public void wishKeyword(UserVO vo) {
 		userDAO.wishKeyword(vo);
 	}
 	
+	@Override
+	public List<UserVO> keywordList(UserVO vo) {
+		return userDAO.keywordList(vo);
+	}
+	
+	@Override
+	public void deleteWish(UserVO vo) {
+		userDAO.deleteWish(vo);
+	}
+	
+	@Override
+	public void deleteWishKeyword(UserVO vo) {
+		userDAO.deleteWishKeyword(vo);
+	}
 	
 	
 }

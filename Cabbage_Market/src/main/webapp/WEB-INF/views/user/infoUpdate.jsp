@@ -17,13 +17,13 @@
 		<!-- 1. 로고 -->
 		<img class="logo" src="/resources/pic/Cabbage_Logo.png" id="logo">
 
-		<form action="userUpdate" method="post" accept-charset="UTF-8">
+		<form action="userUpdate" method="post">
 
 			<!-- 2. 필드 -->
 			<div class="field">
 				<b>아이디</b> <span class="placehold-text"> <input type="text"
 					name="userId" id="userId" type="text"
-					autofocus value=${user.userId} disabled="disabled"></span> <label id="label1"></label>
+					autofocus value='${user.userId}' disabled="disabled"></span> <label id="label1"></label>
 			</div>
 			
 			<div class="field">
@@ -33,7 +33,7 @@
 			</div>
 			
 			<div class="field">
-				<b>이메일</b> <input type="text" name="userEmail" id="userEmail" maxlength="30" value=${user.userEmail} disabled="disabled"> <label
+				<b>이메일</b> <input type="text" name="userEmail" id="userEmail" maxlength="30" value='${user.userEmail}' disabled="disabled"> <label
 					id="label5"></label>
 			</div>
 			
@@ -51,7 +51,7 @@
 
 			<div class="field">
 				<b>닉네임</b> <input type="text" placeholder="닉네임을 입력해주세요"
-					name="userNickname" id="userNickname" maxlength="16" value=${user.userNickname}> <label
+					name="userNickname" id="userNickname" maxlength="16" value='${user.userNickname}'> <label
 					id="label2"></label>
 			</div>
 
@@ -59,7 +59,7 @@
 				<b>휴대전화</b>
 				<div>
 					<input type="text" placeholder="전화번호를 입력주세요" name="userPhone"
-						id="userPhone" maxlength="11" value=${user.userPhone}> <label id="label3"></label>
+						id="userPhone" maxlength="11" value='${user.userPhone}'> <label id="label3"></label>
 				</div>
 			</div>
 

@@ -1194,7 +1194,7 @@ body.global footer .social-links a {
 /* line 6, app/assets/stylesheets/home/articles/cards.scss */
 .cards-wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
   margin: 0 auto;

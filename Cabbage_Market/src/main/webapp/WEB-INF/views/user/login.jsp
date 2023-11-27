@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 		<div class="login">
 			<form action="loginIn" method="post">
-				<img class="back" src="/resources/pic/profilePic/arrow-left-solid.svg" id="back">
+				<img class="back" src="/resources/pic/img/arrow-left-solid.svg" id="back">
 				<h2>로그인</h2>
 				<div class="login_sns">
 					<li><a href=""><i class="fab fa-instagram"></i></a></li>

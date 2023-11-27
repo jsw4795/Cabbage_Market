@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 숫자가 0이면 display를 none으로 설정
   var alrimCount = document.getElementById("alrimCount");
-  if (alrimCount.innerText === "0") {
+  if (alrimCount != null && alrimCount.innerText === "0") {
     alrimCount.style.display = "none";
   }
 });

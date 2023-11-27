@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,6 @@ public class UserController {
 		vo.setUserId((String)session.getAttribute("userId"));
         // userId로 사용자 정보를 가져오는 예시
 		UserVO user = userService.userInfo(vo);
-		System.out.println("filename: " + user.getUserProfile());
 		if (user.getUserProfile() == null) {
 			user.setUserProfile("profile_default.png");
 		}
@@ -78,7 +78,6 @@ public class UserController {
 		vo.setUserId(id);
         // userId로 사용자 정보를 가져오는 예시
 		UserVO user = userService.userInfo(vo);
-		System.out.println("filename: " + user.getUserProfile());
 		if (user.getUserProfile() == null) {
 			user.setUserProfile("profile_default.png");
 		}
@@ -98,7 +97,7 @@ public class UserController {
 		return "user/infoUpdate";
 	}
 	
-	@RequestMapping("/userUpdate")
+	@GetMapping("/userUpdate")
 	public String userUpdate(UserVO vo) {
 		userService.userUpdate(vo);
 		return "redirect:/user/myInfo";
@@ -109,6 +108,9 @@ public class UserController {
 	    // 기존 정보를 가져오기 위해 userId로 DB에서 정보 조회
 		vo.setUserId((String)session.getAttribute("userId"));
 		UserVO user = userService.userInfo(vo);
+		
+		System.out.println(">> userVO : " + vo);
+		System.out.println(">> user : " + user);
 
 	    // 기존 정보를 유지하기 위해 빈 값인 경우 기존 정보로 대체
 	    if (vo.getUserNickname() == null || vo.getUserNickname().isEmpty()) {
@@ -147,10 +149,13 @@ public class UserController {
 		UserVO user = userService.getUser(vo);
 
 		if (user != null) {
-			System.out.println(">> 로그인 성공!!!");
+			if ("WITHDRAWAL".equals(user.getUserStatus())) {
+	            redirectAttributes.addFlashAttribute("message", "탈퇴된 회원입니다.");
+	            return "redirect:/user/login";
+	        }
+			
 			session.setAttribute("userId", user.getUserId());
-			System.out.println("레그데이트 : " + user.getUserRegdate());
-			return "redirect:/user/myInfo";
+			return "redirect:/";
 		} else {
 			redirectAttributes.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해주세요.");
 			return "redirect:/user/login";
@@ -159,15 +164,13 @@ public class UserController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		System.out.println(">>> 로그아웃 처리");
 		session.invalidate();
 
-		return "login";
+		return "redirect:/user/login";
 	}
 
 	@RequestMapping("/joinUser")
 	public String joinAction(UserVO vo) {
-		System.out.println(vo);
 		userService.joinUser(vo);
 		return "redirect:/user/login";
 	}
@@ -176,7 +179,6 @@ public class UserController {
 	@PostMapping("/ConfirmId")
 	@ResponseBody
 	public ResponseEntity<Boolean> confirmId(String userId) {
-		System.out.println(userId);
 		boolean result = true;
 		if (userId.trim().isEmpty()) {
 			result = false;
@@ -195,7 +197,6 @@ public class UserController {
 	@PostMapping("/ConfirmNick")
 	@ResponseBody
 	public ResponseEntity<Boolean> confirmNick(String userNickname) {
-		System.out.println(userNickname);
 		boolean result = true;
 		if (userNickname.trim().isEmpty()) {
 			result = false;
@@ -282,30 +283,24 @@ public class UserController {
 	@RequestMapping("/purchaseList")
 	@ResponseBody
 	public List<UserVO> purchaseList(UserVO vo, HttpSession session) {
-		System.out.println("purchaseList 실행");
 		vo.setUserId((String)session.getAttribute("userId"));
 		List<UserVO> purchaseList = userService.purchaseList(vo);
-		System.out.println("purchaseList : " + purchaseList);
 		return purchaseList;
 	}
 	
 	@RequestMapping("/salesList")
 	@ResponseBody
 	public List<UserVO> salesList(UserVO vo, HttpSession session) {
-		System.out.println("saleList 실행");
 		vo.setUserId((String)session.getAttribute("userId"));
 		List<UserVO> salesList = userService.salesList(vo);
-		System.out.println("salesList : " + salesList);
 		return salesList;
 	}
 	
 	@RequestMapping("/wishList")
 	@ResponseBody
 	public List<UserVO> wishList(UserVO vo, HttpSession session) {
-		System.out.println("wishList 실행");
 		vo.setUserId((String)session.getAttribute("userId"));
 		List<UserVO> wishList = userService.wishList(vo);
-		System.out.println("wishList : " + wishList);
 		return wishList;
 	}
 	
@@ -313,34 +308,84 @@ public class UserController {
 	public String profileUpload(MultipartFile uploadFile, HttpSession session, UserVO vo) throws IllegalStateException, IOException {
 		
 		uploadFile = vo.getUploadFile();
-		System.out.println("> uploadFile : " + uploadFile);
 		
 		if (uploadFile == null) {
-			System.out.println("::: uploadFile 파라미터가 전달되지 않은 경우");
+			//System.out.println("::: uploadFile 파라미터가 전달되지 않은 경우");
 		} else if (uploadFile.isEmpty()) {
-			System.out.println("::: 전달받은 파일 데이터가 없는 경우");
+			//System.out.println("::: 전달받은 파일 데이터가 없는 경우");
 		} else { //업로드 파일이 존재하는 경우
 			
 			//원본파일명 구하기
 			String filename = uploadFile.getOriginalFilename();
-			System.out.println("::: 원본파일명 : " + filename);
 			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
 			String savedFilename = "PROFILE_PIC" + UUID.randomUUID().toString() + extension;
-			System.out.println("::: 저장파일명 : " + savedFilename);
 			
 			//물리적 파일 복사
-			String destPathFile = "C:/MyStudy/70_Spring/Cabbage_Market/src/main/webapp/resources/pic/profilePic/" + savedFilename;
+			String destPathFile = "/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/profilePic/" + savedFilename;
 			uploadFile.transferTo(new File(destPathFile));
 			vo.setFileName(savedFilename);
 			vo.setUserId((String)session.getAttribute("userId"));
 		}
 			userService.profileUpload(vo);
-			userService.profileUpload2(vo);
-			userService.profileUpload3(vo);
 			
 			return "redirect:/user/myInfo";
 			
 	}
+	
+	@RequestMapping("/wishKeyword")
+	public String wishKeyword(UserVO vo, HttpSession session) {
+		vo.setUserId((String)session.getAttribute("userId"));
+		userService.wishKeyword(vo);
+		return "redirect:/user/myInfo";
+	}
+	
+	
+	  //관심 키워드 삭제
+    @RequestMapping("/deleteWishKeyword")
+	@ResponseBody
+    public String deleteWishKeyword(HttpServletRequest request, HttpSession session, UserVO vo) {
+    	
+    	vo.setUserId((String)session.getAttribute("userId"));
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
+        
+        for (int i = 0; i < size; i++) {
+            vo.setWishKeyword(ajaxMsg[i]);
+            userService.deleteWishKeyword(vo);
+        }
+        
+        return "redirect:/user/myInfo";
+    }
+	
+
+	
+	@RequestMapping("/keywordList")
+	@ResponseBody
+	public List<UserVO> keywordList(UserVO vo, HttpSession session) {
+		System.out.println("keywordList 실행");
+		vo.setUserId((String)session.getAttribute("userId"));
+		List<UserVO> keywordList = userService.keywordList(vo);
+		System.out.println("keywordList : " + keywordList);
+		return keywordList;
+	}
+	
+	
+	  //게시물 선택삭제
+    @RequestMapping("/deleteWish")
+	@ResponseBody
+    public String deleteWish(HttpServletRequest request, HttpSession session, UserVO vo) {
+    	
+    	vo.setUserId((String)session.getAttribute("userId"));
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
+        
+        for (int i = 0; i < size; i++) {
+            vo.setPostId(Integer.parseInt(ajaxMsg[i]));
+            userService.deleteWish(vo);
+        }
+        
+        return "redirect:/user/myInfo";
+    }
 	
 
 

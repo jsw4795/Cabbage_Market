@@ -10,6 +10,9 @@
 	<insert id="insertPost" parameterType="post">
 		INSERT INTO POST (POST_ID, SELLER_ID, POST_CAT_ID, POST_TITLE, POST_PRICE, POST_CONTENT)
 		VALUES(POST_ID_SEQ.NEXTVAL, #{sellerId}, #{postCatId}, #{postTitle}, #{postPrice}, #{postContent})
+		<selectKey keyProperty="postId" resultType="long" order="AFTER">
+			SELECT POST_ID_SEQ.CURRVAL POST_ID FROM DUAL
+		</selectKey>
 	</insert>
 	<!-- 가장 최근 POST_ID 찾기 -->
 	<select id="getMaxPostId" resultType="int">

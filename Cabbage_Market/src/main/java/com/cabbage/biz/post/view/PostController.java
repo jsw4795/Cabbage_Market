@@ -251,7 +251,7 @@ public class PostController {
     			if(fileName.trim() != "") {
     			String saveFileName = "post" + maxPostId + "_" + UUID.randomUUID().toString() + "." + fileExtension;
     			
-    			list.transferTo(new File("D:\\MyStudy\\70_Spring\\Cabbage_Market\\src\\main\\webapp\\resources\\pic\\postPic\\" + saveFileName));
+    			list.transferTo(new File("/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/postPic" + saveFileName));
     			filesList.add(saveFileName);
     			}
     		}
@@ -271,7 +271,7 @@ public class PostController {
     		
     	}
     	
-    	return "redirect:/post/getPostList";
+    	return "redirect:/post/getPost/"+vo.getPostId();
     }
     
     @RequestMapping("/getPostList")
