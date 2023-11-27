@@ -552,3 +552,7 @@
 .button-haeun1 {
 	text-decoration: none;
 }   
+.button-haeun1:hover {
+	text-decoration: none;
+	color: black;
+}   
