@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userDAO">
+
+	<select id="getUser" parameterType="user"
+		resultType="user">
+		SELECT * FROM USERS WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
+	</select>
+	
+	<insert id="joinUser"  parameterType="user">
+		INSERT INTO USERS(USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_PHONE, USER_EMAIL)
+		VALUES(#{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userPhone}, #{userEmail})
+	</insert>
+	
+	<select id="selectId" resultType="boolean">	
+		SELECT COUNT(*) FROM USERS WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="selectNick" resultType="boolean">
+		SELECT COUNT(*) FROM USERS WHERE USER_NICKNAME = #{userNickname}
+	</select>
+	
+	<select id="selectPhone" resultType="boolean">
+		SELECT COUNT(*) FROM USERS WHERE USER_Phone = #{userPhone}
+	</select>
+	
+	<select id="findId" parameterType="user" resultType="user">
+		SELECT USER_ID FROM USERS 
+		WHERE USER_NAME = #{userName} 
+		AND
+		USER_PHONE = #{userPhone}
+	</select>
+	
+	<select id="findPw" parameterType="user" resultType="user">
+		SELECT USER_PASSWORD FROM USERS 
+		WHERE USER_EMAIL = #{userEmail}
+		AND
+		USER_ID = #{userId}
+	</select>
+	
+	<select id="purchaseList" parameterType="user" resultType="user">
+		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS
+		FROM USERS U, POST P,
+    	POST_PIC PP, FILES F
+		WHERE U.USER_ID = P.BUYER_ID
+		AND
+    	P.POST_ID = PP.POST_ID
+		AND
+    	F.FILE_ID = PP.FILE_ID
+		AND
+		U.USER_ID = #{userId}
+		ORDER BY P.POST_ID DESC
+	</select>
+	
+	<select id="salesList" parameterType="user" resultType="user">
+		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS
+		FROM USERS U, POST P,
+		POST_PIC PP, FILES F
+		WHERE U.USER_ID = P.SELLER_ID
+		AND
+		P.POST_ID = PP.POST_ID
+		AND
+		F.FILE_ID = PP.FILE_ID
+		AND
+		U.USER_ID = #{userId}
+		ORDER BY P.POST_ID DESC
+	</select>	
+	
+	<select id="wishList" parameterType="user" resultType="user">
+		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS
+		FROM USERS U, POST P, 
+		POST_PIC PP, POST_WISH_LIST PL, FILES F
+		WHERE PP.POST_ID = PL.POST_ID
+		AND
+    	P.POST_ID = PP.POST_ID
+		AND
+    	U.USER_ID = PL.USER_ID
+		AND
+    	F.FILE_ID = PP.FILE_ID
+		AND
+		U.USER_ID = #{userId}
+		ORDER BY P.POST_ID DESC
+	</select>
+	
+	<select id="userInfo" parameterType="user" resultType="user">
+		SELECT U.*, F.FILE_NAME USER_PROFILE
+		FROM 
+			USERS U
+		INNER JOIN
+			PROFILE_PIC P
+		ON P.USER_ID = U.USER_ID
+		INNER JOIN
+			FILES F
+		ON F.FILE_ID = P.FILE_ID
+		
+		WHERE 
+			U.USER_ID = #{userId}
+	</select>
+	
+	<update id="userUpdate" parameterType="user">
+		UPDATE USERS
+			SET USER_NICKNAME = #{userNickname},
+				USER_PASSWORD = #{userPassword},
+				USER_PHONE = #{userPhone}
+		WHERE USER_ID = #{userId}
+	</update>
+	
+	<insert id="profileUpload" parameterType="user">
+		<selectKey keyProperty="fileId" resultType="int" order="BEFORE">
+        SELECT NVL(MAX(FILE_ID), 0) + 1 AS FILE_ID FROM FILES
+    	</selectKey>
+		INSERT INTO FILES (USER_ID, FILE_ID, FILE_NAME)
+    	VALUES (#{userId}, (SELECT NVL(MAX(FILE_ID),0) + 1 FROM FILES), #{fileName})
+	</insert>	
+		
+	<insert id="profileUpload2" parameterType="user">
+		INSERT INTO PROFILE_PIC(USER_ID, FILE_ID)
+    	VALUES (#{userId}, #{fileId})
+	</insert>
+	
+	<update id="profileUpload3" parameterType="user">
+		UPDATE USERS
+			SET USER_PROFILE = #{fileName} 
+		WHERE USER_ID = #{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="user">
+		DELETE FROM USERS WHERE USER_ID = #{userId};
+	</delete>
+	
+	<insert id="wishKeyword">
+		INSERT INTO WISH_KEYWORD(USER_ID, FILE_ID)
+    	VALUES (#{userId}, #{wishKeyword})
+	</insert>
+	
+</mapper>
