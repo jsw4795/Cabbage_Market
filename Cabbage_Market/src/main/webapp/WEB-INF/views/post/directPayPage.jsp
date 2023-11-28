@@ -190,7 +190,7 @@ const Toast = Swal.mixin({
 						</div>
 					</div>
 				</td>
-				<td><strong>${post.sellerId }</strong></td>
+				<td><strong>${sellerNickname }</strong></td>
 
 				<td><fmt:formatNumber type="number" value="${post.postPrice }" />원</td>
 

@@ -71,24 +71,7 @@
 			<div class="div-haeun6">
 				<!-- <span> -->
 				<c:if test="${not empty userId}">
-					<div class="none-haeun" id="alrim">
-
-						<ul class="none-haeun-ul" id="alrimList"
-							style="max-height: 430px; overflow-y: auto;">
-							<li
-								style="margin: 0px; margin-left: 17px; margin-right: 17px; height: 36px; margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
-								<span> 알림 </span>
-								<button style="margin: 0;">
-									<img class="img-haeun4" src="/resources/pic/img/user_icon.png"
-										width="23" height="25" alt="마이페이지 버튼 이미지">
-								</button>
-								<button style="margin: 0;">
-									<img class="img-haeun4" src="/resources/pic/img/user_icon.png"
-										width="23" height="25" alt="마이페이지 버튼 이미지">
-								</button>
-							</li>
-						</ul>
-					</div>
+					
 					<button type="button" class="button-haeun1"
 						onclick="toggleDiv('alrim')">
 						<img class="img-haeun4" src="/resources/pic/img/noti_icon.png"
@@ -96,6 +79,18 @@
 						<div id="someElement">
 							<span class="alrim" id="alrimCount"> 0 </span>
 						</div>
+						
+						<div class="none-haeun" id="alrim">
+
+						<ul class="none-haeun-ul" id="alrimList"
+							style="max-height: 430px; overflow-y: auto;">
+							<li
+								style="margin: 0px; margin-left: 17px; margin-right: 17px; height: 36px; margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+								<span> 알림 </span>
+								
+							</li>
+						</ul>
+					</div>
 					</button>
 				</c:if>
 				<c:if test="${empty userId}">
@@ -107,7 +102,13 @@
 
 				</c:if>
 				<c:if test="${not empty userId}">
-					<div class="none-haeun" id="my">
+					
+
+					<button type="button" onclick="toggleDiv('my')"
+						class="button-haeun1">
+						<img class="img-haeun4" src="/resources/pic/img/user_icon.png"
+							width="23" height="25" alt="마이페이지 버튼 이미지">
+						<div class="none-haeun" id="my">
 						<!-- style="z-index: 1000; position:fixed; padding-top:120px;" -->
 						<ul class="none-haeun-ul">
 							<li class="none-haeun-li"><a class="none-haeun-a" href="/user/myInfo">
@@ -116,11 +117,6 @@
 								onclick="logout()" href="/user/logout"> 로그아웃 </a></li>
 						</ul>
 					</div>
-
-					<button type="button" onclick="toggleDiv('my')"
-						class="button-haeun1">
-						<img class="img-haeun4" src="/resources/pic/img/user_icon.png"
-							width="23" height="25" alt="마이페이지 버튼 이미지">
 					</button>
 
 				</c:if>
