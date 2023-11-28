@@ -26,6 +26,9 @@
 		<typeAlias type="com.cabbage.biz.main.post.PostVO" alias="mainPost"/>
 	<!-- ==================================== Noti ===================================== -->
 		<typeAlias type="com.cabbage.biz.noti.NotiVO" alias="noti"/>
+	<!-- ==================================== QA ===================================== -->
+		<typeAlias type="com.cabbage.biz.qa.faq.FaqVO" alias="faq"/>
+		<typeAlias type="com.cabbage.biz.qa.qa.QaVO" alias="qa"/>
 	</typeAliases>
  	
  
@@ -47,6 +50,9 @@
 		<mapper resource="mappings/noti/NotiMapper.xml"/>
 	<!-- ==================================== Search ===================================== -->
 		<mapper resource="mappings/search/SearchMapper.xml"/>
+	<!-- ==================================== QA ===================================== -->
+		<mapper resource="mappings/qa/QaMapper.xml"/>
+		<mapper resource="mappings/qa/FaqMapper.xml"/>
 	</mappers>
 	
 	
