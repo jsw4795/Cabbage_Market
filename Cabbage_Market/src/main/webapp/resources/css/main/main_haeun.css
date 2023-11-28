@@ -90,6 +90,7 @@
     -webkit-box-align: center;
     align-items: center;
     margin-left: 50px;
+    position: relative;
 }
 .img-haeun1 {
 	text-size-adjust: 100%;
@@ -559,3 +560,38 @@
 	text-decoration: none;
 	color: black;
 }   
+#rollingNotice a, #showingNotice a {
+	font-size: 12px;
+	text-decoration: none;
+	color: black;
+}
+#showingNotice {
+	position: absolute;
+    left: -1px;
+    top: -1px;
+    background-color: white;
+    display: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 134px;
+}
+.a-haeun1:hover #showingNotice {
+    display: block;
+}
+#showingNotice li {
+	margin: 0;
+}
+#showingNotice a { 
+	padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid #cecece;
+}
+#showingNotice li:last-of-type a{
+	border: none;
+}
+
+.a-haeun1 {
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding-left: 15px;
+}

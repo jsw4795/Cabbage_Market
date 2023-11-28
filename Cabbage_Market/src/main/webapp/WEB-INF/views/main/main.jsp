@@ -65,7 +65,7 @@
 					<img src="/resources/pic/img/rcmd_icon.png" width="30px;" height="aute;" style="vertical-align:bottom;" alt="인기">
 					이 물건 필요하세요?
 				</div>
-				<a class="canada-haeun3" onclick="All('RI')" href="#">
+				<a class="canada-haeun3" href="/All?type=RI">
 					<span class="canada-haeun4" style="color:#609966;">
 					모두보기
 					</span>
@@ -116,7 +116,7 @@
 					<img src="/resources/pic/img/new_icon.gif" width="30px;" height="aute;" style="vertical-align:bottom;" alt="인기">
 					방금 올라 왔어요!
 				</div>
-				<a class="canada-haeun3" onclick="All('N')" href="#">
+				<a class="canada-haeun3" href="/All?type=N">
 					<span class="canada-haeun4" style="color:#609966;">
 					모두보기
 					</span>
@@ -172,7 +172,7 @@
 					<img src="/resources/pic/img/hot_icon.gif" width="30px;" height="aute;" style="vertical-align:bottom;" alt="인기">
 					지금 인기 있어요!
 				</div>
-				<a class="canada-haeun3" onclick="All('RV')" href="#">
+				<a class="canada-haeun3" href="/All?type=RV">
 					<span class="canada-haeun4" style="color:#609966;">
 					모두보기
 					</span>

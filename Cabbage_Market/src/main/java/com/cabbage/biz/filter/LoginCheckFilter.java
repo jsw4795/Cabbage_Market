@@ -19,10 +19,17 @@ import org.springframework.util.PatternMatchUtils;
 public class LoginCheckFilter implements Filter{
 	// TODO : 추가 필요
 	private static final String[] whiteList = 
-		{"/", "/user/login", "/user/logout", "/user/findAccount", "/user/signUp", "/user/loginIn", "/user/joinUser", "/user/ConfirmId"
+		{"/"
+			// User
+		, "/user/login", "/user/logout", "/user/findAccount", "/user/signUp", "/user/loginIn", "/user/joinUser", "/user/ConfirmId"
 		, "/user/ConfirmNick", "/user/ConfirmPhone", "/user/findId", "/user/findPw", "/user/EmailAuth", "/user/EmailAuth2"
-		, "/search/*", "/post/getPost/*", "/resources/*"
-		
+			// Search
+		, "/delete-keyword", "/autocomplete", "/recent", "/get_rolling", "/postList", "/morePostList"
+			// Post
+		, "/post/getPost/*", "/post/getPostList"
+			// Resources
+		, "/resources/*"
+			// Test
 		, "/chat/testIndex", "/chat/testRequest"};
 
 	@Override

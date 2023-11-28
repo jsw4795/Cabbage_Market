@@ -1,0 +1,111 @@
+.search-input {
+	display: inline-block; /* inline-block으로 설정 */
+	width: 300px;
+	box-sizing: border-box;
+	padding: 10px;
+	margin: 0;
+}
+
+#clearSearchInput {
+	position: absolute; /* 또는 position: relative; 또는 다른 위치 지정 속성 사용 */
+	right: 36px; /* 원하는 위치로 조절 */
+	top: 45%; /* 세로 중앙 정렬을 위한 조절 */
+	transform: translateY(-50%); /* 세로 중앙 정렬을 위한 조절 */
+	cursor: pointer;
+	display: none; /* 초기에는 숨김 상태로 설정 */
+	font-size: x-large;
+}
+
+#clearSearchInput:hover {
+	color: red; /* x에 호버될 때 색상 변경 등 추가 스타일 적용 가능 */
+}
+
+nav {
+	position: relative;
+	z-index: 1; /* #searchResults 위로 올라오도록 설정 */
+}
+
+#searchResults {
+	position: absolute;
+	top: 100%; /* 아래에 표시 */
+	z-index: 2;
+	display: none;
+	width: 455px;
+	max-height: 500px; /* 레이어의 최대 높이 설정 */
+	overflow-y: auto; /* 넘치는 경우 스크롤 표시 */
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+	left: 0;
+}
+
+#searchResults li {
+	padding: 8px;
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+	height: 20px;
+    margin: 0;
+    padding: 10px;
+}
+
+#searchResults li:last-child {
+	border-bottom: none;
+}
+
+li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/*button {*/
+/*	margin-left: 5px; !* 삭제 버튼과 텍스트 사이의 간격 조절 *!*/
+/*}*/
+.input-group #input-group-text {
+	margin-left: 5px; /* 입력 상자와 '×' 사이에 간격 추가 */
+	cursor: pointer;
+	height: 38px;
+}
+
+/* 검색 결과 리스트 스타일 */
+.list-group {
+	position: absolute;
+	top: 100%; /* 검색창 아래에 위치 */
+	left: 0;
+	z-index: 1000; /* 다른 요소들 위에 표시 */
+	width: 100%; /* 가로 폭을 100%로 설정하거나 필요에 따라 조절하세요 */
+	margin: 0;
+	padding: 0;
+	display: none; /* 초기에는 숨겨둠 */
+	border: 1px solid #ccc;
+	background-color: #fff;
+}
+
+.rolling {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow: hidden;
+	height: 30px;
+}
+
+.rolling li {
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+}
+
+.card-top {
+	width: calc(25% - 20px); /* 20px은 마진 등을 고려한 여백 값으로 조절하세요 */
+	margin: 10px; /* 여백 조절 */
+	box-sizing: border-box; /* 상자 크기를 여백과 패딩을 포함하여 계산하도록 설정 */
+}
+
+#result .result-container .empty-result {
+	padding: 34px 0 24px 0;
+	text-align: center;
+}
+
+button {
+	border: none;
+}

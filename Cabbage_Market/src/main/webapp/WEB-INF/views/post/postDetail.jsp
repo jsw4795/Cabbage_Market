@@ -107,15 +107,17 @@
                 <li class="nav-item">
                 <div class="sellerAction">
                     <a href="/chat/request/${post.postId }" class="btn">채팅하기</a>
-                     <c:choose>
-			            <%-- wishPost가 null이면 찜 목록에 없는 것으로 판단 --%>
-			            <c:when test="${not empty wishPost}">
-			                <button type="button" class="btn" onclick="deleteWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/wishHeart.png" width="22px" height="22px"></button>
-			            </c:when>
-			            <c:otherwise>
-			                <button type="button" class="btn" onclick="addWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/defaultHeart.png" width="22px" height="22px"></button>
-			            </c:otherwise>
-			        </c:choose>
+                    <c:if test="${userId != null }">
+	                     <c:choose>
+				            <%-- wishPost가 null이면 찜 목록에 없는 것으로 판단 --%>
+				            <c:when test="${not empty wishPost}">
+				                <button type="button" class="btn" onclick="deleteWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/wishHeart.png" width="22px" height="22px"></button>
+				            </c:when>
+				            <c:otherwise>
+				                <button type="button" class="btn" onclick="addWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/defaultHeart.png" width="22px" height="22px"></button>
+				            </c:otherwise>
+				        </c:choose>
+			        </c:if>
 			    </div>
 			        <hr>
 			    <div class="sellerAction2" style="display: inline-block;">

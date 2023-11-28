@@ -45,6 +45,8 @@
 		<mapper resource="mappings/main/PostMapper.xml"/>
 	<!-- ==================================== Noti ===================================== -->
 		<mapper resource="mappings/noti/NotiMapper.xml"/>
+	<!-- ==================================== Search ===================================== -->
+		<mapper resource="mappings/search/SearchMapper.xml"/>
 	</mappers>
 	
 	

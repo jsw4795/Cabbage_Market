@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/resources/css/main/main_included_jiwon.css" />
 <link rel="stylesheet" href="/resources/css/main/main_haeun.css" />
+<link rel="stylesheet" href="/resources/css/main/header.css" />
+
 <div id="gnb-root">
 	<div class="light-theme">
 		<div class="_1knjz490">
@@ -47,23 +50,20 @@
 				<!-- 				<div class="_1s38h9c1 _1s38h9c0">
  -->
 				<ul id="rollingNotice" class="rolling">
-					<li><a href="#">Lorem ipsum dolor sit amet..</a></li>
-					<li><a href="#">Lorem ipsum dolor sit amet, consectetur..</a></li>
-					<li><a href="#">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit..</a></li>
 				</ul>
-				-->
+				<ul id="showingNotice" class="showing">
+				</ul>
 			</div>
 			<div class="div-haeun4">
 				<span class="div-haeun5"> <input class="input-haeun1"
 					type="text" id="searchInput" placeholder="물품이나 동네를 검색해보세요"
-					autocomplete="off">
+					autocomplete="off" value="${keyword }">
 					<div class="input-group-append">
 						<span class="input-group-text" id="clearSearchInput"
 							style="cursor: pointer; display: none; height: 38px">&times;</span>
 					</div>
 					<ul class="list-group" id="searchResults"></ul> <a class="a-haeun2">
-						<img class="img-haeun2" src="/resources/pic/img/cabbage_icon.png"
+						<img class="img-haeun2" id="searchButton" src="/resources/pic/img/cabbage_icon.png"
 						width="16" height="17" alt="검색버튼 아이콘">
 				</a>
 				</span>
@@ -139,3 +139,4 @@
 	</div>
 </div>
 <script src="/resources/js/main/header.js" type="text/javascript"></script>
+<script src="/resources/js/search/search_header.js"></script>

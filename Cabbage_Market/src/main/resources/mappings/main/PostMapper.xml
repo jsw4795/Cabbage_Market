@@ -3,16 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mainPostDAO">
-	<!-- <resultMap id="postResult" type="post">
-        <id property="postId" column="post_id" />
-        <result property="sellerId" column="seller_id" />
-        <result property="postTitle" column="post_title" />
-        <result property="postPrice" column="post_price" />
-        <result property="fileId" column="file_id" />
-        <result property="fileName" column="file_name" />
-        다른 Post VO의 프로퍼티들 추가
-
-    </resultMap> -->
     
 	<select id="getPostListForNew" resultType="mainPost">
 	SELECT *
@@ -21,8 +11,8 @@
 		       f.file_id,
 		       f.file_name,
 		       u.user_nickname,
-		       COUNT(pwl.post_id) AS post_wish_count,
-		       COUNT(cr.post_id) AS chat_room_count
+		       (select count(*) from post_wish_list where post_id = p.post_id) AS post_wish_count,
+          	   (select count(*) from chat_room where post_id = p.post_id) AS chat_room_count
 		FROM post p
 		LEFT JOIN (
 		    SELECT post_id, MIN(file_id) AS min_file_id
@@ -61,11 +51,11 @@
 	           u.user_nickname,
 	           pp_lowest.file_id AS file_id,
 	           f.file_name,
-	           COUNT(pwl.post_id) AS post_wish_count,
-	           COUNT(cr.post_id) AS chat_room_count,
-	           (p.post_views / TRUNC((SYSDATE - p.post_regdate) * 24 * 60 * 60) +
-	            COUNT(pwl.post_id) / TRUNC((SYSDATE - p.post_regdate) * 24 * 60 * 60) * 1.5 +
-	            COUNT(cr.post_id) / TRUNC((SYSDATE - p.post_regdate) * 24 * 60 * 60) * 2) AS total_counts
+	           (select count(*) from post_wish_list where post_id = p.post_id) AS post_wish_count,
+          	   (select count(*) from chat_room where post_id = p.post_id) AS chat_room_count,
+	           (p.post_views / TRUNC((SYSDATE - p.post_regdate)*24*60*60) +
+	            COUNT(pwl.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 1.5 +
+	            COUNT(cr.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 2) AS total_counts
 	    FROM post p
 	    LEFT JOIN (
 	        SELECT post_id, MIN(file_id) AS file_id
@@ -91,7 +81,7 @@
 	SELECT * FROM (
 	    SELECT rownum AS rnum, main_query.*
 	    FROM (
-	        SELECT post.*, f.file_id, f.file_name, u.user_nickname, pwl.post_count, cr.chat_room_count
+	        SELECT post.*, f.file_id, f.file_name, u.user_nickname, pwl.post_wish_count, cr.chat_room_count
 	        FROM post
 	        LEFT JOIN (
 	            SELECT post_id, MIN(file_id) AS min_file_id
@@ -101,7 +91,7 @@
 	        LEFT JOIN files f ON min_pp.min_file_id = f.file_id
 	        LEFT JOIN users u ON post.seller_id = u.user_id
 	        LEFT JOIN (
-	            SELECT post_id, COUNT(*) AS post_count
+	            SELECT post_id, COUNT(*) AS post_wish_count
 	            FROM post_wish_list
 	            GROUP BY post_id
 	        ) pwl ON post.post_id = pwl.post_id
@@ -225,11 +215,11 @@
 	            u.user_nickname,
 	            pp_lowest.file_id AS file_id,
 	            f.file_name,
-	            COUNT(pwl.post_id) AS post_wish_count,
-	            COUNT(cr.post_id) AS chat_room_count,
-	            (p.post_views / TRUNC((SYSDATE - p.post_regdate) * 24 * 60 * 60) +
-	             COUNT(pwl.post_id) / TRUNC((SYSDATE - p.post_regdate) * 24 * 60 * 60) * 1.5 +
-	             COUNT(cr.post_id) / TRUNC((SYSDATE - p.post_regdate) * 24 * 60 * 60) * 2) AS total_counts
+	            (select count(*) from post_wish_list where post_id = p.post_id) AS post_wish_count,
+          	    (select count(*) from chat_room where post_id = p.post_id) AS chat_room_count,
+	            (p.post_views / TRUNC((SYSDATE - p.post_regdate)*24*60*60) +
+	             COUNT(pwl.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 1.5 +
+	             COUNT(cr.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 2) AS total_counts
 	        FROM 
 	            post p
 	            LEFT JOIN (
@@ -291,7 +281,7 @@
 	FROM (
 	    SELECT rownum AS rnum, main_query.*
 		FROM (
-		    SELECT post.*, f.file_id, f.file_name, u.user_nickname, pwl.post_count, cr.chat_room_count
+		    SELECT post.*, f.file_id, f.file_name, u.user_nickname, pwl.post_wish_count, cr.chat_room_count
 		    FROM post
 		    LEFT JOIN (
 		        SELECT post_id, MIN(file_id) AS min_file_id
@@ -301,7 +291,7 @@
 		    LEFT JOIN files f ON min_pp.min_file_id = f.file_id
 		    LEFT JOIN users u ON post.seller_id = u.user_id
 		    LEFT JOIN (
-		        SELECT post_id, COUNT(*) AS post_count
+		        SELECT post_id, COUNT(*) AS post_wish_count
 		        FROM post_wish_list
 		        GROUP BY post_id
 		    ) pwl ON post.post_id = pwl.post_id
