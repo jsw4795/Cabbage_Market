@@ -54,8 +54,9 @@
 		ORDER BY P.POST_ID DESC
 	</select>
 	
+	<!-- 임시방편으로 9시간 추가해서 가져옴 (오라클 시간 안맞는 문제) -->
 	<select id="salesList" parameterType="user" resultType="user">
-		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS
+		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, (P.POST_REGDATE + (9/24)) POST_REGDATE, P.POST_STATUS
 		FROM USERS U, POST P,
 		POST_PIC PP, FILES F
 		WHERE U.USER_ID = P.SELLER_ID

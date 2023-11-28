@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class UserVO {
 	private String userPhone;
 	private float userOndo;
 	private String userStatus;
+	@JsonFormat(pattern = "yyyy-M-d", timezone = "KST")
 	private Date userRegdate;
 	private String userEmail;
 	private String userProfile;
@@ -37,6 +40,7 @@ public class UserVO {
 	private int postPrice;
 	private String postContent;
 	private String postStatus;
+	@JsonFormat(pattern = "yyyy-M-d")
 	private Date postRegdate;
 	private int postViews;
 	private String buyerId;

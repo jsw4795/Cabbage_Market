@@ -124,25 +124,31 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             productContainer.empty(); // 기존 상품 삭제
             // 서버에서 받은 데이터로 상품 목록 생성
             response.forEach(function (product) {
-              const productDiv = `
-	                        <div class="sc-bIqbHp deAjQN">
-	                            <a class="sc-dREXXX hsBvIx" href="/post/getPost/\${product.postId}">
-	                                <div class="sc-kcbnda cgazhg">
-	                                    <img src= "/resources/pic/postPic/\${product.fileName}" alt="상품 이미지" />
-	                                    <div class="sc-cJOK bosAdb"></div>
-	                                </div>
-	                                <div class="sc-dHmInP boOsEk">
-	                                    <div class="sc-hcmgZB izvjFP">
-	                                        <div class="sc-ejGVNB hjxvQC">\${product.postTitle}</div>
-	                                        <div class="sc-iiUIRa jBkujo">
-	                                            <div class="postPrice">\${product.postPrice}</div>
-	                                        </div>
-	                                        <div class="sc-eLdqWK cEmwLf">\${product.postRegdate}</div>
-	                                    </div>
-	                                    <div class="sc-hgRTRy eYqEDw">\${product.postStatus}</div>
-	                                </div>
-	                            </a>
-	                        </div>`;
+            	let postStatus = product.postStatus;
+            	let postPrice = product.postPrice;
+            	let productDiv = 
+                    '<div class="sc-bIqbHp deAjQN">'
+                        +'<a class="sc-dREXXX hsBvIx" href="/post/getPost/'+product.postId+'">'
+                            +'<div class="sc-kcbnda cgazhg">'
+                                +'<img src= "/resources/pic/postPic/'+product.fileName+'" alt="상품 이미지" />'
+                                +'<div class="sc-cJOK bosAdb"></div>'
+                           +'</div>'
+                            +'<div class="sc-dHmInP boOsEk">'
+                                +'<div class="sc-hcmgZB izvjFP">'
+                                    +'<div class="sc-ejGVNB hjxvQC">'+product.postTitle+'</div>'
+                                    +'<div class="sc-iiUIRa jBkujo">'
+                                        +'<div class="postPrice">'+addComma(postPrice.toString())+'원</div>'
+                                    +'</div>'
+                                    +'<div class="sc-eLdqWK cEmwLf">'+product.postRegdate.toString()+'</div>'
+                                +'</div>'
+                                +'<div class="sc-hgRTRy eYqEDw">';
+                                if(postStatus == "ENABLE")  productDiv += '판매중'
+                                if(postStatus == "RESERVE")  productDiv += '예약중'
+                                if(postStatus == "FINISH")  productDiv += '판매완료'
+                                productDiv+= '</div>'
+                            +'</div>'
+                        +'</a>'
+                    +'</div>';
 
               productContainer.append(productDiv); // 상품을 컨테이너에 추가
             });
@@ -164,25 +170,31 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             productContainer.empty(); // 기존 상품 삭제
             // 서버에서 받은 데이터로 상품 목록 생성
             response.forEach(function (product) {
-              const productDiv = `
-	                        <div class="sc-bIqbHp deAjQN">
-	                            <a class="sc-dREXXX hsBvIx" href="/post/getPost/\${product.postId}">
-	                                <div class="sc-kcbnda cgazhg">
-	                                    <img src= "/resources/pic/postPic/\${product.fileName}" alt="상품 이미지" />
-	                                    <div class="sc-cJOK bosAdb"></div>
-	                                </div>
-	                                <div class="sc-dHmInP boOsEk">
-	                                    <div class="sc-hcmgZB izvjFP">
-	                                        <div class="sc-ejGVNB hjxvQC">\${product.postTitle}</div>
-	                                        <div class="sc-iiUIRa jBkujo">
-	                                            <div class="postPrice">\${product.postPrice}</div>
-	                                        </div>
-	                                        <div class="sc-eLdqWK cEmwLf">\${product.postRegdate}</div>
-	                                    </div>
-	                                    <div class="sc-hgRTRy eYqEDw">\${product.postStatus}</div>
-	                                </div>
-	                            </a>
-	                        </div>`;
+            	let postStatus = product.postStatus;
+            	let postPrice = product.postPrice;
+            	let productDiv = 
+                    '<div class="sc-bIqbHp deAjQN">'
+                        +'<a class="sc-dREXXX hsBvIx" href="/post/getPost/'+product.postId+'">'
+                            +'<div class="sc-kcbnda cgazhg">'
+                                +'<img src= "/resources/pic/postPic/'+product.fileName+'" alt="상품 이미지" />'
+                                +'<div class="sc-cJOK bosAdb"></div>'
+                           +'</div>'
+                            +'<div class="sc-dHmInP boOsEk">'
+                                +'<div class="sc-hcmgZB izvjFP">'
+                                    +'<div class="sc-ejGVNB hjxvQC">'+product.postTitle+'</div>'
+                                    +'<div class="sc-iiUIRa jBkujo">'
+                                        +'<div class="postPrice">'+addComma(postPrice.toString())+'원</div>'
+                                    +'</div>'
+                                    +'<div class="sc-eLdqWK cEmwLf">'+product.postRegdate.toString()+'</div>'
+                                +'</div>'
+                                +'<div class="sc-hgRTRy eYqEDw">';
+                                if(postStatus == "ENABLE")  productDiv += '판매중'
+                                if(postStatus == "RESERVE")  productDiv += '예약중'
+                                if(postStatus == "FINISH")  productDiv += '판매완료'
+                                productDiv+= '</div>'
+                            +'</div>'
+                        +'</a>'
+                    +'</div>';
 
               productContainer.append(productDiv); // 상품을 컨테이너에 추가
             });
@@ -204,30 +216,31 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             productContainer.empty(); // 기존 상품 삭제
             // 서버에서 받은 데이터로 상품 목록 생성
             response.forEach(function (product) {
-              console.log(product);
-
-              const productDiv = `
-	                        <div class="sc-bIqbHp deAjQN">
-	                            <a class="sc-dREXXX hsBvIx" href="/post/getPost/\${product.postId}?ref=%EC%B0%9C">
-	                                <div class="sc-iIHSe liqURL">
-	                                <input type="checkbox" name="RowCheck" value="\${product.postId}">
-	                                </div>
-	                                <div class="sc-kcbnda cgazhg">
-	                                    <img src= "/resources/pic/postPic/\${product.fileName}" alt="상품 이미지" />
-	                                    <div class="sc-cJOK bosAdb"></div>
-	                                </div>
-	                                <div class="sc-dHmInP boOsEk">
-	                                    <div class="sc-hcmgZB izvjFP">
-	                                        <div class="sc-ejGVNB hjxvQC">\${product.postTitle}</div>
-	                                        <div class="sc-iiUIRa jBkujo">
-	                                            <div class="postPrice">\${product.postPrice}</div>
-	                                        </div>
-	                                        <div class="sc-eLdqWK cEmwLf">\${product.postRegdate}</div>
-	                                    </div>
-	                                    <div class="sc-hgRTRy eYqEDw">\${product.postStatus}</div>
-	                                </div>
-	                            </a>
-	                        </div>`;
+            	let postStatus = product.postStatus;
+            	let postPrice = product.postPrice;
+            	let productDiv = 
+                    '<div class="sc-bIqbHp deAjQN">'
+                        +'<a class="sc-dREXXX hsBvIx" href="/post/getPost/'+product.postId+'">'
+                            +'<div class="sc-kcbnda cgazhg">'
+                                +'<img src= "/resources/pic/postPic/'+product.fileName+'" alt="상품 이미지" />'
+                                +'<div class="sc-cJOK bosAdb"></div>'
+                           +'</div>'
+                            +'<div class="sc-dHmInP boOsEk">'
+                                +'<div class="sc-hcmgZB izvjFP">'
+                                    +'<div class="sc-ejGVNB hjxvQC">'+product.postTitle+'</div>'
+                                    +'<div class="sc-iiUIRa jBkujo">'
+                                        +'<div class="postPrice">'+addComma(postPrice.toString())+'원</div>'
+                                    +'</div>'
+                                    +'<div class="sc-eLdqWK cEmwLf">'+product.postRegdate.toString()+'</div>'
+                                +'</div>'
+                                +'<div class="sc-hgRTRy eYqEDw">';
+                                if(postStatus == "ENABLE")  productDiv += '판매중'
+                                if(postStatus == "RESERVE")  productDiv += '예약중'
+                                if(postStatus == "FINISH")  productDiv += '판매완료'
+                                productDiv+= '</div>'
+                            +'</div>'
+                        +'</a>'
+                    +'</div>';
 
               productContainer.append(productDiv); // 상품을 컨테이너에 추가
             });
@@ -345,6 +358,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             // 아무 동작 없음
           }
         }
+      }
+      function addComma(value){
+          value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          return value; 
       }
     </script>
   </head>
