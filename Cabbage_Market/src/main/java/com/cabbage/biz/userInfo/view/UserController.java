@@ -59,14 +59,17 @@ public class UserController {
 
 	@GetMapping("/myInfo")
     public String getinfoPage(UserVO vo, Model model, HttpSession session) {
-		vo.setUserId((String)session.getAttribute("userId"));
+		String userId = (String)session.getAttribute("userId");
+		vo.setUserId(userId);
         // userId로 사용자 정보를 가져오는 예시
-		UserVO user = userService.userInfo(vo);
-		if (user.getUserProfile() == null) {
-			user.setUserProfile("profile_default.png");
+		vo = userService.userInfo(vo);
+		System.out.println(">>> user : " + vo);
+		System.out.println(">>> vo : " + vo);
+		if (vo.getUserProfile() == null) {
+			vo.setUserProfile("profile_default.png");
 		}
         // 모델에 사용자 정보를 추가하여 뷰로 전달
-        model.addAttribute("user", user);
+        model.addAttribute("user", vo);
         model.addAttribute("nowUserId", vo.getUserId());
 
         return "user/myInfo";
@@ -325,8 +328,8 @@ public class UserController {
 			uploadFile.transferTo(new File(destPathFile));
 			vo.setFileName(savedFilename);
 			vo.setUserId((String)session.getAttribute("userId"));
-		}
 			userService.profileUpload(vo);
+		}
 			
 			return "redirect:/user/myInfo";
 			

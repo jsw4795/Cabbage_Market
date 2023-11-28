@@ -70,6 +70,7 @@ public class SearchController {
         else if(keyword != null) {
             totalC =searchService.countKeywordPostList(keyword);
             model.addAttribute("posts", this.searchPost(session, keyword, 1, paging));
+            model.addAttribute("keyword", keyword);
         }
         // 둘 다 없으면
         else {
@@ -77,7 +78,6 @@ public class SearchController {
             model.addAttribute("posts", searchService.findByCategoryPost("1", 1, paging));
         }
         model.addAttribute("totalC", totalC);
-        session.setAttribute("keyword", keyword);
 
         return "search/postList";
     }

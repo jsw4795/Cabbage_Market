@@ -564,6 +564,9 @@
 	font-size: 12px;
 	text-decoration: none;
 	color: black;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space : nowrap;
 }
 #showingNotice {
 	position: absolute;

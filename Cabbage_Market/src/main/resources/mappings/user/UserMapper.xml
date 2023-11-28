@@ -89,13 +89,12 @@
 		SELECT U.*, F.FILE_NAME USER_PROFILE
 		FROM 
 			USERS U
-		INNER JOIN
+		LEFT JOIN
 			PROFILE_PIC P
 		ON P.USER_ID = U.USER_ID
-		INNER JOIN
+		LEFT JOIN
 			FILES F
 		ON F.FILE_ID = P.FILE_ID
-		
 		WHERE 
 			U.USER_ID = #{userId}
 	</select>
@@ -108,11 +107,29 @@
 		WHERE USER_ID = #{userId}
 	</update>
 	<update id="profileUpload" parameterType="user">
-		UPDATE FILES
-		SET 
-			FILE_NAME = #{fileName}
-		WHERE
-			FILE_ID = (SELECT FILE_ID FROM PROFILE_PIC WHERE USER_ID = #{userId})
+		<selectKey keyProperty="fileIdCount" resultType="long" order="BEFORE">
+			SELECT COUNT(FILE_ID) FILE_ID_COUNT FROM PROFILE_PIC WHERE USER_ID = #{userId}
+		</selectKey>
+		<if test="fileIdCount > 0">
+			UPDATE FILES
+			SET 
+				FILE_NAME = #{fileName}
+			WHERE
+				FILE_ID = (SELECT FILE_ID FROM PROFILE_PIC WHERE USER_ID = #{userId})
+		</if>
+		<if test="fileIdCount == 0">
+			INSERT ALL
+			INTO FILES
+			    (FILE_ID, USER_ID, FILE_NAME, FILE_REGDATE)
+			VALUES
+			    (FILE_ID_SEQ.NEXTVAL, #{userId}, #{fileName}, SYSDATE)
+			
+			INTO PROFILE_PIC
+			    (USER_ID, FILE_ID)
+			VALUES
+			    (#{userId}, FILE_ID_SEQ.CURRVAL)
+			SELECT * FROM DUAL
+		</if>
 	</update>	
 	
 	<delete id="deleteUser" parameterType="user">

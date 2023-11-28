@@ -119,7 +119,7 @@
 <!-- header -->
 <%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
 
-<section id="content">
+<section id="content" data-keyword="${keyword }">
 	<h1 class="head-title" id="hot-articles-head-title">
 		<!--카테고리 선택하면 그걸로 출력되게 수정  -->
 	</h1>

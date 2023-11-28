@@ -50,4 +50,6 @@ public class UserVO {
 	private String fileName;
 	private MultipartFile uploadFile;
 	
+	private long fileIdCount;
+	
 }

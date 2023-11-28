@@ -57,7 +57,7 @@
 			<div class="div-haeun4">
 				<span class="div-haeun5"> <input class="input-haeun1"
 					type="text" id="searchInput" placeholder="물품이나 동네를 검색해보세요"
-					autocomplete="off" value="${keyword }">
+					autocomplete="off">
 					<div class="input-group-append">
 						<span class="input-group-text" id="clearSearchInput"
 							style="cursor: pointer; display: none; height: 38px">&times;</span>

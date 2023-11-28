@@ -7,8 +7,8 @@ const searchButton = document.getElementById("searchButton");
 const clearSearchInput = document.getElementById("clearSearchInput");
 //=================== 검색창 입력  ================
 $(() => {
-  
-  searchInput.value = searchKeyword;
+  let keyword = $("#content").attr("data-keyword");
+  if (keyword) searchInput.value = keyword;
 });
 // 마우스 클릭으로 검색 결과 가져오기
 searchButton.addEventListener("click", function () {

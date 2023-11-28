@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,7 @@ import org.springframework.util.PatternMatchUtils;
 public class LoginCheckFilter implements Filter{
 	// TODO : 추가 필요
 	private static final String[] whiteList = 
-		{"/"
+		{"/", "/All"
 			// User
 		, "/user/login", "/user/logout", "/user/findAccount", "/user/signUp", "/user/loginIn", "/user/joinUser", "/user/ConfirmId"
 		, "/user/ConfirmNick", "/user/ConfirmPhone", "/user/findId", "/user/findPw", "/user/EmailAuth", "/user/EmailAuth2"
