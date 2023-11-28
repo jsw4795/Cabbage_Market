@@ -577,6 +577,9 @@
     border: 1px solid gray;
     border-radius: 5px;
     width: 134px;
+    margin: 0;
+    padding: 0;
+    box-sizing: unset;
 }
 .a-haeun1:hover #showingNotice {
     display: block;

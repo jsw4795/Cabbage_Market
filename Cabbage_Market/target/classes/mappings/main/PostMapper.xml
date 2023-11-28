@@ -81,7 +81,9 @@
 	SELECT * FROM (
 	    SELECT rownum AS rnum, main_query.*
 	    FROM (
-	        SELECT post.*, f.file_id, f.file_name, u.user_nickname, pwl.post_wish_count, cr.chat_room_count
+	        SELECT post.*, f.file_id, f.file_name, u.user_nickname,
+			(select count(*) from post_wish_list where post_id = post.post_id) AS post_wish_count,
+          	(select count(*) from chat_room where post_id = post.post_id) AS chat_room_count
 	        FROM post
 	        LEFT JOIN (
 	            SELECT post_id, MIN(file_id) AS min_file_id
@@ -151,8 +153,8 @@
 			       f.file_id,
 			       f.file_name,
 			       u.user_nickname,
-			       COUNT(pwl.post_id) AS post_wish_count,
-			       COUNT(cr.post_id) AS chat_room_count
+			       (select count(*) from post_wish_list where post_id = p.post_id) AS post_wish_count,
+          	   	   (select count(*) from chat_room where post_id = p.post_id) AS chat_room_count
 			FROM post p
 			LEFT JOIN (
 			    SELECT post_id, MIN(file_id) AS min_file_id
@@ -281,8 +283,10 @@
 	FROM (
 	    SELECT rownum AS rnum, main_query.*
 		FROM (
-		    SELECT post.*, f.file_id, f.file_name, u.user_nickname, pwl.post_wish_count, cr.chat_room_count
-		    FROM post
+		    SELECT post.*, f.file_id, f.file_name, u.user_nickname,
+		    (select count(*) from post_wish_list where post_id = post.post_id) AS post_wish_count,
+          	(select count(*) from chat_room where post_id = post.post_id) AS chat_room_count
+		    FROM post 
 		    LEFT JOIN (
 		        SELECT post_id, MIN(file_id) AS min_file_id
 		        FROM post_pic

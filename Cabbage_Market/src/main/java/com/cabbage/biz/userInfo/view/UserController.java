@@ -63,8 +63,6 @@ public class UserController {
 		vo.setUserId(userId);
         // userId로 사용자 정보를 가져오는 예시
 		vo = userService.userInfo(vo);
-		System.out.println(">>> user : " + vo);
-		System.out.println(">>> vo : " + vo);
 		if (vo.getUserProfile() == null) {
 			vo.setUserProfile("profile_default.png");
 		}

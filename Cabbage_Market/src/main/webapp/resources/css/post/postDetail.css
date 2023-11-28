@@ -77,7 +77,7 @@
     position: relative;
     -webkit-appearance: none;
     border: none;
-    z-index: 99;
+    /* z-index: 99; */
     height: 25px;
     background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/icon-slider-left-4c0e713bfa2cd12bd959e6dd9ef456cd6fc094953c41e605f6b9a59bc1680686.svg) 
     			no-repeat;
