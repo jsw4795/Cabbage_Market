@@ -370,10 +370,10 @@ public class UserController {
 	@RequestMapping("/keywordList")
 	@ResponseBody
 	public List<UserVO> keywordList(UserVO vo, HttpSession session) {
-		System.out.println("keywordList 실행");
-		vo.setUserId((String)session.getAttribute("userId"));
+		String userId = (String)session.getAttribute("userId");
+		if(!vo.getUserId().equals(userId))
+			return null;
 		List<UserVO> keywordList = userService.keywordList(vo);
-		System.out.println("keywordList : " + keywordList);
 		return keywordList;
 	}
 	

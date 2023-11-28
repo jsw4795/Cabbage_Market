@@ -70,7 +70,7 @@
 			</div>
 			<div class="div-haeun6">
 				<!-- <span> -->
-				<%-- <c:if test="${not empty userId}">
+				<c:if test="${not empty userId}">
 					
 					<button type="button" class="button-haeun1"
 						onclick="toggleDiv('alrim')">
@@ -92,7 +92,7 @@
 						</ul>
 					</div>
 					</button>
-				</c:if> --%>
+				</c:if>
 				<c:if test="${empty userId}">
 					<a type="button" href="/user/login"
 						class="button-haeun1">

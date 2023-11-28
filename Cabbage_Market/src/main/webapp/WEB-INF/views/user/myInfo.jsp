@@ -9,8 +9,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="/resources/css/user/test.css" />
     <script>
       $(document).ready(function () {
+        var userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
         purchaseList();
-        let userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
 
         $.ajax({
           type: "POST",
@@ -64,9 +64,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         displayKeywordList();
 
         function displayKeywordList() {
+        	
           $.ajax({
             type: "POST",
             url: "/user/keywordList",
+            data: {"userId" : userId},
             dataType: "json",
             success: function (response) {
               console.log(response);
@@ -88,9 +90,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
                 wishKeywordsDisplay.append(newDiv); // 만들어진 div를 wishKeywordsDisplay에 추가
               });
-            },
-            error: function (xhr, status, error) {
-              console.error(error);
             },
           });
         }
