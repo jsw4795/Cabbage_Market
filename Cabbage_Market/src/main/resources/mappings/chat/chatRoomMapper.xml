@@ -118,6 +118,10 @@
 			CHAT_ROOM_ID = #{chatRoomId} AND USER_ID = #{requestUserId}
 	</update>
 	
+	<select id="getUnreadCount" parameterType="chatRoomVO" resultType="int">
+		SELECT SUM(UNREAD_MESSAGE_COUNT) FROM CHAT_ROOM_USER WHERE USER_ID = #{requestUserId}
+	</select>
+	
 </mapper>
 
 

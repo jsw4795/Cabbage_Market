@@ -17,19 +17,15 @@
 
 </head>
 <body>
-	<!-- <nav class="navbar nav-global fixed-top navbar-expand-sm">
-        <div class="container">
-            <a class="navbar-brand" href="javascript:history.back()">
-                <img src="/resources/pic/cabbage.png" width="100px" height="50px">
-            </a>
-        </div>
-    </nav> -->
+	<div id="loading-overlay">
+         <div id="loading-spinner"></div>
+      </div>
     
     <!-- header -->
 	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
 
     <div class="sell-form">
-        <form action="insertPost" method="post" enctype="multipart/form-data">
+        <form action="insertPost" method="post" enctype="multipart/form-data" onsubmit="disableSubmitButton()">
         	<input type="hidden" name="sellerId" value=${userId }>	<!-- 세션으로 로그인한 아이디 할당 -->
         	
             <label for="postCatId">카테고리</label>
@@ -44,7 +40,7 @@
             <div id="file-input-container" onclick="openFileInput()">
             <label for="uploadFile">이미지</label><br>
                 <span id="file-input-text">+</span>
-                <input type="file" id="uploadFile" name="uploadFile" accept="image/*" multiple onchange="previewImages(event)" id="file-input" hidden>
+                <input type="file" id="uploadFile" name="uploadFile" accept="image/*" multiple onchange="previewImages(event)" id="file-input" hidden required="required">
             </div>
             
             <div>
@@ -57,7 +53,7 @@
             <p id="postTitleError" style="color: red; display: none;">공백문자는 사용할 수 없습니다.</p>
             
             <label for="postPrice">가격</label>
-            <input type="number" name="postPrice" id="postPrice" min="0" required>
+            <input type="number" name="postPrice" id="postPrice" min="0" max="1000000001" required>
             
             <label for="postContent">상세 설명</label>
             <textarea name="postContent" id="postContent" rows="5" maxlength="1000" placeholder="최대 1000자" required></textarea>

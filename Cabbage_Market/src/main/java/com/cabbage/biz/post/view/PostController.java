@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cabbage.biz.chat.chat.ChatRoomService;
 import com.cabbage.biz.chat.user.UserService;
 import com.cabbage.biz.post.post.PostService;
 import com.cabbage.biz.post.post.PostVO;
@@ -34,12 +35,16 @@ public class PostController {
 	
 	private final UserService userService;
 	private final PostService postService;
+	private final ChatRoomService chatRoomService;
 	private List<MultipartFile> uploadFile = new ArrayList<>();
 
 	//post 작성
     @GetMapping("/create")
     public String getPostCreate(Model model, HttpSession session) {
     	String userId = (String)session.getAttribute("userId");
+    	Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+		
+		model.addAttribute("unreadChatCount", unreadChatCount);
     	
     	model.addAttribute("userId", userId);
     	
@@ -58,6 +63,10 @@ public class PostController {
     	
     	List<PostVO> postPic = postService.getPostPic(vo);
     	
+    	Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+		
+		model.addAttribute("unreadChatCount", unreadChatCount);
+    	
     	model.addAttribute("postPic", postPic);
     	model.addAttribute("post", post);
     	
@@ -65,8 +74,10 @@ public class PostController {
     }
     //수정
     @PostMapping("/updatePost")
-    public String updatePost(PostVO vo) throws IllegalStateException, IOException {
-
+    public String updatePost(HttpSession session, PostVO vo) throws IllegalStateException, IOException {
+    	String userId = (String)session.getAttribute("userId");
+    	vo.setUserId(userId);
+    	vo.setSellerId(userId);
     	//제거한 이미지 처리
     	if(vo.getFileIdArr() == null) {
     		//System.out.println("삭제할 이미지 없음");
@@ -97,7 +108,7 @@ public class PostController {
     			if(fileName.trim() != "") {
     			String saveFileName = "post" + vo.getPostId() + "_" + UUID.randomUUID().toString() + "." + fileExtension;
     			
-    			list.transferTo(new File("D:\\MyStudy\\70_Spring\\Cabbage_Market\\src\\main\\webapp\\resources\\pic\\postPic\\" + saveFileName));
+    			list.transferTo(new File("/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/postPic/" + saveFileName));
     			filesList.add(saveFileName);
     			}
     		}
@@ -212,6 +223,10 @@ public class PostController {
     	//관심 수
     	int countWish = postService.countWish(vo);
     	
+    	Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+		
+		model.addAttribute("unreadChatCount", unreadChatCount);
+    	
     	model.addAttribute("post", post);
     	model.addAttribute("postPic", postPic);
     	model.addAttribute("user", user);
@@ -236,9 +251,9 @@ public class PostController {
     	List<MultipartFile> uploadFile = vo.getUploadFile();
     	
     	if(uploadFile == null) {
-    		//System.out.println("uploadFile 파라미터 전달x");
+    		System.out.println("uploadFile 파라미터 전달x");
     	}else if(uploadFile.isEmpty()) {
-    		//System.out.println("업로드 파일 없음");
+    		System.out.println("업로드 파일 없음");
     	}else {
     		int maxPostId = postService.getMaxPostId();
     		List<String> filesList = new ArrayList<String>();
@@ -251,7 +266,7 @@ public class PostController {
     			if(fileName.trim() != "") {
     			String saveFileName = "post" + maxPostId + "_" + UUID.randomUUID().toString() + "." + fileExtension;
     			
-    			list.transferTo(new File("/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/postPic" + saveFileName));
+    			list.transferTo(new File("/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/postPic/" + saveFileName));
     			filesList.add(saveFileName);
     			}
     		}
@@ -281,7 +296,7 @@ public class PostController {
     	
     	model.addAttribute("postList", postList);
     	
-    	return "main";
+    	return "redirect:/";
     }
     
     //찜

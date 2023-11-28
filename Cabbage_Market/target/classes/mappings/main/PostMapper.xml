@@ -53,9 +53,9 @@
 	           f.file_name,
 	           (select count(*) from post_wish_list where post_id = p.post_id) AS post_wish_count,
           	   (select count(*) from chat_room where post_id = p.post_id) AS chat_room_count,
-	           (p.post_views / TRUNC((SYSDATE - p.post_regdate)*24*60*60) +
-	            COUNT(pwl.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 1.5 +
-	            COUNT(cr.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 2) AS total_counts
+	           (p.post_views / (TRUNC((SYSDATE - p.post_regdate)*24*60*60))+1 +
+	            COUNT(pwl.post_id) / (TRUNC((SYSDATE - p.post_regdate)*24*60*60))+1 * 1.5 +
+	            COUNT(cr.post_id) / (TRUNC((SYSDATE - p.post_regdate)*24*60*60) +1 * 2 )) AS total_counts
 	    FROM post p
 	    LEFT JOIN (
 	        SELECT post_id, MIN(file_id) AS file_id
@@ -219,9 +219,9 @@
 	            f.file_name,
 	            (select count(*) from post_wish_list where post_id = p.post_id) AS post_wish_count,
           	    (select count(*) from chat_room where post_id = p.post_id) AS chat_room_count,
-	            (p.post_views / TRUNC((SYSDATE - p.post_regdate)*24*60*60) +
-	             COUNT(pwl.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 1.5 +
-	             COUNT(cr.post_id) / TRUNC((SYSDATE - p.post_regdate)*24*60*60) * 2) AS total_counts
+	            (p.post_views / (TRUNC((SYSDATE - p.post_regdate)*24*60*60))+1 +
+	            COUNT(pwl.post_id) / (TRUNC((SYSDATE - p.post_regdate)*24*60*60))+1 * 1.5 +
+	            COUNT(cr.post_id) / (TRUNC((SYSDATE - p.post_regdate)*24*60*60) +1 * 2 )) AS total_counts
 	        FROM 
 	            post p
 	            LEFT JOIN (

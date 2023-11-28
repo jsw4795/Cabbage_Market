@@ -123,6 +123,11 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		chatDAO.updateUserExitPoint(chatRoom);
 	}
 
+	@Override
+	public Integer getUnreadCount(String userId) {
+		return chatDAO.selectUnreadCount(ChatRoomVO.builder().requestUserId(userId).build());
+	}
+
 
 	
 

@@ -186,7 +186,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 		return data;
 	}
 	
-
+	
 
 	
 

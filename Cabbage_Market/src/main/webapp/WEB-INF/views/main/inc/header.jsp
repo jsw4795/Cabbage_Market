@@ -70,7 +70,7 @@
 			</div>
 			<div class="div-haeun6">
 				<!-- <span> -->
-				<c:if test="${not empty userId}">
+				<%-- <c:if test="${not empty userId}">
 					
 					<button type="button" class="button-haeun1"
 						onclick="toggleDiv('alrim')">
@@ -92,7 +92,7 @@
 						</ul>
 					</div>
 					</button>
-				</c:if>
+				</c:if> --%>
 				<c:if test="${empty userId}">
 					<a type="button" href="/user/login"
 						class="button-haeun1">
@@ -125,6 +125,9 @@
 				<a class="button-haeun1" href="/chat">
 					<img class="img-haeun3" src="/resources/pic/img/cabbage_icon.png"
 						alt="배추톡 버튼 이미지"> 배추톡
+						<div id="someElement" data-count="${unreadChatCount}">
+						<span class="alrim" id="alrimCount" >${unreadChatCount}</span>
+					</div>
 				</a>
 				<!-- <a class="a-haeun3" href="">
 						<img class="img-hauen4" src="/resources/pic/img/cabbage_icon.png" width="23" height="25" alt="마이페이지 버튼 이미지">

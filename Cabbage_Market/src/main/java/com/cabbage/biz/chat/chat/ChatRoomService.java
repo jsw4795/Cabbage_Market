@@ -11,4 +11,5 @@ public interface ChatRoomService {
 	List<ChatRoomVO> getLastMessageTimeListByChatRoomId(List<Integer> chatRoomIdList);
 	ChatRoomVO makeNewChatRoom(long postId, String userId);
 	void exitChatRoom(ChatRoomVO chatRoom);
+	Integer getUnreadCount(String userId);
 }

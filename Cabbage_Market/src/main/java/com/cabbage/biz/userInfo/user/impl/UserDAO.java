@@ -86,5 +86,10 @@ public class UserDAO {
 		mybatis.delete("userDAO.deleteWish", vo);
 	}
 	
+	public void deleteUser(UserVO vo) {
+		System.out.println("==> Mybatis로 deleteUser 기능 처리");
+		mybatis.update("userDAO.deleteUser", vo);
+	}
+
 
 }

@@ -41,48 +41,50 @@
 	</select>
 	
 	<select id="purchaseList" parameterType="user" resultType="user">
-		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS
-		FROM USERS U, POST P,
-    	POST_PIC PP, FILES F
-		WHERE U.USER_ID = P.BUYER_ID
-		AND
-    	P.POST_ID = PP.POST_ID
-		AND
-    	F.FILE_ID = PP.FILE_ID
-		AND
-		U.USER_ID = #{userId}
-		ORDER BY P.POST_ID DESC
+		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, POST_REGDATE, POST_STATUS
+      FROM (
+       SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS,
+        ROW_NUMBER() OVER(PARTITION BY P.POST_ID ORDER BY F.FILE_ID) AS RN
+       FROM USERS U, POST P, POST_PIC PP, FILES F
+       WHERE U.USER_ID = P.BUYER_ID
+       AND P.POST_ID = PP.POST_ID
+       AND F.FILE_ID = PP.FILE_ID
+       AND U.USER_ID = #{userId}
+      )
+      WHERE RN = 1
+      ORDER BY POST_ID DESC
 	</select>
 	
 	<!-- 임시방편으로 9시간 추가해서 가져옴 (오라클 시간 안맞는 문제) -->
 	<select id="salesList" parameterType="user" resultType="user">
-		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, (P.POST_REGDATE + (9/24)) POST_REGDATE, P.POST_STATUS
-		FROM USERS U, POST P,
-		POST_PIC PP, FILES F
-		WHERE U.USER_ID = P.SELLER_ID
-		AND
-		P.POST_ID = PP.POST_ID
-		AND
-		F.FILE_ID = PP.FILE_ID
-		AND
-		U.USER_ID = #{userId}
-		ORDER BY P.POST_ID DESC
+		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, POST_REGDATE, POST_STATUS
+      FROM (
+       SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS,
+        ROW_NUMBER() OVER(PARTITION BY P.POST_ID ORDER BY F.FILE_ID) AS RN
+       FROM USERS U, POST P, POST_PIC PP, FILES F
+       WHERE U.USER_ID = P.SELLER_ID
+       AND P.POST_ID = PP.POST_ID
+       AND F.FILE_ID = PP.FILE_ID
+       AND U.USER_ID = #{userId}
+      )
+      WHERE RN = 1
+      ORDER BY POST_ID DESC
 	</select>	
 	
 	<select id="wishList" parameterType="user" resultType="user">
-		SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS
-		FROM USERS U, POST P, 
-		POST_PIC PP, POST_WISH_LIST PL, FILES F
-		WHERE PP.POST_ID = PL.POST_ID
-		AND
-    	P.POST_ID = PP.POST_ID
-		AND
-    	U.USER_ID = PL.USER_ID
-		AND
-    	F.FILE_ID = PP.FILE_ID
-		AND
-		U.USER_ID = #{userId}
-		ORDER BY P.POST_ID DESC
+		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, POST_REGDATE, POST_STATUS
+       FROM (
+        SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS,
+        ROW_NUMBER() OVER(PARTITION BY P.POST_ID ORDER BY F.FILE_ID) AS RN
+        FROM USERS U, POST P, POST_PIC PP, POST_WISH_LIST PL, FILES F
+        WHERE PP.POST_ID = PL.POST_ID
+        AND P.POST_ID = PP.POST_ID
+        AND U.USER_ID = PL.USER_ID
+        AND F.FILE_ID = PP.FILE_ID
+        AND U.USER_ID = #{userId}
+       )
+       WHERE RN = 1
+       ORDER BY POST_ID DESC
 	</select>
 	
 	<select id="userInfo" parameterType="user" resultType="user">
@@ -132,9 +134,11 @@
 		</if>
 	</update>	
 	
-	<delete id="deleteUser" parameterType="user">
-		DELETE FROM USERS WHERE USER_ID = #{userId};
-	</delete>
+	<update id="deleteUser" parameterType="user">
+		UPDATE USERS 
+		SET USER_STATUS = 'WITHDRAWAL'
+		WHERE USER_ID = #{userId}
+	</update>
 	
 	<insert id="wishKeyword">
 		INSERT INTO WISH_KEYWORD(USER_ID, WISH_KEYWORD)

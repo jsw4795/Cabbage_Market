@@ -31,18 +31,9 @@
 	<script src="/resources/js/post/postDetail.js"></script>
 </head>
 <body>
-<!-- 	model.addAttribute()
-		post : 게시글 정보 postPic : 해당 게시글 이미지  
-		user: 해당 게시글 판매자 정보 anotherPost: 판매자의 다른 상품
--->
-   <!--  <nav class="navbar nav-global fixed-top navbar-expand-sm">
-        <div class="container">
-            <a class="navbar-brand" href="javascript:history.back()">
-                <img src="/resources/pic/cabbage.png" width="100px" height="50px">
-            </a>
-        </div>
-    </nav> -->
-
+	<div id="loading-overlay">
+         <div id="loading-spinner"></div>
+      </div>
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
 
@@ -111,10 +102,10 @@
 	                     <c:choose>
 				            <%-- wishPost가 null이면 찜 목록에 없는 것으로 판단 --%>
 				            <c:when test="${not empty wishPost}">
-				                <button type="button" class="btn" onclick="deleteWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/wishHeart.png" width="22px" height="22px"></button>
+				                <button type="button" class="btn" id="deleteWish"  onclick="deleteWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/wishHeart.png" width="22px" height="22px"></button>
 				            </c:when>
 				            <c:otherwise>
-				                <button type="button" class="btn" onclick="addWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/defaultHeart.png" width="22px" height="22px"></button>
+				                <button type="button" class="btn"  id="addWish" onclick="addWishList('${userId}', '${post.postId}')"><img src="/resources/pic/postPic/wish/defaultHeart.png" width="22px" height="22px"></button>
 				            </c:otherwise>
 				        </c:choose>
 			        </c:if>
@@ -142,7 +133,7 @@
             <li class="list-item date">상품 등록 일자 <span><time datetime='2019-08-20T08:30:00Z'>${post.postRegdate }</time></span></li>
         </ul>
         <div class="description">
-            <p>${post.postContent }<p>
+            <pre class="postContent">${post.postContent }</pre>
         </div>
 
 		<p id="article-counts">관심 ${countWish} ∙ 조회 ${post.postViews }</p>

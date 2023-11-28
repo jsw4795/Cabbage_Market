@@ -104,6 +104,10 @@ public class UserServiceImpl implements UserService {
 	public void deleteWishKeyword(UserVO vo) {
 		userDAO.deleteWishKeyword(vo);
 	}
+	@Override
+	public void deleteUser(UserVO vo) {
+		userDAO.deleteUser(vo);
+	}
 	
 	
 }

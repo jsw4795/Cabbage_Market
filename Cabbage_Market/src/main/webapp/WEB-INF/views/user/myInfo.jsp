@@ -10,10 +10,12 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <script>
       $(document).ready(function () {
         purchaseList();
+        let userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
 
         $.ajax({
           type: "POST",
           url: "/user/salesList",
+          data: {"userId" : userId},
           dataType: "json",
           success: function (response) {
             $("#salecnt").text(response.length);
@@ -160,10 +162,12 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       }
 
       function salesList() {
+    	  let userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
         $(".sc-eEieub").hide();
         $.ajax({
           type: "POST",
           url: "/user/salesList",
+          data: {"userId": userId},
           dataType: "json",
           success: function (response) {
             let productContainer = $(".product-container");
@@ -221,6 +225,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             	let productDiv = 
                     '<div class="sc-bIqbHp deAjQN">'
                         +'<a class="sc-dREXXX hsBvIx" href="/post/getPost/'+product.postId+'">'
+                        + ' <div class="sc-iIHSe liqURL">'
+                        + '<input type="checkbox" name="RowCheck" value="'+product.postId+'">'
+                        + '</div>'
                             +'<div class="sc-kcbnda cgazhg">'
                                 +'<img src= "/resources/pic/postPic/'+product.fileName+'" alt="상품 이미지" />'
                                 +'<div class="sc-cJOK bosAdb"></div>'
@@ -369,7 +376,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
   	<!-- header -->
 	<%@ include file="/WEB-INF/views/main/inc/header.jsp" %>
-    <div class="sc-kqlzXE bvAAFa">
+    <div class="sc-kqlzXE bvAAFa" data-userid="${user.userId }">
       <div class="sc-jRhVzh kyOmSl">
         <div class="sc-jXQZqI jiarQh">
           <div class="sc-iGPElx ermrpj">

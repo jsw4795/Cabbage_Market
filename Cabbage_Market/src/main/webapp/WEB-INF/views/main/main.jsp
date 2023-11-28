@@ -99,6 +99,24 @@
 									<img width="15" height="15" src="https://img.icons8.com/ios-filled/50/chat.png" alt="chat"/>
 									${recomendPostById.chatRoomCount }
 							 	</span>
+							 	<span>
+								 	<c:if test="${recomendPostById.postStatus == 'RESERVE' }">
+										<span style="
+										    float: right;
+										    margin-right: 12px;
+										    border: 1px solid #000;
+										    border-radius: 10px;
+										    padding: 0;
+										    padding-left: 10px;
+										    padding-right: 10px;
+										    padding-bottom: 3px;
+										    padding-top: 3px;
+										    line-height: -8;
+										">
+										예약중
+										</span>
+									</c:if>
+								</span>
 							</div>
 						</div>
 					</a>
@@ -156,6 +174,24 @@
 									<img width="15" height="15" src="https://img.icons8.com/ios-filled/50/chat.png" alt="chat"/>
 									${somethingNew.chatRoomCount }
 							 	</span>
+							 	<span>
+								 	<c:if test="${somethingNew.postStatus == 'RESERVE' }">
+										<span style="
+										    float: right;
+										    margin-right: 12px;
+										    border: 1px solid #000;
+										    border-radius: 10px;
+										    padding: 0;
+										    padding-left: 10px;
+										    padding-right: 10px;
+										    padding-bottom: 3px;
+										    padding-top: 3px;
+										    line-height: -8;
+										">
+										예약중
+										</span>
+									</c:if>
+								</span>
 							</div>
 						</div>
 					</a>
@@ -212,6 +248,24 @@
 									<img width="15" height="15" src="https://img.icons8.com/ios-filled/50/chat.png" alt="chat"/>
 									${recomendPostByVeiwCount.chatRoomCount } 
 							 	</span>
+							 	<span>
+								 	<c:if test="${recomendPostByVeiwCount.postStatus == 'RESERVE' }">
+										<span style="
+										    float: right;
+										    margin-right: 12px;
+										    border: 1px solid #000;
+										    border-radius: 10px;
+										    padding: 0;
+										    padding-left: 10px;
+										    padding-right: 10px;
+										    padding-bottom: 3px;
+										    padding-top: 3px;
+										    line-height: -8;
+										">
+										예약중
+										</span>
+									</c:if>
+								</span>
 							</div>
 						</div>
 					</a>

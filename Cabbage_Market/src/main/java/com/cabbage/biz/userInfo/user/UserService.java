@@ -34,4 +34,5 @@ public interface UserService {
 	List<UserVO> keywordList(UserVO vo);
 	void deleteWish(UserVO vo);
 	void deleteWishKeyword(UserVO vo);
+	void deleteUser(UserVO vo);
 }

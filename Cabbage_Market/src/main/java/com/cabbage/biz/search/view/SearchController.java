@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cabbage.biz.chat.chat.ChatRoomService;
 import com.cabbage.biz.search.post.PostVO;
 import com.cabbage.biz.search.search.SearchService;
 import com.cabbage.biz.search.search.SearchVO;
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class SearchController {
 
     private final SearchService searchService;
-
+    private final ChatRoomService chatRoomService;
     
     
     
@@ -59,6 +60,7 @@ public class SearchController {
 
     @GetMapping("/postList")
     public String showPostList( HttpSession session, String category, String keyword, Model model) {
+    	String userId = (String)session.getAttribute("userId");
         int totalC = 0;
         int paging = 8;
         // 카테고리가 있으면
@@ -77,6 +79,10 @@ public class SearchController {
             totalC =searchService.countCategoryPostList(category);
             model.addAttribute("posts", searchService.findByCategoryPost("1", 1, paging));
         }
+        Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+		
+		model.addAttribute("unreadChatCount", unreadChatCount);
+        
         model.addAttribute("totalC", totalC);
 
         return "search/postList";
@@ -117,7 +123,7 @@ public class SearchController {
                 model.addAttribute("list",postRV);
         }
 
-        return "all_Ajax";
+        return "/main/all_Ajax";
 
     }
     

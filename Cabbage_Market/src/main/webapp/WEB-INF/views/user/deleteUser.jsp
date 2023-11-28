@@ -13,29 +13,40 @@
 	crossorigin="anonymous">
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>   
-
-
 <script>
+$(document).ready(function() {
+	
+	$("#stay_btn").click(function() {
+		window.location.href = 'myInfo';
+	});
 
-	$(function() {
-		$("#confirm").click(function() {
-			modalClose();
-			//컨펌 이벤트 처리
-		});
-		$("#modal-open").click(function() {
-			$("#popup").css('display', 'flex').hide().fadeIn();
-		});
-		$("#close").click(function() {
-			modalClose();
-		});
-		function modalClose() {
-			$("#popup").fadeOut();
-		}
+	$('li a').click(function(event) {
+    	event.preventDefault();
+    	$('#modal').addClass('show');
+
 	});
 	
+	$(document).on('click', '#leave_btn', function (e) {
+	    console.log("click event");
+	    
+	    $.ajax({
+	        type: 'POST', // 혹은 GET 방식에 맞게 설정
+	        url: 'leaveUser', // 요청을 보낼 URL
+	        success: function(response) {
+	            console.log('서버 요청 성공:', response);
+	            alert("탈퇴 되었습니다");
+	            window.location.href = 'login'; // 로그인 페이지로 이동하는 예시
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('서버 요청 실패:', error);
+	            // 실패했을 때의 동작 구현
+	        }
+	    });
+	});
+});
+
 </script>
 <link rel="stylesheet" type="text/css" href="/resources/css/user/delete.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/user/modal.css">
 </head>
 
 <body>
@@ -49,17 +60,33 @@
 				<h2>회원탈퇴</h2>
 				<h4>회원탈퇴 사유를 골라주세요.</h4>
 				<ul>
-					<li><a href="javascript:modalOpen()">너무 많이 이용해요</a></li>
-					<li><a href="/deleteModal">사고 싶은 물품이 없어요</a></li>
-					<li><a href="/deleteModal">물품이 안팔려요</a></li>
-					<li><a href="/deleteModal">비매너 사용자를 만났어요</a></li>
-					<li><a href="/deleteModal">억울하게 이용이 제한됐어요</a></li>
-					<li><a href="/deleteModal">알림이 너무 많이 와요</a></li>
-					<li><a href="/deleteModal">기타</a></li>
+					<li><a href="">너무 많이 이용해요</a></li>
+					<li><a href="">사고 싶은 물품이 없어요</a></li>
+					<li><a href="">물품이 안팔려요</a></li>
+					<li><a href="">비매너 사용자를 만났어요</a></li>
+					<li><a href="">억울하게 이용이 제한됐어요</a></li>
+					<li><a href="">알림이 너무 많이 와요</a></li>
+					<li><a href="">기타</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </body>
+
+<!-- 모달 -->
+<div class="modal" id="modal">
+	<div class="modal_body">
+		<div class="m_head">
+			<div class="modal_title">정말로 떠나실건가요?</div>
+		</div>
+		<div class="m_body">
+			<img alt="울어" src="/resources/pic/emoji/6.png">
+		</div>
+		<div class="m_footer">
+			<div class="modal_btn leave" id="leave_btn">떠나기</div>
+			<div class="modal_btn save" id="stay_btn">머무르기</div>
+		</div>
+	</div>
+</div>
 
 </html>

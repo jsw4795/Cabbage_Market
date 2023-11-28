@@ -37,6 +37,24 @@
 					        	<img width="15" height="15" src="https://img.icons8.com/ios-filled/50/chat.png" alt="chat"/>
 					            ${post.chatRoomCount }
 					        </span>
+					        <span>
+							 	<c:if test="${post.postStatus == 'RESERVE' }">
+									<span style="
+									    float: right;
+									    margin-right: 12px;
+									    border: 1px solid #000;
+									    border-radius: 10px;
+									    padding: 0;
+									    padding-left: 10px;
+									    padding-right: 10px;
+									    padding-bottom: 3px;
+									    padding-top: 3px;
+									    line-height: -8;
+									">
+									예약중
+									</span>
+								</c:if>
+							</span>
 						</div>
 			   		</div>
 				</a>

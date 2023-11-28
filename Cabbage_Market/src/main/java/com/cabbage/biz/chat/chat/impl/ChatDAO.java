@@ -96,6 +96,10 @@ public class ChatDAO {
 		mybatis.update("chatRoom.updateUserExitPoint", chatRoom);
 	}
 	
+	public Integer selectUnreadCount(ChatRoomVO chatRoom) {
+		return mybatis.selectOne("chatRoom.getUnreadCount", chatRoom);
+	}
+	
 	
 //================================================= post ====================================================
 	public PostVO selectPostById(PostVO post) {

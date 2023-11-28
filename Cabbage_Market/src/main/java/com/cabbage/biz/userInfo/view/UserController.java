@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cabbage.biz.chat.chat.ChatRoomService;
 import com.cabbage.biz.userInfo.user.UserService;
 import com.cabbage.biz.userInfo.user.UserVO;
 
@@ -31,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserService userService;
+	private final ChatRoomService chatRoomService;
 
 	@GetMapping("/login")
 	public String getLoginPage() {
@@ -66,6 +68,9 @@ public class UserController {
 		if (vo.getUserProfile() == null) {
 			vo.setUserProfile("profile_default.png");
 		}
+		Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+		
+		model.addAttribute("unreadChatCount", unreadChatCount);
         // 모델에 사용자 정보를 추가하여 뷰로 전달
         model.addAttribute("user", vo);
         model.addAttribute("nowUserId", vo.getUserId());
@@ -82,6 +87,9 @@ public class UserController {
 		if (user.getUserProfile() == null) {
 			user.setUserProfile("profile_default.png");
 		}
+		Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+		
+		model.addAttribute("unreadChatCount", unreadChatCount);
         // 모델에 사용자 정보를 추가하여 뷰로 전달
         model.addAttribute("user", user);
         model.addAttribute("nowUserId", userId);
@@ -167,7 +175,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 
-		return "redirect:/user/login";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/joinUser")
@@ -292,7 +300,6 @@ public class UserController {
 	@RequestMapping("/salesList")
 	@ResponseBody
 	public List<UserVO> salesList(UserVO vo, HttpSession session) {
-		vo.setUserId((String)session.getAttribute("userId"));
 		List<UserVO> salesList = userService.salesList(vo);
 		return salesList;
 	}
@@ -388,7 +395,14 @@ public class UserController {
         return "redirect:/user/myInfo";
     }
 	
-
+    @RequestMapping("/leaveUser")
+	public String leaveUser(UserVO vo, HttpSession session) {
+		System.out.println(">>> 유저삭제처리");
+		vo.setUserId((String)session.getAttribute("userId"));
+		userService.deleteUser(vo);
+		session.invalidate();
+		return "user/login";
+	}
 
 
 }

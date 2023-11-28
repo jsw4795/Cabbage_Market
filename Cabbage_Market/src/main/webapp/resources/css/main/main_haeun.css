@@ -236,7 +236,7 @@
     text-size-adjust: 100%;
     box-sizing: border-box;
     font-family: inherit;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 1.15;
     margin: 0px;
     overflow: visible;
@@ -371,6 +371,7 @@
     left: -41px;
     top: -10px;
     width: 90px;
+    padding: 0;
 }
 .none-haeun-li {
     -webkit-text-size-adjust: 100%;
@@ -384,17 +385,20 @@
     list-style: none;
     --tw-bg-opacity: 1;
     font-size: 15px;
-    line-height: 1.25rem;
+    line-height: 12px;
     font-weight: 400;
     box-sizing: border-box;
     border: 0 solid #f9f9f9;
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
+    margin-left: 12px;
+    margin-right: 12px;
     border-bottom-width: 1px;
     --tw-border-opacity: 1;
     border-color: rgb(156 163 175/var(--tw-border-opacity));
-    padding-top: .75rem;
-    padding-bottom: 1.75rem;
+    padding-top: 8px;
+    padding-bottom: 17px;
+}
+.none-haeun-ul li {
+	margin: 16px;
 }
 .none-haeun-a {
     -webkit-text-size-adjust: 100%;
@@ -530,8 +534,8 @@
 } 
 .alrim {
 	position: absolute;
-    top: -6px;
-    right: 7px;
+   	top: -8px;
+    right: 46px;
     z-index: 10;
     /* min-width: 7px; */
     padding: 0 5px;
@@ -545,13 +549,16 @@
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);
     transform: translateX(50%);
-    font-size: 1.1rem;
+    font-size: 14px;
     line-height: 18px;
     font-weight: bold;
     text-align: center;
     color: #fff;
 	
 }  
+#someElement[data-count="0"] .alrim, #someElement[data-count=""] .alrim {
+	display: none;
+} 
 
 .button-haeun1 {
 	text-decoration: none;

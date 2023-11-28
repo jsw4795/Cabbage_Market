@@ -32,7 +32,7 @@
 					<button class="common-bg-hover  css-1ca43ff">
 						<img class="menu-profile-img"
 							src="/resources/pic/profilePic/${nowUserVO.profilePic }"
-							alt="${nowUserVO.userNickname }">
+							alt="${nowUserVO.userNickname }" onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'">
 						<div class="nickname-area">
 							${nowUserVO.userNickname }<span class="menu-icon"><svg width="12" height="7"
 									viewBox="0 0 12 7" fill="none"
