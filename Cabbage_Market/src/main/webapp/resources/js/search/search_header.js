@@ -9,6 +9,12 @@ const clearSearchInput = document.getElementById("clearSearchInput");
 $(() => {
   let keyword = $("#content").attr("data-keyword");
   if (keyword) searchInput.value = keyword;
+  $(document).on("click", ".list-group .delBtn", function (e) {
+    e.preventDefault();
+
+    let result = $(this).prev().text();
+    deleteRecentSearch(result);
+  });
 });
 // 마우스 클릭으로 검색 결과 가져오기
 searchButton.addEventListener("click", function () {
@@ -51,7 +57,9 @@ searchInput.addEventListener("focus", function () {
       if (
         $target.hasClass("input-haeun1") ||
         $target.hasClass("list-group") ||
-        $target.hasClass("recentKeyword")
+        $target.hasClass("recentKeyword") ||
+        $target.hasClass("delBtn") ||
+        $target.hasClass("deleteAll")
       ) {
         return;
       }
@@ -135,10 +143,87 @@ function updateAutocompleteResults(query) {
 
   console.log("XHR request sent to: " + url);
 }
+// 최근검색 결과를 표시하는 함수 정의
+function displayRecentResults(results) {
+  searchResults.innerText = "";
+  searchResults.style.display = "block";
+
+  // 결과를 반복하며 리스트 아이템을 생성하고 추가합니다.
+  results.forEach(function (result) {
+    var listItem = document.createElement("li");
+    var spanElement = document.createElement("span");
+    listItem.classList.add("recentKeyword");
+    spanElement.classList.add("recentKeyword");
+    spanElement.style.width = "95%";
+    spanElement.textContent = result;
+
+    // 삭제 버튼 추가
+    var deleteButton = document.createElement("button");
+    deleteButton.className = "delBtn";
+    deleteButton.textContent = "X"; // "X"로 표시
+    deleteButton.addEventListener("click", function () {
+      deleteRecentSearch(result);
+    });
+
+    $(document).on("click", "li.recentKeyword", function (e) {
+      let $target = $(e.target);
+      if ($target.hasClass("delBtn")) return;
+      let result = $(this).find("span").text();
+      setSearchInputValue(result);
+    });
+
+    // listItem에 마우스 이벤트 리스너 추가
+    listItem.addEventListener("mouseover", function () {
+      listItem.style.backgroundColor = "#eee"; // 마우스가 올라갔을 때의 색상
+    });
+
+    listItem.addEventListener("mouseout", function () {
+      listItem.style.backgroundColor = ""; // 마우스가 나갔을 때의 색상 (기본값)
+    });
+
+    // 리스트 아이템에 삭제 버튼 추가
+    listItem.appendChild(spanElement);
+    listItem.appendChild(deleteButton);
+
+    searchResults.appendChild(listItem);
+  });
+
+  var deleteAllliElement = document.createElement("li");
+  var deleteAllSpanElement = document.createElement("span");
+  if (results.length > 0) {
+    deleteAllSpanElement.style.color = "red";
+    deleteAllSpanElement.style.fontWeight = "bold";
+    deleteAllSpanElement.textContent = "전체삭제";
+    deleteAllSpanElement.classList.add("deleteAll");
+  } else {
+    deleteAllSpanElement.style.width = "95%";
+    deleteAllSpanElement.style.height = "40px";
+    deleteAllSpanElement.style.display = "flex";
+    deleteAllSpanElement.style.justifyContent = "center";
+    deleteAllSpanElement.style.alignItems = "center";
+    deleteAllSpanElement.textContent = "최근에 검색한 키워드가 없습니다.";
+  }
+  deleteAllliElement.appendChild(deleteAllSpanElement);
+  deleteAllliElement.addEventListener("click", function () {
+    var xhr = new XMLHttpRequest();
+    var url = "/deleteAllKeyword";
+
+    xhr.open("GET", url, true);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        searchResults.innerHTML = "";
+        searchResults.style.display = "none";
+      }
+    };
+    xhr.send();
+  });
+  searchResults.appendChild(deleteAllliElement);
+}
+
 // 자동완성 결과를 표시하는 함수 정의
 function displayAutocompleteResults(results) {
   searchResults.innerText = "";
-
   // 결과가 있을 경우, 엘리먼트를 보이게 만듭니다.
   if (results.length > 0) {
     searchResults.style.display = "block";
@@ -156,21 +241,9 @@ function displayAutocompleteResults(results) {
     spanElement.style.width = "95%";
     spanElement.textContent = result;
 
-    // spanElement.addEventListener("click", function () {
-    //   // 검색어를 클릭했을 때 해당 검색어를 입력창에 넣습니다.
-    //   setSearchInputValue(result);
-    // });
-
-    // 삭제 버튼 추가
-    var deleteButton = document.createElement("button");
-    deleteButton.className = "btn btn-danger btn-sm";
-    deleteButton.textContent = "X"; // "X"로 표시
-    deleteButton.addEventListener("click", function () {
-      deleteRecentSearch(result);
-    });
-
-    $(document).on("click", "li.recentKeyword", function () {
-      console.log(">>> 클릭");
+    $(document).on("click", "li.recentKeyword", function (e) {
+      let $target = $(e.target);
+      if ($target.hasClass("delBtn")) return;
       let result = $(this).find("span").text();
       setSearchInputValue(result);
     });
@@ -186,7 +259,6 @@ function displayAutocompleteResults(results) {
 
     // 리스트 아이템에 삭제 버튼 추가
     listItem.appendChild(spanElement);
-    listItem.appendChild(deleteButton);
 
     searchResults.appendChild(listItem);
   });
@@ -207,7 +279,7 @@ function recentResults(query) {
       var data = JSON.parse(xhr.responseText);
 
       // 자동완성 결과를 업데이트
-      displayAutocompleteResults(data);
+      displayRecentResults(data);
     }
   };
 

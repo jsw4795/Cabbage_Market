@@ -24,7 +24,7 @@ public class PostVO {
 	private String sellerId;
 	private Long postCatId;
 	private String postTitle;
-	private int postPrice;
+	private long postPrice;
 	private String postContent;
 	private String postStatus;
 	private Date postRegdate;

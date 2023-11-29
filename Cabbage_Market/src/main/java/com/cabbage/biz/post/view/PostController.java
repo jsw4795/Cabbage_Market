@@ -197,11 +197,15 @@ public class PostController {
     	vo.setPostId(postId);
     	vo.setUserId(userId);
     	
+    	//post상세정보
+    	PostVO post = postService.getPost(vo);
+    	if(post == null)
+    		return "/post/error";
+    	
     	//조회수 증가
     	postService.plusPostViews(vo);
     	
-    	//post상세정보
-    	PostVO post = postService.getPost(vo);
+    	
     	vo.setSellerId(post.getSellerId());	//해당 포스트에 sellerId 추가
     	
     	if(post.getPostStatus().equals("DELETE")) {

@@ -25,4 +25,6 @@ public interface SearchService {
     int countCategoryPostList(String category);
 
     int countKeywordPostList(String keyword);
+    
+    void deleteAllKeyword(String userId);
 }

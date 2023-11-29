@@ -89,4 +89,7 @@ public class SearchDAO {
     public int countKeywordPostList(String keyword) {
         return mybatis.selectOne("Search.countKeywordPostList", keyword);
     }
+    public void deleteAllKeyword(String userId) {
+        mybatis.update("Search.deleteAllKeyword",userId);
+    }
 }

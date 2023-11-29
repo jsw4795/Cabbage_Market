@@ -404,5 +404,25 @@ public class UserController {
 		return "user/login";
 	}
 
+	// 닉네임(회원정보수정) 중복 확인
+	@PostMapping("/nickUpdate")
+	@ResponseBody
+	public ResponseEntity<Boolean> nickUpdate(UserVO vo, String userNickname, HttpSession session) {
 
+		vo.setUserId((String) session.getAttribute("userId"));
+		UserVO user = userService.userInfo(vo);
+
+		boolean result = true;
+		if (userNickname.trim().isEmpty()) {
+			result = false;
+		} else {
+			if (user.getUserNickname().equals(userNickname)) {
+				result = true;
+			} else {
+				result = !userService.selectNick(userNickname);
+			}
+		}
+
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 }

@@ -8,9 +8,15 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/user/test.css" />
     <script>
-      $(document).ready(function () {
+      $(()=> {
         var userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
         purchaseList();
+        
+        console.log($(".kHfkPy").length)
+        if($(".kHfkPy").length == 0){
+        	$(".gmerZt").removeClass("gmerZt").addClass("kHfkPy");
+        	salesList();
+        }
 
         $.ajax({
           type: "POST",
@@ -162,6 +168,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
       function salesList() {
     	  let userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
+    	  let productContainer = $(".product-container");
+    	  productContainer.html(""); // 기존 상품 삭제
         $(".sc-eEieub").hide();
         $.ajax({
           type: "POST",
@@ -169,8 +177,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           data: {"userId": userId},
           dataType: "json",
           success: function (response) {
-            let productContainer = $(".product-container");
-            productContainer.empty(); // 기존 상품 삭제
+            
+            
             // 서버에서 받은 데이터로 상품 목록 생성
             response.forEach(function (product) {
             	let postStatus = product.postStatus;
@@ -198,7 +206,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                             +'</div>'
                         +'</a>'
                     +'</div>';
-
+				
               productContainer.append(productDiv); // 상품을 컨테이너에 추가
             });
           },

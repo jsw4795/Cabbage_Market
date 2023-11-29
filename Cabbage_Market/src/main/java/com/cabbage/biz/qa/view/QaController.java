@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cabbage.biz.qa.qa.QaService;
 import com.cabbage.biz.qa.qa.QaVO;
-import com.cabbage.biz.qa.user.UsersVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -64,7 +63,7 @@ public class QaController {
 		
 		
 		// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+		String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
 		
 		return "/qa/qaFormList";
@@ -79,7 +78,7 @@ public class QaController {
         
         
         // 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+        String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
         return "/qa/qaCategory";
@@ -92,7 +91,7 @@ public class QaController {
     								Model model, HttpSession session) {
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
         // categoryId에 따라서 qacatcontent를 가져와서 세션에 저장하고 모델에 추가
@@ -113,10 +112,10 @@ public class QaController {
     	System.out.println(">>> insertQa 실행");
 
         // 사용자 ID를 세션에서 가져와서 해당 사용자의 1:1 문의 목록을 가져옴
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
-        vo.setUserId(loggedInUser.getUserId());
+        vo.setUserId(loggedInUser);
         
         
         
@@ -156,7 +155,7 @@ public class QaController {
         qaService.insertQa(vo);
         
         // 1:1 문의 목록 가져옴
-        List<QaVO> qaList = qaService.getQaList(loggedInUser.getUserId());
+        List<QaVO> qaList = qaService.getQaList(loggedInUser);
         
         // 모델에 추가
         model.addAttribute("qaList", qaList);
@@ -181,7 +180,7 @@ public class QaController {
             				Model model, HttpSession session) {
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+        String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
         // 검색 조건 맵을 모델에 추가
@@ -189,7 +188,7 @@ public class QaController {
         model.addAttribute("searchCondition", searchCondition);
         model.addAttribute("searchKeyword", searchKeyword);
 
-        List<QaVO> qaList = qaService.getQaList(loggedInUser.getUserId());
+        List<QaVO> qaList = qaService.getQaList(loggedInUser);
     	
     	model.addAttribute("qaList", qaList);
     	
@@ -207,7 +206,7 @@ public class QaController {
     	System.out.println(">>> 1:1 문의내역 리스트 보기 -> getQaList 실행!");
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
         
@@ -230,7 +229,7 @@ public class QaController {
     public String getQaFormDetail(QaVO vo, Model model, HttpSession session) {
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
     	
     	
@@ -262,7 +261,7 @@ public class QaController {
     public String getAdminQaList(Model model, HttpSession session) {
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
     	
     	List<QaVO> adminQaList = qaService.getAdminQaList();
@@ -278,7 +277,7 @@ public class QaController {
     public String getAdminQaFormDetail(QaVO vo, Model model, HttpSession session) {
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
     	
     	
@@ -299,13 +298,13 @@ public class QaController {
 	    	QaVO qa = qaService.getQa(vo);
 	    	
 	        // 사용자 ID를 세션에서 가져와서 해당 사용자의 1:1 문의 목록을 가져옴
-	        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+	    	String loggedInUser = (String) session.getAttribute("userId");
 	        model.addAttribute("loggedInUser", loggedInUser);
 	        
 	        qa.setQaComment(vo.getQaComment());
 	        
 	        // 로그인한 사용자의 ID를 댓글 작성자로 설정
-	        qa.setUserId(loggedInUser.getUserId());
+	        qa.setUserId(loggedInUser);
 	        
 	        
 	        // DB에 댓글 저장

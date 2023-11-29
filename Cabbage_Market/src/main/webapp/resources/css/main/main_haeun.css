@@ -212,6 +212,7 @@
     vertical-align: bottom;
 }
 .div-haeun6 {
+	position: relative;
     text-size-adjust: 100%;
     font-synthesis: none;
     -webkit-font-smoothing: antialiased;
@@ -326,6 +327,7 @@
     margin-right: 5px;
 }
 .none-haeun {
+	position: relative;
 	display: none;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;

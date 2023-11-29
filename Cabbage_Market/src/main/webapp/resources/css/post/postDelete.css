@@ -716,5 +716,8 @@ footer a, footer h6 {
     color: #868e96;
     font-size: 13px;
 }
+body{
+	margin-top: 200px;
+}
 
 /* 하단 판매자의 다른 상품 부분 끝*/

@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+//알림 갯수 컨트롤
 function toggleDiv(type) {
   var myPageDiv = document.getElementById(type);
 
@@ -14,6 +15,8 @@ function toggleDiv(type) {
     var alrimCount = document.getElementById("alrimCount");
 
     if (!myPageDiv.style.display || myPageDiv.style.display === "none") {
+      var myDiv = document.getElementById("my");
+      myDiv.style.display = "none";
       myPageDiv.style.display = "block";
 
       // 'alrimCount' ID를 가진 요소가 존재하는지 확인
@@ -21,11 +24,20 @@ function toggleDiv(type) {
         alrimCount.innerHTML = "0";
         alrimCount.style.display = "none";
       }
+      $.ajax({
+        type: "get",
+        url: "/updateNoti",
+        success: function (data) {
+          console.log("header에서 읽음으로 변경");
+        },
+      });
     } else {
       myPageDiv.style.display = "none";
     }
   } else {
     if (!myPageDiv.style.display || myPageDiv.style.display === "none") {
+      var alrimDiv = document.getElementById("alrim");
+      alrimDiv.style.display = "none";
       myPageDiv.style.display = "block";
     } else {
       myPageDiv.style.display = "none";

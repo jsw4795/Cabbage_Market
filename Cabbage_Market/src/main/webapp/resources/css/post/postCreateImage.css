@@ -16,6 +16,10 @@
 	overflow: hidden;
 	cursor: pointer;
 }
+#file-input-container * {
+	cursor: pointer;
+	
+}
 
 #file-input {
 	position: absolute;
@@ -37,7 +41,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 10px;
-	max-height: 70px;
+	height: 100px;
 }
 
 #preview-container {

@@ -15,15 +15,12 @@
 		<h1 title="" class="">
 			<!-- 세션에서 로그인된 사용자 정보 읽어오기 -->
 			<c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
-			<!-- 로그인 정보 출력 -->
-			<c:if test="${loggedInUser ne null}">
 				<svg title="" width="1.8rem" height="5rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
 					<img src="/resources/pic/baechu.png" width="45" height="45" /></svg>
 					<!--  <a href="redirect:/qa/qaFormList" style="text-decoration: none; color: black;">문의내역</a> -->
 					문의내역
-				</c:if>
 		</h1>
 
 			<!-- SEARCH BAR 부분 -->

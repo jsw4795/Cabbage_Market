@@ -73,4 +73,8 @@ public class SearchServiceImpl implements SearchService {
 	public int countKeywordPostList(String keyword) {
 		return dao.countKeywordPostList(keyword);
 	}
+	@Override
+	public void deleteAllKeyword(String userId) {
+		dao.deleteAllKeyword(userId);
+	}
 }

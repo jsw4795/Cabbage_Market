@@ -71,28 +71,67 @@
 			<div class="div-haeun6">
 				<!-- <span> -->
 				<c:if test="${not empty userId}">
-					
-					<button type="button" class="button-haeun1"
-						onclick="toggleDiv('alrim')">
-						<img class="img-haeun4" src="/resources/pic/img/noti_icon.png"
-							width="23" height="25" alt="마이페이지 버튼 이미지">
-						<div id="someElement">
-							<span class="alrim" id="alrimCount"> 0 </span>
-						</div>
-						
-						<div class="none-haeun" id="alrim">
-
-						<ul class="none-haeun-ul" id="alrimList"
-							style="max-height: 430px; overflow-y: auto;">
-							<li
-								style="margin: 0px; margin-left: 17px; margin-right: 17px; height: 36px; margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
-								<span> 알림 </span>
+							<div class="none-haeun" id="alrim" style="display:none;">
 								
-							</li>
-						</ul>
-					</div>
-					</button>
-				</c:if>
+								<ul class="none-haeun-ul" id="alrimList" style="max-height:430px; overflow-y:auto;">
+								<li>
+									<div style="
+									    margin: 0px;
+									    margin-left: 17px;
+									    margin-right: 17px;
+									    height: 36px;
+									    margin-top: 14px;
+									    display: flex;
+									    justify-content: space-between;
+									    align-items: center;
+									">
+								
+									    <span>
+									        알림
+									    </span>
+									    <span>
+									    <button onclick="deleteAlrim()" style=" margin: 0; ">
+									        <img class="img-haeun4" src="/resources/pic/img/bin_icon.png" width="23" height="25" alt="알림 삭제 버튼 이미지">
+									    </button>
+									    </span>
+									</div>	
+									</li>
+									<c:forEach var="alrim2" items="${alrim2 }">
+									<c:if test="${empty alrim2}">
+										알림이 없습니다.
+									</c:if>
+									<li class="none-haeun-li" id="alrim_${alrim2.notiId }">
+										<a class="none-haeun-a" href=${alrim2.notiUrl } style="font-size: 18px;">
+											<c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 할인' }">
+											
+											<img class="" src="/resources/pic/postPic/${alrim2.fileName }" 
+													onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" width="60" height="60" alt="알림 삭제 버튼 이미지">
+											</c:if>
+											<div style="display:inline-block;">
+											<b style='font-size:18px;'>
+												[${alrim2.notiType } 알림] 
+											</b><br><br>
+												${alrim2.notiContent }
+											</div>
+											
+									    </a>
+									    <button onclick="goNotiDelete('${alrim2.notiId}')" id="goNotiDelete" style="display:none;">
+									    	X
+									    </button>
+									</li>		
+									</c:forEach>
+											
+								</ul>
+							</div>
+							<button type="button" class="button-haeun1" onclick="toggleDiv('alrim')" >
+									<img class="img-haeun4" src="/resources/pic/img/noti_icon.png" width="23" height="25" alt="마이페이지 버튼 이미지">
+									<div id="someElement">
+							            <span class="alrim" id="alrimCount" style="display: none;">  
+							                ${alrim}
+							            </span>
+									</div>
+							</button>
+							</c:if>
 				<c:if test="${empty userId}">
 					<a type="button" href="/user/login"
 						class="button-haeun1">

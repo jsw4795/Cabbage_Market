@@ -38,7 +38,7 @@
             </select>
             
             <div id="file-input-container" onclick="openFileInput()">
-            <label for="uploadFile">이미지</label><br>
+            <label>이미지</label><br>
                 <span id="file-input-text">+</span>
                 <input type="file" id="uploadFile" name="uploadFile" accept="image/*" multiple onchange="previewImages(event)" id="file-input" hidden required="required">
             </div>
@@ -53,7 +53,7 @@
             <p id="postTitleError" style="color: red; display: none;">공백문자는 사용할 수 없습니다.</p>
             
             <label for="postPrice">가격</label>
-            <input type="number" name="postPrice" id="postPrice" min="0" max="1000000001" required>
+            <input type="text" name="postPrice" id="postPrice" maxlength="13" required>
             
             <label for="postContent">상세 설명</label>
             <textarea name="postContent" id="postContent" rows="5" maxlength="1000" placeholder="최대 1000자" required></textarea>

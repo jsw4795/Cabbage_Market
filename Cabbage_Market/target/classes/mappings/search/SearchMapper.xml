@@ -203,4 +203,10 @@
         WHERE ROWNUM <![CDATA[<=]]> 10
     </select>
 
+	<!-- 최근 검색어 전테 삭제 -->
+	<update id="deleteAllKeyword" parameterType="string">
+		UPDATE SEARCH_KEYWORD_LOG
+		SET USE_YN = 'N'
+		WHERE USER_ID = #{userId}
+	</update>
 </mapper>

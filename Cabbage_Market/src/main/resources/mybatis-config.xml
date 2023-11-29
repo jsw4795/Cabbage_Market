@@ -25,7 +25,7 @@
 	<!-- ==================================== Main ===================================== -->
 		<typeAlias type="com.cabbage.biz.main.post.PostVO" alias="mainPost"/>
 	<!-- ==================================== Noti ===================================== -->
-		<typeAlias type="com.cabbage.biz.noti.NotiVO" alias="noti"/>
+		<typeAlias type="com.cabbage.biz.noti.noti.NotiVO" alias="noti"/>
 	<!-- ==================================== QA ===================================== -->
 		<typeAlias type="com.cabbage.biz.qa.faq.FaqVO" alias="faq"/>
 		<typeAlias type="com.cabbage.biz.qa.qa.QaVO" alias="qa"/>

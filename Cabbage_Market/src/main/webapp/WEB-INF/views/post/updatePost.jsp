@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<c:set var="postPrice" value="${post.postPrice }" />
+<fmt:formatNumber type="currency" value="${postPrice}" var="formattedPrice" />   
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +76,7 @@
             <p id="postTitleError" style="color: red; display: none;">공백문자는 사용할 수 없습니다.</p>
             
             <label for="postPrice">가격</label>
-            <input type="number" name="postPrice" id="postPrice" min="0" value="${post.postPrice }" required>
+			<input type="text" name="postPrice" id="postPrice" maxlength="13" value="${formattedPrice}" required>
             
             <label for="postContent">상세 설명</label>
             <textarea name="postContent" id="postContent" rows="5" maxlength="1000" placeholder="최대 1000자" required>${post.postContent }</textarea>

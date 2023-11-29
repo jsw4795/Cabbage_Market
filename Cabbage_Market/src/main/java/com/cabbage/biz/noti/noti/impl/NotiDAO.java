@@ -1,4 +1,4 @@
-package com.cabbage.biz.noti.impl;
+package com.cabbage.biz.noti.noti.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cabbage.biz.main.post.PostVO;
-import com.cabbage.biz.noti.NotiVO;
+import com.cabbage.biz.noti.noti.NotiVO;
 
-@Repository
+@Repository("notiDAO")
 public class NotiDAO {
 
 	private SqlSessionTemplate mybatis;
@@ -32,16 +32,16 @@ public class NotiDAO {
 		mybatis.insert("notiDAO.insertNoti", vo);
 	}
 
-	//글수정
-	public void updateNoti(NotiVO vo) {
-		System.out.println("===> MyBatis JDBC로 updateBoard() 실행");
-		mybatis.update("notiDAO.updateBoard", vo);
+	//알림 테이블 unread -> read
+	public void updateNoti(String id) {
+		System.out.println("===> MyBatis JDBC로 updateNoti() 실행");
+		mybatis.update("notiDAO.updateNoti", id);
 	}
 
 	//글삭제
 	public void deleteNoti(NotiVO vo) {
-		System.out.println("===> MyBatis JDBC로 deleteBoard() 실행");
-		mybatis.delete("notiDAO.deleteBoard", vo);
+		System.out.println("===> MyBatis JDBC로 deleteNoti() 실행");
+		mybatis.delete("notiDAO.deleteNoti", vo.getNotiId());
 	}
 
 	//게시글 1개 조회
@@ -56,26 +56,6 @@ public class NotiDAO {
 		return null;
 	}
 	
-	//전체 게시글 조회
-//	public List<NotiVO> getBoardList(NotiVO vo) {
-//		System.out.println("===> MyBatis JDBC로 getBoardList() 실행");
-//		// 검색조건 값이 없을 때 기본값 설정
-//		if (vo.getSearchCondition() == null) {
-//			vo.setSearchCondition("TITLE");
-//		}
-//		if (vo.getSearchKeyword() == null) {
-//			vo.setSearchKeyword("");
-//		}
-//		String sql = "";
-//		if ("TITLE".equals(vo.getSearchCondition())) {
-//			sql = "boardDAO.getBoardList_T";
-//		} else if ("CONTENT".equals(vo.getSearchCondition())) {
-//			sql = "boardDAO.getBoardList_C";
-//		}
-//		
-//		return mybatis.selectList(sql, vo.getSearchKeyword());
-//	}
-	
 	public List<Map<String, String>> checkWishKeyWord(PostVO postVo) {
 		System.out.println("여기는 노티다오 ㅇㅇ checkWishKeyWord");
 		Map<String, String> map = new HashMap<>();
@@ -84,6 +64,18 @@ public class NotiDAO {
 		return mybatis.selectList("notiDAO.checkWishKeyWord", map);
 	}
 	
+	public List<String> checkPostWishList(PostVO postVo) {
+		System.out.println("여기는 노티다오 ㅇㅇ checkPostWishList");
+		System.out.println(postVo.getPostId());
+		return mybatis.selectList("notiDAO.checkPostWishList", postVo.getPostId().intValue());
+	}
 	
+	public int getNotiCountById(String id) {
+		return mybatis.selectOne("notiDAO.getNotiCountById", id);
+	}
+	
+	public List<NotiVO> getNotiListById(String id) {
+		return mybatis.selectList("notiDAO.getNotiListById", id);
+	}
 		
 }

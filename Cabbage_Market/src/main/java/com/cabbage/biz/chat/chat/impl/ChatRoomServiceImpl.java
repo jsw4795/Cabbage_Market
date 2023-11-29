@@ -74,8 +74,12 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
 	@Override
 	public ChatRoomVO getChatRoomVOByUserIdAndChatRoomId(ChatRoomVO chatRoom) {
+		chatRoom = chatDAO.selectChatRoomVOByUserIdAndChatRoomId(chatRoom);
 		
-		return chatDAO.selectChatRoomVOByUserIdAndChatRoomId(chatRoom);
+		if(chatRoom.getOtherUserProfilePic() == null)
+			chatRoom.setOtherUserProfilePic(UserService.PROFILE_DEFAULT);
+		
+		return chatRoom;
 	}
 	
 	@Override

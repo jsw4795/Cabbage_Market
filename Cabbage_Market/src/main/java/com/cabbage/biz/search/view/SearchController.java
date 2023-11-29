@@ -137,4 +137,14 @@ public class SearchController {
         
         return searchService.selectListPost(vo.getSearchKeyword(), begin, end);
     }
+    
+    @GetMapping("/deleteAllKeyword")
+    @ResponseBody
+    public void deleteAllKeyword(HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        if (userId == null) {
+            userId = "admin";
+        }
+        searchService.deleteAllKeyword(userId);
+    }
 }

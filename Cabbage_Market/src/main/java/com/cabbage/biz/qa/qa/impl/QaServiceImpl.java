@@ -1,27 +1,21 @@
 package com.cabbage.biz.qa.qa.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cabbage.biz.qa.qa.QaService;
 import com.cabbage.biz.qa.qa.QaVO;
 
-//@Service : @Component 상속 확장 어노테이션
-//비즈니스 로직 처리 서비스 영역에 사용
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service("qaService")
 public class QaServiceImpl implements QaService {
-	@Autowired //타입이 일치하는 객체(인스턴스) 주입
-	private QaDAO QaDAO;
-
-	public QaServiceImpl() {
-		System.out.println(">> QaServiceImpl() 객체 생성");
-	}
 	
+
+	private final QaDAO QaDAO;
+
 	@Override
 	public void insertQa(QaVO vo) {
 		QaDAO.insertQa(vo);
@@ -44,14 +38,12 @@ public class QaServiceImpl implements QaService {
 	
 	@Override
 	public List<QaVO> getQaList(QaVO vo) {
-		System.out.println(">>> QaServiceImpl - getQaList 메소드 호출");
 		return QaDAO.getQaList(vo);
 	}
 	
 	
 	@Override
 	public List<QaVO> getQaList(String userId) {
-		System.out.println(">>> QaServiceImpl - getQaList 메소드 호출");
 		return QaDAO.getQaList(userId);
 	}
 	
@@ -70,7 +62,6 @@ public class QaServiceImpl implements QaService {
 	// 1:1 문의내역 내용 조회
 	@Override
 	public QaVO getQaFormDetail(QaVO vo) {
-		System.out.println(">>> QaServiceImpl - getQaFormDetail 메소드 호출");
 		return QaDAO.getQaFormDetail(vo);
 	}
 	
@@ -93,7 +84,6 @@ public class QaServiceImpl implements QaService {
 	// Admin 관리자모드에서 사용자 문의 리스트
 	@Override
 	public List<QaVO> getAdminQaList() {
-		System.out.println(">>> QaServiceImpl - getAdminQaList 메소드 호출");
 		return QaDAO.getAdminQaList();
 	}
 	

@@ -257,7 +257,7 @@ function reservePost(postId) {
   } else {
     Swal.fire({
       title: "",
-      text: "예약 상태로 전환하시겠습니까?",
+      text: "'예약중'으로 전환하시겠습니까?",
       icon: "question",
 
       showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
@@ -305,7 +305,7 @@ function finishPost(postId) {
   } else {
     Swal.fire({
       title: "",
-      text: "거래완료 상태로 전환하시겠습니까?",
+      text: "'거래완료'로 전환하시겠습니까?",
       icon: "question",
 
       showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
@@ -353,7 +353,7 @@ function enablePost(postId) {
   } else {
     Swal.fire({
       title: "",
-      text: "거래 상태로 전환하시겠습니까?",
+      text: "'판매중'으로 전환하시겠습니까?",
       icon: "question",
 
       showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음

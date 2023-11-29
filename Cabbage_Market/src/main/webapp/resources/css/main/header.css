@@ -37,6 +37,7 @@ nav {
 	border-radius: 4px;
 	background-color: #fff;
 	left: 0;
+	box-sizing: unset;
 }
 
 #searchResults li {
@@ -46,10 +47,26 @@ nav {
 	height: 20px;
     margin: 0;
     padding: 10px;
+    box-sizing: unset;
 }
 
 #searchResults li:last-child {
 	border-bottom: none;
+}
+
+#searchResults span {
+	font-size: 12px;
+	border-bottom: none;
+}
+
+#searchResults button {
+	font-size: 12px;
+	display: inline-block;
+	border-radius: 0px;
+	font-weight: 700;
+	background-color: inherit;
+	margin: 0;
+	text-decoration: none;
 }
 
 li {

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cabbage.biz.qa.faq.FaqService;
 import com.cabbage.biz.qa.faq.FaqVO;
-import com.cabbage.biz.qa.user.UsersVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,7 +47,7 @@ public class FaqController {
         model.addAttribute("faqList", faqList);
         
         // 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+        String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
         
@@ -64,7 +63,7 @@ public class FaqController {
 									Model model, HttpSession session) {
     	
         // 세션에서 로그인된 사용자 정보 읽어오기
-        UsersVO loggedInUser = (UsersVO) session.getAttribute("loggedInUser");
+    	String loggedInUser = (String) session.getAttribute("userId");
         model.addAttribute("loggedInUser", loggedInUser);
         
     	List<FaqVO> faqList = faqService.getFaqKeywordList(searchCondition, searchKeyword); 

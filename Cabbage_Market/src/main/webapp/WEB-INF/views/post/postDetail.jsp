@@ -121,9 +121,9 @@
 			    <div class="sellerAction2" style="display: inline-block;">
 			        <span class="changeStatus">상태변경 ▼ </span>
 				        <div class="statusChange">
-				        <button class="btn" id="reserveButton" onclick="reservePost('${post.postId}')">예약상태</button><br>
+				        <button class="btn" id="enableButton" onclick="enablePost('${post.postId}')" >판매중</button>
+				        <button class="btn" id="reserveButton" onclick="reservePost('${post.postId}')">예약중</button><br>
 				        <button class="btn" id="finishButton" onclick="finishPost('${post.postId}')" >거래완료</button><br>
-				        <button class="btn" id="enableButton" onclick="enablePost('${post.postId}')" >거래상태</button>
 				        </div>
 				</div>        
                 </li>
