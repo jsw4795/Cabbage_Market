@@ -18,7 +18,7 @@
 		Resolver 명칭이 있는 객체명은 대체로 정해져 있음-->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10000000" /> <!-- 10 메가바이트 -->
-		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
 	
 	

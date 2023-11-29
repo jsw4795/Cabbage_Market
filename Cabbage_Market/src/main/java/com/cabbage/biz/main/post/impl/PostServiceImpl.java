@@ -72,5 +72,11 @@ public class PostServiceImpl implements PostService {
 		postDAO.updatePost(vo);
 		
 	}
+
+
+	@Override
+	public List<PostVO> getTop100Post() {
+		return postDAO.getTop100Post();
+	}
 	
 }

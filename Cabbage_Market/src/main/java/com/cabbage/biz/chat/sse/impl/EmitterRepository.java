@@ -3,9 +3,13 @@ package com.cabbage.biz.chat.sse.impl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import net.jodah.expiringmap.ExpirationPolicy;
+import net.jodah.expiringmap.ExpiringMap;
 
 /*
  * emitter id 는 userId_currentTimeMilis
@@ -22,8 +26,12 @@ public class EmitterRepository {
 	// 이벤트 데이터 객체들이 저장될 맵 (thread-safe 하기위해 ConcurrentHashMap 사용)
 	// 데이터 유실 방지를 위해 최근데 전송된 데이터들을 저장해놓는 공간
 	// < userId_currentTime_eventName, Object(이벤트 객체) >
-	// TODO : 유실된 메세지가 전달되고나서 해당 유저에 대한 이벤트 데이터 모두 삭제
-	private final Map<String, Object> eventCacheMap = new ConcurrentHashMap<String, Object>();
+	// 캐시 저장소 공간 확보를 위해 시간제로 저장
+	private final Map<String, Object> eventCacheMap = ExpiringMap.builder()
+																 .expirationPolicy(ExpirationPolicy.CREATED)
+																 .maxSize(10000)
+																 .expiration(5, TimeUnit.MINUTES)
+																 .build();
 	
 	
 // ====================================== emitterMap 메소드 =============================================

@@ -18,18 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.qa.qa.QaService;
 import com.cabbage.biz.qa.qa.QaVO;
 
 import lombok.RequiredArgsConstructor;
-
-/* 
-@SessionAttributes : 같은 컨트롤러에서 모델객체 공유해서 사용(session)
-	단, 현재(동일) 컨트롤러에서만 사용 가능
-	사용완료되면 SessionStatus 객체의 setComplete() 메소드 사용해서 해제
-@SessionAttribute : HttpSession 에 데이터 저장 및 읽기
-*/
-//@SessionAttributes("qa")
 
 @RequiredArgsConstructor
 @Controller
@@ -37,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class QaController {
 
 	private final QaService qaService;
+	private final NotiService notiService;
 	
 
 
@@ -309,6 +303,8 @@ public class QaController {
 	        
 	        // DB에 댓글 저장
 	        qaService.insertAdminComment(qa);
+	        
+	        notiService.afterInsertQaAnwser(qa);
 	        
 	        return "redirect:/qa/adminFormDetail?qaId=" + vo.getQaId();
 	    } catch (Exception e) {

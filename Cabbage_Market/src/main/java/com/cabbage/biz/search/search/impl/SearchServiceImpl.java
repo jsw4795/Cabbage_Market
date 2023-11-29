@@ -1,6 +1,7 @@
 package com.cabbage.biz.search.search.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cabbage.biz.search.post.PostVO;
@@ -9,13 +10,11 @@ import com.cabbage.biz.search.search.SearchVO;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 
 @RequiredArgsConstructor
 @Service("searchService")
 public class SearchServiceImpl implements SearchService {
-	@Autowired
+	
 	private final SearchDAO dao;
 	
 	

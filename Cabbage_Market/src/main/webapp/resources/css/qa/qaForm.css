@@ -334,7 +334,7 @@ input {
     box-sizing: border-box;
     border-radius: 6px;
     height: 100%;
-    padding: 16px 16px 300px 16px;
+    /*padding: 16px 16px 300px 16px;*/
     margin: 0 16px 43px;
 }
 

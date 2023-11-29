@@ -20,7 +20,7 @@
 			<svg title="" width="1.8rem" height="0rem" viewBox="0 0 474 801" fill="none"
 					xmlns="http://www.w3.org/2000/svg">
 			<path d="" fill="#FF6F0F"></path> 
-			<img src="/resources/pic/admin_baechu.png" width="80" height="80" />
+			<img src="/resources/pic/img/admin_baechu.png" width="80" height="80" />
 			</svg>
 			<h1 title="" class="">쉿!🤫</h1>
 			<h1 title="">여기는 관리자 페이지</h1>

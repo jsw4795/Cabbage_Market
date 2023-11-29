@@ -1,19 +1,16 @@
 package com.cabbage.biz.noti.noti.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cabbage.biz.main.post.PostVO;
 import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.noti.noti.NotiVO;
+import com.cabbage.biz.post.post.PostVO;
 import com.cabbage.biz.qa.qa.QaVO;
 import com.cabbage.biz.userInfo.user.UserVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,15 +26,13 @@ public class NotiServiceImpl implements NotiService {
    	public void afterInsertPost(PostVO vo) throws JsonProcessingException {
     	List<Map<String, String>>  a = checkWishKeyWord(vo);
 		
-    	System.out.println("-----------------------------------------------");
 
 		if (a != null) {
 			for (Map<String, String> row : a) {
 			    String wishUserId = row.get("USER_ID");
 			    String wishKeyword = row.get("WISH_KEYWORD");
 			    String b = wishKeyword + " - " + vo.getPostTitle();
-			    String url = "/post/getpost/" + vo.getPostId();
-			    System.out.println("wishUserId: " + wishUserId + ", Wish Keyword: " + wishKeyword);
+			    String url = "/post/getPost/" + vo.getPostId();
 			    NotiVO voN = new NotiVO();
 			    voN.setUserId(wishUserId);
 				voN.setPostId(vo.getPostId());
@@ -47,15 +42,6 @@ public class NotiServiceImpl implements NotiService {
 		    	
 		    	//노티 테이블 insert
 		    	insertNoti(voN);
-		    	
-		    	// Map을 생성하고 데이터를 추가하는 부분을 한 줄로 간소화
-		    	Map<String, Object> data = new HashMap<>();
-		    	data.put("url", url);
-		    	data.put("message", "<b style='font-size:18px;'>[키워드 알림]</b><br><br> " +b);
-		    	data.put("img", "<b style='font-size:18px;'>[키워드 알림]</b><br><br> " +b);
-
-		    	// JSON 형식으로 변환하는 부분을 한 줄로 간소화
-		    	String jsonData = new ObjectMapper().writeValueAsString(data);
 
 			}
 		}
@@ -67,10 +53,9 @@ public class NotiServiceImpl implements NotiService {
     	List<String>  a = checkPostWishList(vo);
 
 		for (String wishUserId : a) {
-		    System.out.println(wishUserId);
 		    String b = vo.getSellerId() + "님이 " 
-		    			+ vo.getPostTitle() + "의 가격 할인을 제안했어요. ";
-		    String url = "/post/getpost/" + vo.getPostId();
+		    			+ vo.getPostTitle() + "의 가격이 변동되었어요. ";
+		    String url = "/post/getPost/" + vo.getPostId();
 		    NotiVO voN = new NotiVO();
 		    voN.setUserId(wishUserId);
 			voN.setPostId(vo.getPostId());
@@ -79,24 +64,15 @@ public class NotiServiceImpl implements NotiService {
 			voN.setNotiUrl(url);
 			
 	    	insertNoti(voN);
-	    	
-	    	// Map을 생성하고 데이터를 추가하는 부분을 한 줄로 간소화
-	    	Map<String, Object> data = new HashMap<>();
-	    	data.put("url", url);
-	    	data.put("message", "<b style='font-size:18px;'>[가격 할인 알림]</b><br><br>" + b);
-
-	    	// JSON 형식으로 변환하는 부분을 한 줄로 간소화
-	    	String jsonData = new ObjectMapper().writeValueAsString(data);
-
 
 		}
 		
 	}
     
 	@Override
-	public void afterUpdateUserOndo(UserVO vo, String sessionId) throws JsonProcessingException {
+	public void afterUpdateUserOndo(UserVO vo, String buyerId) throws JsonProcessingException {
 		// vo.getUserOndo해서 몇도로 변경됐는지...
-		String b = sessionId + "님이 거래 후 온도 뭐라고 해야하니 ㅋ";
+		String b = buyerId + "님이 거래 후기를 남겨서 온도가 변화됐어요.";
 		String url = "/user/myInfo";
 	    NotiVO voN = new NotiVO();
 	    String sellerId = "test1";
@@ -106,43 +82,24 @@ public class NotiServiceImpl implements NotiService {
 		voN.setNotiUrl(url);
 		
     	insertNoti(voN);
-
-    	// Map을 생성하고 데이터를 추가하는 부분을 한 줄로 간소화
-    	Map<String, Object> data = new HashMap<>();
-    	data.put("url", url);
-    	data.put("message", "<b style='font-size:18px;'>[온도 변경 알림]</b><br><br>" + b);
-
-    	// JSON 형식으로 변환하는 부분을 한 줄로 간소화
-    	String jsonData = new ObjectMapper().writeValueAsString(data);
-
-		
 	}
 
 	@Override
-	public void afterInsertQaQnwser(QaVO vo) throws JsonProcessingException {
-		String b = "문의하신 " + "vo.getQaTitle()" + "에 대한 답변이 등록되었습니다.";
-		String url = "/qa/qaformdetail?qa_id=" + "vo.getQaId()";
+	public void afterInsertQaAnwser(QaVO vo) throws JsonProcessingException {
+		String b = "문의하신 " + vo.getQaTitle() + "에 대한 답변이 등록되었습니다.";
+		String url = "/qa/qaFormDetail?qa_id=" + vo.getQaId();
 				
 		NotiVO voN = new NotiVO();
 
-//		voN.setUserId("vo.getUserId()");
+		voN.setUserId(vo.getUserId());
 		voN.setUserId("test1");
-//		voN.setQaId("vo.getQaId()");
+		voN.setQaId(vo.getQaId());
 		voN.setQaId(100);
 		voN.setNotiType("문의글 답변");
 		voN.setNotiContent(b);
 		voN.setNotiUrl(url);
 		
     	insertNoti(voN);
-
-    	// Map을 생성하고 데이터를 추가하는 부분을 한 줄로 간소화
-    	Map<String, Object> data = new HashMap<>();
-    	data.put("url", url);
-    	data.put("message", "<b style='font-size:18px;'>[문의글 답변 알림]</b><br><br>" 
-    				+ b);
-
-    	// JSON 형식으로 변환하는 부분을 한 줄로 간소화
-    	String jsonData = new ObjectMapper().writeValueAsString(data);
 
 	}
 

@@ -85,5 +85,9 @@ public class MainDAO {
 	public int countIdAll(String id) {
 		return mybatis.selectOne("mainPostDAO.countIdAll", id);
 	}
+	
+	public List<PostVO> getTop100Post() {
+		return mybatis.selectList("mainPostDAO.getTop100Post");
+	}
 		
 }

@@ -24,9 +24,16 @@
 	
 	<!-- getQaList_TC -->
 	<select id="getQaKeywordList_TC" parameterType="qa" resultType="qa">
-	    SELECT * FROM QA
-	    WHERE USER_ID = #{userId} AND (TITLE LIKE CONCAT('%', IFNULL(#{searchKeyword}, ''), '%')
-	    OR CONTENT LIKE CONCAT('%', IFNULL(#{searchKeyword}, ''), '%'))
+	    SELECT *
+	    FROM QA
+	    WHERE USER_ID = #{userId}
+	    <if test='searchCondition == "TITLE" and searchKeyword != "" '>
+	        AND QA_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+	    </if>
+	    <if test='searchCondition == "CONTENT" and searchKeyword != "" '>
+	        AND QA_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+	    </if>
+	    ORDER BY QA_REGDATE DESC
 	</select>
 	
 	
@@ -54,15 +61,39 @@
 	
 	
 	<!-- 1:1 문의하기 INSERT -->
- 	<insert id="insertQa" parameterType="qa">
+ 	<!-- <insert id="insertQa" parameterType="qa">
 		INSERT ALL 
         INTO QA (QA_ID, USER_ID, QA_CAT_ID, QA_TITLE, QA_CONTENT, QA_REGDATE)
         VALUES (QA_ID_SEQ.NEXTVAL, #{userId}, #{qaCatId}, #{qaTitle}, #{qaContent}, SYSDATE)
-        INTO FILES (FILE_ID, USER_ID, FILE_NAME, FILE_REGDATE)
-        VALUES (FILE_ID_SEQ.NEXTVAL, #{userId}, #{fileName}, SYSDATE)
+        INTO FILES (FILE_ID, USER_ID, FILE_NAME, FILE_REGDATE, FILE_TYPE)
+        VALUES (FILE_ID_SEQ.NEXTVAL, #{userId}, #{fileName}, SYSDATE, #{uploadFile.contentType})
         INTO QA_PIC (QA_ID, FILE_ID)
         VALUES (QA_ID_SEQ.CURRVAL, FILE_ID_SEQ.CURRVAL)
     	SELECT * FROM DUAL
+	</insert> -->
+	
+    <!-- 선택적인 이미지 업로드 -->
+	<insert id="insertQa" parameterType="qa">
+	    <choose>
+	        <!-- 이미지를 업로드하는 경우 -->
+	        <when test="fileName != null and uploadFile != null">
+	            INSERT ALL 
+	            INTO QA (QA_ID, USER_ID, QA_CAT_ID, QA_TITLE, QA_CONTENT, QA_REGDATE)
+	            VALUES (QA_ID_SEQ.NEXTVAL, #{userId}, #{qaCatId}, #{qaTitle}, #{qaContent}, SYSDATE)
+	            INTO FILES (FILE_ID, USER_ID, FILE_NAME, FILE_REGDATE)
+	            VALUES (FILE_ID_SEQ.NEXTVAL, #{userId}, #{fileName}, SYSDATE)
+	            INTO QA_PIC (QA_ID, FILE_ID)
+	            VALUES (QA_ID_SEQ.CURRVAL, FILE_ID_SEQ.CURRVAL)
+	            SELECT * FROM DUAL
+	        </when>
+	        <!-- 이미지를 업로드하지 않는 경우 -->
+	        <otherwise>
+	            INSERT ALL 
+	            INTO QA (QA_ID, USER_ID, QA_CAT_ID, QA_TITLE, QA_CONTENT, QA_REGDATE)
+	            VALUES (QA_ID_SEQ.NEXTVAL, #{userId}, #{qaCatId}, #{qaTitle}, #{qaContent}, SYSDATE)
+	            SELECT * FROM DUAL
+	        </otherwise>
+	    </choose>
 	</insert>
 	
 	

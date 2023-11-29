@@ -19,4 +19,6 @@ public interface PostService {
 	int countVcAll();
 	int countNewAll();
 	int countIdAll(String id);
+	
+	List<PostVO> getTop100Post();
 }

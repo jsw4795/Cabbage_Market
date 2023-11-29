@@ -18,7 +18,7 @@
 				<svg title="" width="1.8rem" height="5rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
-					<img src="/resources/pic/baechu.png" width="45" height="45" /></svg>
+					<img src="/resources/pic/img/baechu.png" width="45" height="45" /></svg>
 					<!--  <a href="redirect:/qa/qaFormList" style="text-decoration: none; color: black;">문의내역</a> -->
 					문의내역
 		</h1>

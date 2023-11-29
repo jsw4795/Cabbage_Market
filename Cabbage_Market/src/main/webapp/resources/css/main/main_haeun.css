@@ -1,4 +1,44 @@
 @charset "UTF-8";
+.alrimContainer {
+	
+}
+.alrimContainer b {
+	font-size: 16px;
+}
+.alrimContent{
+	font-size: 13px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 24px;
+    /* white-space: nowrap; */
+    width: 200px;
+    margin-top: 15px;
+    line-height: 13px;
+}
+
+#alrim {
+	right: 240px;
+	position: absolute;
+}
+#alrim ul {
+	width: 300px;
+}
+#alrimList .none-haeun-li {
+	height: 70px;
+	margin: 0 10px;
+	vertical-align: text-top;
+}
+.none-haeun-li > a > div {
+	width: 200px;
+}
+.none-haeun-a img {
+	object-fit: contain;
+}
+
+.none-haeun-ul .firstLi {
+	margin: 0;
+}
 
 .div-haeun1 {
     text-size-adjust: 100%;
@@ -421,6 +461,7 @@
     border: 0 solid #f9f9f9;
     color: inherit;
     text-decoration: inherit;
+    margin-top: 10px;
 } 
 
 /* 캐나다 당근 */
@@ -562,6 +603,9 @@
 	display: none;
 } 
 
+#someElement .alrimCount {
+	right: 0px;
+}
 .button-haeun1 {
 	text-decoration: none;
 }   

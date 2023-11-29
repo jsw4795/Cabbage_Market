@@ -74,7 +74,7 @@
 							<div class="none-haeun" id="alrim" style="display:none;">
 								
 								<ul class="none-haeun-ul" id="alrimList" style="max-height:430px; overflow-y:auto;">
-								<li>
+								<li class="firstLi">
 									<div style="
 									    margin: 0px;
 									    margin-left: 17px;
@@ -107,11 +107,9 @@
 											<img class="" src="/resources/pic/postPic/${alrim2.fileName }" 
 													onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" width="60" height="60" alt="알림 삭제 버튼 이미지">
 											</c:if>
-											<div style="display:inline-block;">
-											<b style='font-size:18px;'>
-												[${alrim2.notiType } 알림] 
-											</b><br><br>
-												${alrim2.notiContent }
+											<div class="alrimContainer" style="display:inline-block;">
+											<b>[${alrim2.notiType } 알림]</b>
+												<span class="alrimContent">${alrim2.notiContent }</span>
 											</div>
 											
 									    </a>
@@ -125,8 +123,8 @@
 							</div>
 							<button type="button" class="button-haeun1" onclick="toggleDiv('alrim')" >
 									<img class="img-haeun4" src="/resources/pic/img/noti_icon.png" width="23" height="25" alt="마이페이지 버튼 이미지">
-									<div id="someElement">
-							            <span class="alrim" id="alrimCount" style="display: none;">  
+									<div id="someElement" data-count="${alrim }">
+							            <span class="alrim alrimCount" id="alrimCount">  
 							                ${alrim}
 							            </span>
 									</div>

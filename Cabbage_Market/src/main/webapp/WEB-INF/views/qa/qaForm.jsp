@@ -50,8 +50,8 @@
                 <input data-v-8b136b14="" name="qaTitle" type="text" placeholder="제목을 입력해주세요 :)" class="phone"> <!----></div>
                 <div data-v-38784853="" data-v-8b136b14="" class="text-area">
                     <div data-v-38784853="" class="textarea">
-                        <textarea data-v-38784853="" name="qaContent" placeholder="여기에 내용을 적어주세요 :)" maxlength="1000"></textarea>
-                    </div>
+                        <textarea data-v-38784853="" cols="80" rows="20" name="qaContent" placeholder="여기에 내용을 적어주세요 :)" maxlength="1000" style=" border: none;  overflow: hidden;  resize: none; padding: 10px 10px 10px 10px;"></textarea>
+                     </div>
                     <p data-v-38784853="" class="counter text-gray">0/1000</p>
                 </div>
                 <!-- 사진 업로드 부분 -->

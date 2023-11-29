@@ -49,7 +49,7 @@
 		    </div>
 		    
             <label for="postTitle">게시글 제목</label>
-            <input type="text" name="postTitle" id="postTitle" required>
+            <input type="text" name="postTitle" maxlength="300" id="postTitle" required>
             <p id="postTitleError" style="color: red; display: none;">공백문자는 사용할 수 없습니다.</p>
             
             <label for="postPrice">가격</label>

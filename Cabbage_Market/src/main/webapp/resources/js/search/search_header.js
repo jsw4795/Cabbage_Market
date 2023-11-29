@@ -90,7 +90,7 @@ function setSearchInputValue(value) {
 // 검색 결과
 function searchKeywordResults() {
   searchResults.style.display = "none";
-  var keyword = searchInput.value;
+  var keyword = searchInput.value.trim();
 
   if (keyword.length < 1) {
     alert("키워드를 입력하세요.");

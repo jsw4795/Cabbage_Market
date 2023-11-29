@@ -438,8 +438,7 @@
 		</div>
 	</div>
 
-<c:if test="${not empty userId}">
-<script src="/resources/js/main/sse.js"></script>	
+<c:if test="${not empty userId}">	
 
 </c:if>
 </body>

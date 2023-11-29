@@ -17,14 +17,11 @@
 		<h1 title="" class="">
 			<!-- 세션에서 로그인된 사용자 정보 읽어오기 -->
 			<c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
-			<!-- 로그인 정보 출력 -->
-			<c:if test="${loggedInUser ne null}">
 				<svg title="" width="1.8rem" height="3rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
-					<img src="/resources/pic/admin_baechu.png" width="70" height="70" /></svg>
+					<img src="/resources/pic/img/admin_baechu.png" width="70" height="70" /></svg>
 					쉿!🤫 여기는 관리자 페이지
-			</c:if>
 		</h1>
 		<br>
 
@@ -60,20 +57,27 @@
 						<div class="fb__communityDetail__contents">
 							<p class="contents__text default">${admin.qaContent }</p>
 						</div>
-
+						
+						
+										<!-- 이미지 영역 -->
+					<div class="fb__communityDetail__comments js__communityDetail__comments">
+					<p>이미지를 확대해보세요 🔎 </p>
+					<c:choose>
+					    <c:when test="${not empty admin.fileName}">
+					        <p>
+					            <a href="/resources/pic/qaPic/${admin.fileName}" data-fancybox="gallery">
+					                <img alt="" src="/resources/pic/qaPic/${admin.fileName}" width="50px" height="50px">
+					            </a>
+					        </p>
+					    </c:when>
+					    <c:otherwise>
+					        <p>첨부된 이미지가 없습니다.</p>
+					    </c:otherwise>
+					</c:choose>
+						
+						
+						
 						<div class="fb__communityDetail__comments js__communityDetail__comments">
-						<!-- 댓글 작성 -->
-							<div class="comments__write">
-								<p> 
-								첨부이미지 : ${admin.fileId }
-								<a href="/resources/pic/qaPic/${admin.fileName}" data-fancybox="gallery">
-									<img alt="" src="/resources/pic/qaPic/${admin.fileName}" width="50px" height="50px">
-								</a>
-								</p>
-										
-								</div>
-								
-								
 								<!-- 댓글이 있을 때 -->
 					            <c:if test="${not empty admin.qaComment}">
 					                <h3>${admin.qaComment}</h3>

@@ -20,7 +20,7 @@
 					<svg title="" width="1.8rem" height="3rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
-					<img src="/resources/pic/baechu.png" width="45" height="45" /></svg>
+					<img src="/resources/pic/img/baechu.png" width="45" height="45" /></svg>
 					문의내역
 			</h1>
 		<br>
@@ -62,31 +62,45 @@
 					</div>
 					
 					
-
-					<!-- 댓글 영역 -->
+					<!-- 이미지 영역 -->
 					<div class="fb__communityDetail__comments js__communityDetail__comments">
-						<!-- 댓글 작성 -->
-						<div class="comments__write">
-						<p> 
-						<!-- 첨부이미지 : ${qaFormDetail.fileId } -->
-						<p>이미지를 확대해보세요 🔎 </p>
-						<p>
-						<a href="/resources/pic/qaPic/${qaFormDetail.fileName}" data-fancybox="gallery">
-							<img alt="" src="/resources/pic/qaPic/${qaFormDetail.fileName}" width="50px" height="50px">
-						</a>
-						</p>
-						</div>
-					</div>
-					</form>
+					<p>이미지를 확대해보세요 🔎 </p>
+					<c:choose>
+					    <c:when test="${not empty qaFormDetail.fileName}">
+					        <p>
+					            <a href="/resources/pic/qaPic/${qaFormDetail.fileName}" data-fancybox="gallery">
+					                <img alt="" src="/resources/pic/qaPic/${qaFormDetail.fileName}" width="50px" height="50px">
+					            </a>
+					        </p>
+					    </c:when>
+					    <c:otherwise>
+					        <p>첨부된 이미지가 없습니다.</p>
+					    </c:otherwise>
+					</c:choose>
+					
+
+				
+
 					<!-- 관리자 댓글 표시 -->
-					<img src="/resources/pic/adminPic.png" width="70" height="70" /></svg>
-					<p class="commentContainer">
-					${qaFormDetail.qaComment }
-					</p>
+					<div class="commentContainerWrapper">
+						<img src="/resources/pic/img/adminPic.png" width="70" height="70" />
+					    <c:choose>
+					        <c:when test="${not empty qaFormDetail.qaComment}">
+					            <p class="commentContainer">
+					                ${qaFormDetail.qaComment }
+					            </p>
+					        </c:when>
+					        <c:otherwise>
+					            <p class="commentContainer">
+					                답변은 조금만 기다려주세요!
+					            </p>
+					        </c:otherwise>
+					    </c:choose>
+					</div>
 					<p>
-						<a href="qaFormList">목록</a>
-						<a href="deleteQaFormDetail?qaId=${qaFormDetail.qaId }">삭제</a>	
-					</p>	
+					    <a href="qaFormList" class="button-link">목록</a>
+					    <a href="deleteQaFormDetail?qaId=${qaFormDetail.qaId }" class="button-link">삭제</a>	
+					</p>
 			</div>
 		</div>
 	</div>
@@ -95,7 +109,7 @@
 	function clearCommentForm() {
         document.querySelector('textarea[name="qaComment"]').value = ''; // 댓글 입력란 초기화
     }
-    
+</script>
     
     
     

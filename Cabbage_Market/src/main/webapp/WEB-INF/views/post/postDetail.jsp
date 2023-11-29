@@ -27,6 +27,8 @@
      var userId = "${userId}";  // userId 값 가져오기
      
      var postStatus = '${post.postStatus}'; //게시글 상태
+     
+     
 	</script>
 	<script src="/resources/js/post/postDetail.js"></script>
 </head>

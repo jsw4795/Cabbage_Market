@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cabbage.biz.chat.chat.ChatRoomService;
+import com.cabbage.biz.common.ListContainer;
+import com.cabbage.biz.noti.noti.NotiService;
+import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.search.post.PostVO;
 import com.cabbage.biz.search.search.SearchService;
 import com.cabbage.biz.search.search.SearchVO;
@@ -24,6 +27,8 @@ public class SearchController {
 
     private final SearchService searchService;
     private final ChatRoomService chatRoomService;
+    private final NotiService notiService;
+    private final ListContainer listContainer;
     
     
     
@@ -55,7 +60,8 @@ public class SearchController {
     @GetMapping("/get_rolling")
     @ResponseBody
     public List<String> getRolling() {
-        return searchService.TopSearched();
+    	//return searchService.TopSearched();
+    	return listContainer.top10Search;
     }
 
     @GetMapping("/postList")
@@ -84,6 +90,11 @@ public class SearchController {
 		model.addAttribute("unreadChatCount", unreadChatCount);
         
         model.addAttribute("totalC", totalC);
+        
+        int alrim = notiService.getNotiCountById(userId);
+		List<NotiVO> alrim2 = notiService.getNotiListById(userId);
+		model.addAttribute("alrim", alrim);
+		model.addAttribute("alrim2", alrim2);
 
         return "search/postList";
     }

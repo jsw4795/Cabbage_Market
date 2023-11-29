@@ -5,13 +5,13 @@
 <mapper namespace="notiDAO">
 
 	<select id="getNotiListById" parameterType="String" resultType="noti">
-	SELECT *
+	SELECT  *
 	FROM (
 	    SELECT n.*, f.file_name
 		FROM notification n
 		LEFT JOIN post_pic pp ON n.post_id = pp.post_id
 		LEFT JOIN files f ON pp.file_id = f.file_id
-		WHERE n.user_id = #{id}
+		WHERE n.user_id = #{userId} AND f.file_id = (select min(file_id) from post_pic where post_id = n.post_id)
 		ORDER BY n.noti_date DESC
 	)
 	WHERE ROWNUM &lt;= 20

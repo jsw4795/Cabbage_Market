@@ -3,7 +3,7 @@ package com.cabbage.biz.noti.noti;
 import java.util.List;
 import java.util.Map;
 
-import com.cabbage.biz.main.post.PostVO;
+import com.cabbage.biz.post.post.PostVO;
 import com.cabbage.biz.qa.qa.QaVO;
 import com.cabbage.biz.userInfo.user.UserVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,6 +28,6 @@ public interface NotiService {
 	void afterUpdatePost(PostVO vo) throws JsonProcessingException;
 	void afterInsertPost(PostVO vo) throws JsonProcessingException;
 	void afterUpdateUserOndo(UserVO vo, String sessionId) throws JsonProcessingException;
-	void afterInsertQaQnwser(QaVO vo) throws JsonProcessingException;
+	void afterInsertQaAnwser(QaVO vo) throws JsonProcessingException;
 
 }

@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cabbage.biz.chat.chat.ChatRoomService;
 import com.cabbage.biz.chat.user.UserService;
+import com.cabbage.biz.noti.noti.NotiService;
+import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.post.post.PostService;
 import com.cabbage.biz.post.post.PostVO;
 
@@ -36,6 +36,7 @@ public class PostController {
 	private final UserService userService;
 	private final PostService postService;
 	private final ChatRoomService chatRoomService;
+	private final NotiService notiService;
 	private List<MultipartFile> uploadFile = new ArrayList<>();
 
 	//post 작성
@@ -47,6 +48,11 @@ public class PostController {
 		model.addAttribute("unreadChatCount", unreadChatCount);
     	
     	model.addAttribute("userId", userId);
+    	
+    	int alrim = notiService.getNotiCountById(userId);
+		List<NotiVO> alrim2 = notiService.getNotiListById(userId);
+		model.addAttribute("alrim", alrim);
+		model.addAttribute("alrim2", alrim2);
     	
         return "post/postCreate";
     }
@@ -69,6 +75,11 @@ public class PostController {
     	
     	model.addAttribute("postPic", postPic);
     	model.addAttribute("post", post);
+    	
+    	int alrim = notiService.getNotiCountById(userId);
+		List<NotiVO> alrim2 = notiService.getNotiListById(userId);
+		model.addAttribute("alrim", alrim);
+		model.addAttribute("alrim2", alrim2);
     	
     	return "post/updatePost";
     }
@@ -126,6 +137,9 @@ public class PostController {
     		}
     		
     	}
+    	
+    	notiService.afterUpdatePost(vo);
+    	
     	return "redirect:/post/getPostList";
     }
     
@@ -239,6 +253,11 @@ public class PostController {
     	model.addAttribute("countWish", countWish);
     	model.addAttribute("userId", userId);
     	
+    	int alrim = notiService.getNotiCountById(userId);
+		List<NotiVO> alrim2 = notiService.getNotiListById(userId);
+		model.addAttribute("alrim", alrim);
+		model.addAttribute("alrim2", alrim2);
+    	
     	return "post/postDetail";
     }
     
@@ -290,9 +309,12 @@ public class PostController {
     		
     	}
     	
+    	notiService.afterInsertPost(vo);
+    	
     	return "redirect:/post/getPost/"+vo.getPostId();
     }
     
+    // 안씀
     @RequestMapping("/getPostList")
     public String getPostList(PostVO vo, Model model) {
     	

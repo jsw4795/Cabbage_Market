@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cabbage.biz.chat.chat.ChatRoomService;
+import com.cabbage.biz.noti.noti.NotiService;
+import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.userInfo.user.UserService;
 import com.cabbage.biz.userInfo.user.UserVO;
 
@@ -33,6 +35,7 @@ public class UserController {
 	
 	private final UserService userService;
 	private final ChatRoomService chatRoomService;
+	private final NotiService notiService;
 
 	@GetMapping("/login")
 	public String getLoginPage() {
@@ -74,6 +77,11 @@ public class UserController {
         // 모델에 사용자 정보를 추가하여 뷰로 전달
         model.addAttribute("user", vo);
         model.addAttribute("nowUserId", vo.getUserId());
+        
+        int alrim = notiService.getNotiCountById(userId);
+		List<NotiVO> alrim2 = notiService.getNotiListById(userId);
+		model.addAttribute("alrim", alrim);
+		model.addAttribute("alrim2", alrim2);
 
         return "user/myInfo";
     }
@@ -93,6 +101,11 @@ public class UserController {
         // 모델에 사용자 정보를 추가하여 뷰로 전달
         model.addAttribute("user", user);
         model.addAttribute("nowUserId", userId);
+        
+        int alrim = notiService.getNotiCountById(userId);
+		List<NotiVO> alrim2 = notiService.getNotiListById(userId);
+		model.addAttribute("alrim", alrim);
+		model.addAttribute("alrim2", alrim2);
 
         return "user/myInfo";
     }
@@ -164,6 +177,10 @@ public class UserController {
 	        }
 			
 			session.setAttribute("userId", user.getUserId());
+			
+			if(user.getUserId().equals("admin"))
+				return "redirect:/qa/adminQaFormList";
+			
 			return "redirect:/";
 		} else {
 			redirectAttributes.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해주세요.");

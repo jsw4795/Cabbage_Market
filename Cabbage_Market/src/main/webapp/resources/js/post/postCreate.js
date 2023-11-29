@@ -119,9 +119,6 @@ function openFileInput() {
 function disableSubmitButton() {
   document.getElementById("loading-overlay").style.display = "block";
 
-  setTimeout(function () {
-    document.getElementById("loading-overlay").style.display = "none";
-  }, 3000);
   const postPriceInput = document.getElementById("postPrice");
   postPriceInput.value = postPriceInput.value.replace(/[₩,]/g, "");
 }
