@@ -10,7 +10,6 @@ import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.post.post.PostVO;
 import com.cabbage.biz.qa.qa.QaVO;
 import com.cabbage.biz.userInfo.user.UserVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,13 +22,17 @@ public class NotiServiceImpl implements NotiService {
     
     
     @Override
-   	public void afterInsertPost(PostVO vo) throws JsonProcessingException {
+   	public void afterInsertPost(PostVO vo) {
     	List<Map<String, String>>  a = checkWishKeyWord(vo);
+    	String sellerId = vo.getSellerId();
 		
 
 		if (a != null) {
 			for (Map<String, String> row : a) {
 			    String wishUserId = row.get("USER_ID");
+			    
+			    if(wishUserId.equals(sellerId)) continue;
+			    
 			    String wishKeyword = row.get("WISH_KEYWORD");
 			    String b = wishKeyword + " - " + vo.getPostTitle();
 			    String url = "/post/getPost/" + vo.getPostId();
@@ -39,7 +42,6 @@ public class NotiServiceImpl implements NotiService {
 				voN.setNotiType("키워드");
 				voN.setNotiContent(b);
 				voN.setNotiUrl(url);
-		    	
 		    	//노티 테이블 insert
 		    	insertNoti(voN);
 
@@ -49,7 +51,7 @@ public class NotiServiceImpl implements NotiService {
    	}
     
     @Override
-	public void afterUpdatePost(PostVO vo) throws JsonProcessingException {
+	public void afterUpdatePost(PostVO vo) {
     	List<String>  a = checkPostWishList(vo);
 
 		for (String wishUserId : a) {
@@ -59,7 +61,7 @@ public class NotiServiceImpl implements NotiService {
 		    NotiVO voN = new NotiVO();
 		    voN.setUserId(wishUserId);
 			voN.setPostId(vo.getPostId());
-			voN.setNotiType("가격 할인");
+			voN.setNotiType("가격 변동");
 			voN.setNotiContent(b);
 			voN.setNotiUrl(url);
 			
@@ -70,13 +72,12 @@ public class NotiServiceImpl implements NotiService {
 	}
     
 	@Override
-	public void afterUpdateUserOndo(UserVO vo, String buyerId) throws JsonProcessingException {
+	public void afterUpdateUserOndo(UserVO vo, String buyerId) {
 		// vo.getUserOndo해서 몇도로 변경됐는지...
 		String b = buyerId + "님이 거래 후기를 남겨서 온도가 변화됐어요.";
 		String url = "/user/myInfo";
 	    NotiVO voN = new NotiVO();
-	    String sellerId = "test1";
-		voN.setUserId(sellerId);
+		voN.setUserId(vo.getSellerId());
 		voN.setNotiType("온도 변경");
 		voN.setNotiContent(b);
 		voN.setNotiUrl(url);
@@ -85,16 +86,14 @@ public class NotiServiceImpl implements NotiService {
 	}
 
 	@Override
-	public void afterInsertQaAnwser(QaVO vo) throws JsonProcessingException {
+	public void afterInsertQaAnwser(QaVO vo) {
 		String b = "문의하신 " + vo.getQaTitle() + "에 대한 답변이 등록되었습니다.";
 		String url = "/qa/qaFormDetail?qa_id=" + vo.getQaId();
 				
 		NotiVO voN = new NotiVO();
 
 		voN.setUserId(vo.getUserId());
-		voN.setUserId("test1");
 		voN.setQaId(vo.getQaId());
-		voN.setQaId(100);
 		voN.setNotiType("문의글 답변");
 		voN.setNotiContent(b);
 		voN.setNotiUrl(url);

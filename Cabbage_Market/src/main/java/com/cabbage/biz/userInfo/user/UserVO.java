@@ -44,6 +44,7 @@ public class UserVO {
 	private Date postRegdate;
 	private int postViews;
 	private String buyerId;
+	private String review;
 	
 	// FILE부분
 	private int fileId;
@@ -52,4 +53,5 @@ public class UserVO {
 	
 	private long fileIdCount;
 	
+	float incrementValue;
 }

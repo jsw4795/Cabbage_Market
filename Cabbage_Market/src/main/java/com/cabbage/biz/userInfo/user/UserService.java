@@ -35,4 +35,7 @@ public interface UserService {
 	void deleteWish(UserVO vo);
 	void deleteWishKeyword(UserVO vo);
 	void deleteUser(UserVO vo);
+	void reviewInput(UserVO vo);
+	
+	void ondoUpDown(UserVO vo);
 }

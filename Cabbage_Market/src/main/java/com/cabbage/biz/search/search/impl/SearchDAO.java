@@ -17,22 +17,20 @@ import lombok.RequiredArgsConstructor;
 public class SearchDAO {
     private final SqlSessionTemplate mybatis;
 
-//    //포스트 키워드로 조회
-//    public List<PostVO> SearchPost (PostVO vo) {
-//
-//    }
     //키워드 입력
     public void insertKeyword(SearchVO vo) {
+    	
+    	mybatis.update("Search.keywordMerge", vo);
 
-        // 데이터베이스에서 같은 아이디와 서치 키워드를 조회합니다.
-        SearchVO existingKeyword = mybatis.selectOne("Search.selectKeyword", vo);
-
-        // 조회된 결과가 없을 경우에만 vo를 입력합니다.
-        if (existingKeyword == null) {
-            mybatis.insert("Search.insertKeyword", vo);
-        }else if (existingKeyword != null) {
-            mybatis.update("Search.updateSearchDate", vo);
-        }
+//        // 데이터베이스에서 같은 아이디와 서치 키워드를 조회합니다.
+//        SearchVO existingKeyword = mybatis.selectOne("Search.selectKeyword", vo);
+//
+//        // 조회된 결과가 없을 경우에만 vo를 입력합니다.
+//        if (existingKeyword == null) {
+//            mybatis.insert("Search.insertKeyword", vo);
+//        }else if (existingKeyword != null) {
+//            mybatis.update("Search.updateSearchDate", vo);
+//        }
     }
 
     //키워드 삭제

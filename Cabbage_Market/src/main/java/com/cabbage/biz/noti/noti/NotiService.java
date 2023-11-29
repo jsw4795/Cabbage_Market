@@ -25,9 +25,9 @@ public interface NotiService {
 	int getNotiCountById(String userId);
 	List<NotiVO> getNotiListById(String userId);
 	
-	void afterUpdatePost(PostVO vo) throws JsonProcessingException;
-	void afterInsertPost(PostVO vo) throws JsonProcessingException;
-	void afterUpdateUserOndo(UserVO vo, String sessionId) throws JsonProcessingException;
-	void afterInsertQaAnwser(QaVO vo) throws JsonProcessingException;
+	void afterUpdatePost(PostVO vo);
+	void afterInsertPost(PostVO vo);
+	void afterUpdateUserOndo(UserVO vo, String sessionId);
+	void afterInsertQaAnwser(QaVO vo);
 
 }

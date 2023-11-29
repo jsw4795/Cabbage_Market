@@ -28,7 +28,12 @@
      
      var postStatus = '${post.postStatus}'; //게시글 상태
      
-     
+     const chatUserJson = '${chatUserJson}';
+     if(chatUserJson != '')
+     	var chatUser = JSON.parse(chatUserJson);
+     else 
+    	var chatUser = '';
+     var postId = '${post.postId}';
 	</script>
 	<script src="/resources/js/post/postDetail.js"></script>
 </head>
@@ -113,21 +118,23 @@
 			        </c:if>
 			    </div>
 			        <hr>
-			    <div class="sellerAction2" style="display: inline-block;">
-			        <span class="upDel">수정/삭제 ▼ </span>
-				        <div class="div_upDel">
-				        <a href="/post/updatePostPage?postId=${post.postId }" class="btn">수정하기</a><br>
-				        <button class="btn" onclick="deletePost('${post.postId}')">삭제하기</button>
-				        </div>
-			    </div>
-			    <div class="sellerAction2" style="display: inline-block;">
-			        <span class="changeStatus">상태변경 ▼ </span>
-				        <div class="statusChange">
-				        <button class="btn" id="enableButton" onclick="enablePost('${post.postId}')" >판매중</button>
-				        <button class="btn" id="reserveButton" onclick="reservePost('${post.postId}')">예약중</button><br>
-				        <button class="btn" id="finishButton" onclick="finishPost('${post.postId}')" >거래완료</button><br>
-				        </div>
-				</div>        
+			        <c:if test="${userId == post.sellerId }">
+					    <div class="sellerAction2" style="display: inline-block;">
+					        <span class="upDel">수정/삭제 ▼ </span>
+						        <div class="div_upDel">
+						        <a href="/post/updatePostPage?postId=${post.postId }" class="btn">수정하기</a><br>
+						        <button class="btn" onclick="deletePost('${post.postId}')">삭제하기</button>
+						        </div>
+					    </div>
+					    <div class="sellerAction2" style="display: inline-block;">
+					        <span class="changeStatus">상태변경 ▼ </span>
+						        <div class="statusChange">
+						        <button class="btn" id="enableButton" onclick="enablePost('${post.postId}')" >판매중</button>
+						        <button class="btn" id="reserveButton" onclick="reservePost('${post.postId}')">예약중</button><br>
+						        <button class="btn" id="finishButton" onclick="finishPost('${post.postId}')" >거래완료</button><br>
+						        </div>
+						</div>      
+				  </c:if>
                 </li>
         </ul>
         <ul class="list-product-information">

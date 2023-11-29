@@ -3,7 +3,9 @@ package com.cabbage.biz.post.view;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cabbage.biz.chat.chat.ChatRoomService;
@@ -25,6 +29,8 @@ import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.post.post.PostService;
 import com.cabbage.biz.post.post.PostVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,7 +43,7 @@ public class PostController {
 	private final PostService postService;
 	private final ChatRoomService chatRoomService;
 	private final NotiService notiService;
-	private List<MultipartFile> uploadFile = new ArrayList<>();
+	//private List<MultipartFile> uploadFile = new ArrayList<>();
 
 	//post 작성
     @GetMapping("/create")
@@ -206,7 +212,7 @@ public class PostController {
     
     //게시글 상세보기
     @GetMapping("/getPost/{postId}")
-    public String getPostDetail(HttpSession session, @PathVariable long postId, PostVO vo, Model model) {
+    public String getPostDetail(HttpSession session, @PathVariable long postId, PostVO vo, Model model) throws JsonProcessingException {
     	String userId = (String)session.getAttribute("userId");
     	vo.setPostId(postId);
     	vo.setUserId(userId);
@@ -242,6 +248,14 @@ public class PostController {
     	int countWish = postService.countWish(vo);
     	
     	Integer unreadChatCount = chatRoomService.getUnreadCount(userId);
+    	
+    	//해당 게시글에서 채팅한 회원 아이디, 닉네임
+    	List<PostVO> chatUser = postService.getChatUser(vo);
+    	if(!chatUser.isEmpty()) {
+    		ObjectMapper objectMapper = new ObjectMapper();
+    		String chatUserJson = objectMapper.writeValueAsString(chatUser);
+    		model.addAttribute("chatUserJson", chatUserJson);
+    	}
 		
 		model.addAttribute("unreadChatCount", unreadChatCount);
     	
@@ -265,8 +279,9 @@ public class PostController {
     
     //게시글 등록
     @PostMapping("/insertPost")
-    public String insertPost(PostVO vo) throws IllegalStateException, IOException {
-    	
+    public String insertPost(PostVO vo, HttpSession session) throws IllegalStateException, IOException {
+    	String userId = (String)session.getAttribute("userId");
+    	vo.setSellerId(userId);
     	//post테이블 데이터 insert
     	postService.insertPost(vo);
     	
@@ -355,4 +370,17 @@ public class PostController {
     	
     	return entity;
     }
+    
+	// 거래완료하면 buyerId 추가
+	@PostMapping("insertBuyer")
+	@ResponseBody
+	public int insertBuyer(@RequestParam("userNickname") String userNickname, @RequestParam("postId") long postId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("userNickname", userNickname);
+		param.put("postId", postId);
+
+		int success = postService.insertBuyer(param);
+
+		return success;
+	}
 }

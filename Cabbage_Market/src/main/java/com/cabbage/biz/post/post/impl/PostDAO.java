@@ -1,6 +1,7 @@
 package com.cabbage.biz.post.post.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,5 +122,15 @@ public class PostDAO {
 	//결제 누른 게시글 정보
 	public PostVO getPayPost(PostVO vo) {
 		return mybatis.selectOne("postDAO.getPayPost", vo);
+	}
+	
+	// 해당 게시글에서 채팅한 회원의 아이디, 닉네임
+	public List<PostVO> getChatUser(PostVO vo) {
+		return mybatis.selectList("postDAO.getChatUser", vo);
+	}
+	
+	// 거래완료시 구매자 업데이트
+	public int insertBuyer(Map map) {
+		return mybatis.update("postDAO.insertBuyer", map);
 	}
 }

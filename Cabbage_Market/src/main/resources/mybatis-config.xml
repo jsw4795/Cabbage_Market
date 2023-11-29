@@ -14,7 +14,7 @@
 
 	<typeAliases>
 	<!-- ==================================== Chat ===================================== -->
-		<typeAlias type="com.cabbage.biz.chat.user.UserVO" alias="userVO" />
+		<typeAlias type="com.cabbage.biz.chat.user.UserVO" alias="userVO" /> 
 		<typeAlias type="com.cabbage.biz.chat.chat.ChatMessageVO" alias="chatMessageVO" />
 		<typeAlias type="com.cabbage.biz.chat.chat.ChatRoomVO" alias="chatRoomVO" />
 		<typeAlias type="com.cabbage.biz.chat.post.PostVO" alias="postVO" />

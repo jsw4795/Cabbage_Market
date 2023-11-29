@@ -1,6 +1,11 @@
 @charset "UTF-8";
-.alrimContainer {
-	
+#alrimDeleteBtn{
+	margin-left: 240px;
+	background: inherit;
+}
+#alrimDeleteBtn:focus {
+	border: none;
+	outline: none;
 }
 .alrimContainer b {
 	font-size: 16px;
@@ -18,11 +23,11 @@
 }
 
 #alrim {
-	right: 240px;
+	right: 290px;
 	position: absolute;
 }
 #alrim ul {
-	width: 300px;
+	width: 340px;
 }
 #alrimList .none-haeun-li {
 	height: 70px;
@@ -32,8 +37,16 @@
 .none-haeun-li > a > div {
 	width: 200px;
 }
+.none-haeun-li button {
+	background-color: inherit;
+}
 .none-haeun-a img {
-	object-fit: contain;
+	object-fit: cover;
+	vertical-align: unset;
+}
+
+.none-haeun-a:hover *{
+	color: black;
 }
 
 .none-haeun-ul .firstLi {
@@ -442,6 +455,11 @@
 .none-haeun-ul li {
 	margin: 16px;
 }
+.none-haeun-li button{
+	margin-left: 0;
+    margin-right: 15px;
+    margin-top: 27px;
+}
 .none-haeun-a {
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
@@ -454,7 +472,7 @@
     list-style: none;
     --tw-bg-opacity: 1;
     font-size: 15px;
-    line-height: 1.25rem;
+    line-height: 13px;
     font-weight: 400;
     --tw-border-opacity: 1;
     box-sizing: border-box;

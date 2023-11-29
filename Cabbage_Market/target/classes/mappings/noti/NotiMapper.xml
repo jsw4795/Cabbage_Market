@@ -8,11 +8,15 @@
 	SELECT  *
 	FROM (
 	    SELECT n.*, f.file_name
-		FROM notification n
-		LEFT JOIN post_pic pp ON n.post_id = pp.post_id
-		LEFT JOIN files f ON pp.file_id = f.file_id
-		WHERE n.user_id = #{userId} AND f.file_id = (select min(file_id) from post_pic where post_id = n.post_id)
-		ORDER BY n.noti_date DESC
+            FROM notification n
+            LEFT JOIN (
+                SELECT pp.post_id, MIN(pp.file_id) AS min_file_id
+                FROM post_pic pp
+                GROUP BY pp.post_id
+            ) min_pp ON n.post_id = min_pp.post_id
+            LEFT JOIN files f ON min_pp.min_file_id = f.file_id
+            WHERE n.user_id = #{userId}
+            ORDER BY n.noti_date DESC
 	)
 	WHERE ROWNUM &lt;= 20
 	ORDER BY noti_date DESC
@@ -52,13 +56,14 @@
 	  NOTI_ID,
 	  USER_ID,
 	  POST_ID,
+	  QA_ID,
 	  NOTI_TYPE,
 	  NOTI_CONTENT,
 	  NOTI_URL,
 	  NOTI_DATE
 	) VALUES
 		(noti_id_seq.NEXTVAL, 
-		#{userId}, #{postId}, #{notiType}, #{notiContent}, #{notiUrl}, 
+		#{userId}, #{postId}, #{qaId}, #{notiType}, #{notiContent}, #{notiUrl}, 
 		SYSDATE
 	)
 	</insert>

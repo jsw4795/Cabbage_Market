@@ -297,13 +297,11 @@ public class QaController {
 	        
 	        qa.setQaComment(vo.getQaComment());
 	        
-	        // 로그인한 사용자의 ID를 댓글 작성자로 설정
-	        qa.setUserId(loggedInUser);
-	        
 	        
 	        // DB에 댓글 저장
 	        qaService.insertAdminComment(qa);
 	        
+	        System.out.println(">>>>"+ qa);
 	        notiService.afterInsertQaAnwser(qa);
 	        
 	        return "redirect:/qa/adminFormDetail?qaId=" + vo.getQaId();

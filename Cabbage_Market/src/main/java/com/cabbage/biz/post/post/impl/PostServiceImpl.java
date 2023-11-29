@@ -1,6 +1,7 @@
 package com.cabbage.biz.post.post.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -158,5 +159,17 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public String getOnePic(PostVO vo) {
 		return postDAO.getOnePic(vo);
+	}
+	
+	// 게시글에서 채팅한 유저 아이디, 닉네임
+	@Override
+	public List<PostVO> getChatUser(PostVO vo) {
+		return postDAO.getChatUser(vo);
+	}
+
+	// 구매자 넣기
+	@Override
+	public int insertBuyer(Map map) {
+		return postDAO.insertBuyer(map);
 	}
 }

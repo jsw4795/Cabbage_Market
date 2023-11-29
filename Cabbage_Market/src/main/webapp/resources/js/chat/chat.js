@@ -417,26 +417,13 @@ function clickToCloseLogOutOn() {
     } else if ($target.hasClass("logout-menu")) {
       e.preventDefault();
       $(document).off("click.logout");
-      logout();
+      // 로그아웃
+      location.href = "/user/logout";
     } else if ($target.hasClass("css-1ca43ff")) {
       e.preventDefault();
     }
     $(document).off("click.logout");
     removeLogout();
-  });
-}
-
-function logout() {
-  // 테스트용 코드
-  location.href = "/chat/testIndex";
-  return;
-
-  $.ajax({
-    url: "로그아웃 URL",
-    type: "POST",
-    success: function () {
-      // 할거 있으면 추가
-    },
   });
 }
 

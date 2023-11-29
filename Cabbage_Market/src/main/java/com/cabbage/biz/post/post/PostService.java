@@ -1,6 +1,7 @@
 package com.cabbage.biz.post.post;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostService {
 	//게시글 등록 관련
@@ -36,4 +37,8 @@ public interface PostService {
 	//결제 관련
 	PostVO getPayPost(PostVO vo);
 	String getOnePic(PostVO vo);
+	
+	List<PostVO> getChatUser(PostVO vo);	//해당 게시글에서 채팅한 사람 아이디, 닉네임 가져오기
+
+	int insertBuyer(Map map);	//구매자 넣기
 }

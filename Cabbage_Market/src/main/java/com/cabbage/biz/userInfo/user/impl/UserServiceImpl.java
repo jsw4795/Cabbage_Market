@@ -109,5 +109,14 @@ public class UserServiceImpl implements UserService {
 		userDAO.deleteUser(vo);
 	}
 	
+	@Override
+	public void reviewInput(UserVO vo) {
+		userDAO.reviewInput(vo);
+	}
+	
+	@Override
+	public void ondoUpDown(UserVO vo) {
+		userDAO.ondoUpDown(vo);
+	}
 	
 }

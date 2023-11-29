@@ -1102,6 +1102,9 @@ body.global footer .social-links a {
   box-sizing: border-box;
   border-radius: 12px;
   border: 1px solid transparent;
+  object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 /* line 43, app/assets/stylesheets/home/articles/cards.scss */

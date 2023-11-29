@@ -25,6 +25,7 @@ import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.userInfo.user.UserService;
 import com.cabbage.biz.userInfo.user.UserVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -309,9 +310,23 @@ public class UserController {
 	@RequestMapping("/purchaseList")
 	@ResponseBody
 	public List<UserVO> purchaseList(UserVO vo, HttpSession session) {
-		vo.setUserId((String)session.getAttribute("userId"));
-		List<UserVO> purchaseList = userService.purchaseList(vo);
-		return purchaseList;
+	    System.out.println("purchaseList 실행");
+	    vo.setUserId((String) session.getAttribute("userId"));
+	    List<UserVO> purchaseList = userService.purchaseList(vo);
+
+	    if (purchaseList != null) {
+	        for (UserVO product : purchaseList) {
+	            
+	            String review = product.getReview();
+	            if (review != null && !review.isEmpty()) {
+	                product.setReview("평가 완료");
+	            } else {
+	                product.setReview("거래 평가");
+	            }
+	        }
+	    }
+
+	    return purchaseList;
 	}
 	
 	@RequestMapping("/salesList")
@@ -442,4 +457,25 @@ public class UserController {
 
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	
+
+    @PostMapping("/ondoUpDown")
+    public String ondoUpDown(UserVO vo, String action, HttpSession session) {
+        if ("up".equals(action)) {
+        	vo.setIncrementValue(0.1f);
+            userService.ondoUpDown(vo);
+            
+        } else if ("down".equals(action)) {
+        	vo.setIncrementValue(-0.1f);
+        	userService.ondoUpDown(vo);
+        }
+        
+        String userId = (String)session.getAttribute("userId");
+        String sessionNickname = userService.userInfo(UserVO.builder().userId(userId).build()).getUserNickname();
+        
+        notiService.afterUpdateUserOndo(vo, sessionNickname);
+        
+        userService.reviewInput(vo);
+        return "redirect:/user/myInfo";
+    }
 }

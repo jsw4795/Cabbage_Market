@@ -91,12 +91,13 @@ function setSearchInputValue(value) {
 function searchKeywordResults() {
   searchResults.style.display = "none";
   var keyword = searchInput.value.trim();
+  var trimmedKeyword = keyword.replace(/\s+/g, " ");
 
-  if (keyword.length < 1) {
+  if (trimmedKeyword.length < 1) {
     alert("키워드를 입력하세요.");
     return;
   }
-  location.href = "/postList?keyword=" + searchInput.value;
+  location.href = "/postList?keyword=" + keyword;
 }
 // 000단위로 포맷팅하는 함수
 function formatPrice(price) {

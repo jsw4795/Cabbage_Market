@@ -90,19 +90,43 @@
 									        알림
 									    </span>
 									    <span>
-									    <button onclick="deleteAlrim()" style=" margin: 0; ">
+									    <button id="alrimDeleteBtn" onclick="deleteAlrim()" >
 									        <img class="img-haeun4" src="/resources/pic/img/bin_icon.png" width="23" height="25" alt="알림 삭제 버튼 이미지">
 									    </button>
 									    </span>
 									</div>	
 									</li>
-									<c:forEach var="alrim2" items="${alrim2 }">
 									<c:if test="${empty alrim2}">
-										알림이 없습니다.
+										<li>
+											알림이 없습니다.
+										</li>
 									</c:if>
+									<c:forEach var="alrim2" items="${alrim2 }">
+									
 									<li class="none-haeun-li" id="alrim_${alrim2.notiId }">
 										<a class="none-haeun-a" href=${alrim2.notiUrl } style="font-size: 18px;">
-											<c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 할인' }">
+										
+											<div class="music" >
+											 	<div class="musicInfo playerInnerContainer">
+											 	
+												 	<c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 할인' }">
+												 		<div class="musicPictureContainer play">
+															<img class="musicPicture-small" src="/resources/pic/postPic/${alrim2.fileName }" onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" 
+																	alt="알림 이미지">
+														</div>
+													</c:if>
+										 			
+										 			<div class="titleContainer">
+										 				<span class="artist-small" data-artist=" data.artist "> [${alrim2.notiType } 알림] </span>
+										 				<div class="musicTitleContainer">
+										 					<span  class="musicTitle-small"> ${alrim2.notiContent } </span>
+										 				</div>
+										 			</div>
+													
+										 		</div>
+										 	</div>
+										
+											<%-- <c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 할인' }">
 											
 											<img class="" src="/resources/pic/postPic/${alrim2.fileName }" 
 													onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" width="60" height="60" alt="알림 삭제 버튼 이미지">
@@ -110,13 +134,14 @@
 											<div class="alrimContainer" style="display:inline-block;">
 											<b>[${alrim2.notiType } 알림]</b>
 												<span class="alrimContent">${alrim2.notiContent }</span>
-											</div>
+											</div> --%>
 											
 									    </a>
 									    <button onclick="goNotiDelete('${alrim2.notiId}')" id="goNotiDelete" style="display:none;">
 									    	X
 									    </button>
 									</li>		
+									
 									</c:forEach>
 											
 								</ul>
@@ -148,7 +173,7 @@
 						<div class="none-haeun" id="my">
 						<!-- style="z-index: 1000; position:fixed; padding-top:120px;" -->
 						<ul class="none-haeun-ul">
-							<li class="none-haeun-li"><a class="none-haeun-a" href="/user/myInfo">
+							<li class="none-haeun-li mypage"><a class="none-haeun-a" href="/user/myInfo">
 									마이페이지 </a></li>
 							<li style="margin-top: 4px;"><a class="none-haeun-a"
 								onclick="logout()" href="/user/logout"> 로그아웃 </a></li>

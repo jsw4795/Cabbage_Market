@@ -34,7 +34,7 @@
                               p.post_id,
                               p.seller_id, p.post_cat_id, p.post_title, p.post_price,
                               p.post_content, p.post_status, p.post_regdate,
-                              p.post_views, p.buyer_id, u.user_nickname, f.file_name, pp_lowest.file_id
+                              p.post_views, p.buyer_id, p.review, u.user_nickname, f.file_name, pp_lowest.file_id
                           ORDER BY
                               p.POST_REGDATE DESC
                       ) subquery
@@ -75,7 +75,7 @@
                               p.post_id,
                               p.seller_id, p.post_cat_id, p.post_title, p.post_price,
                               p.post_content, p.post_status, p.post_regdate,
-                              p.post_views, p.buyer_id, u.user_nickname, f.file_name, pp_lowest.file_id
+                              p.post_views, p.buyer_id, p.review, u.user_nickname, f.file_name, pp_lowest.file_id
                           ORDER BY
                               p.POST_REGDATE DESC
                       ) subquery
@@ -208,5 +208,17 @@
 		UPDATE SEARCH_KEYWORD_LOG
 		SET USE_YN = 'N'
 		WHERE USER_ID = #{userId}
+	</update>
+	
+	<update id="keywordMerge" parameterType="com.cabbage.biz.search.search.SearchVO">
+		MERGE INTO 
+			SEARCH_KEYWORD_LOG
+		USING DUAL ON 
+			(USER_ID = #{userId} AND SEARCH_KEYWORD = #{searchKeyword})
+		WHEN MATCHED THEN
+		  	UPDATE SET SEARCH_DATE = SYSDATE, USE_YN = 'Y'
+		WHEN NOT MATCHED THEN
+		  	INSERT (USER_ID, SEARCH_KEYWORD, SEARCH_DATE)
+		    VALUES (#{userId}, #{searchKeyword}, SYSDATE)
 	</update>
 </mapper>

@@ -10,12 +10,14 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <script>
       $(()=> {
         var userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
-        purchaseList();
+        
         
         console.log($(".kHfkPy").length)
         if($(".kHfkPy").length == 0){
         	$(".gmerZt").removeClass("gmerZt").addClass("kHfkPy");
         	salesList();
+        } else {
+        	purchaseList();
         }
 
         $.ajax({
@@ -133,9 +135,14 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             response.forEach(function (product) {
             	let postStatus = product.postStatus;
             	let postPrice = product.postPrice;
+            	const isDisabled = product.review === "평가 완료" ? 'disabled' : ''; // 작성 완료면 비활성화
             	let productDiv = 
                     '<div class="sc-bIqbHp deAjQN">'
                         +'<a class="sc-dREXXX hsBvIx" href="/post/getPost/'+product.postId+'">'
+                        
+                        +'<div class="sc-iIHSe liqURL">'
+                        +'<input type="button" value="'+product.review+'" class="review" data-postid="'+product.postId+'" '+isDisabled+'/>'
+                        +'</div>'
                             +'<div class="sc-kcbnda cgazhg">'
                                 +'<img src= "/resources/pic/postPic/'+product.fileName+'" alt="상품 이미지" />'
                                 +'<div class="sc-cJOK bosAdb"></div>'
@@ -159,6 +166,54 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
               productContainer.append(productDiv); // 상품을 컨테이너에 추가
             });
+            
+            $('.review').on('click', function(event) {
+            	event.preventDefault();
+                const postId = $(this).data('postid'); // 해당 후기 버튼의 postID 가져오기
+                $('#hugiModal').data('postid', postId)
+                $('#hugiModal').addClass('show');      
+                console.log('postID:', postId); // 콘솔에 postID 출력 (테스트용)
+            });      
+            
+         // 모달 내부의 이미지 클릭 이벤트 핸들러
+            $('#hugiModal').one('click', '.ondoUp', function() {
+                const postId = $('#hugiModal').data('postid'); // 모달 내 postId 가져오기
+                console.log(postId);
+                // postId를 사용하여 Ajax 요청을 보냄
+                $.ajax({
+                    type: 'POST',
+                    url: 'ondoUpDown',
+                    data: { postId: postId, action: 'up' },
+                    success: function(response) {
+                    	alert("반영되었습니다");
+                    	location.replace("myInfo")
+                    },
+                    error: function(xhr, status, error) {
+                        // 오류 발생 시 동작
+                        console.error(error);
+                    }
+                });
+            });
+
+            $('#hugiModal').one('click', '.ondoDown', function() {
+                const postId = $('#hugiModal').data('postid'); // 모달 내 postId 가져오기
+                console.log(postId);
+                // postId를 사용하여 Ajax 요청을 보냄
+                $.ajax({
+                    type: 'POST',
+                    url: 'ondoUpDown',
+                    data: { postId: postId, action: 'down' },
+                    success: function(response) {
+                    	alert("반영되었습니다");
+                    	location.replace("myInfo")
+                    },
+                    error: function(xhr, status, error) {
+                        // 오류 발생 시 동작
+                        console.error(error);
+                    }
+                });
+            });
+            
           },
           error: function (xhr, status, error) {
             console.error(error);
@@ -377,6 +432,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           return value; 
       }
+      $(document).on('click', '#hclose_btn', function (e) {
+    		console.log("click event"); 
+    		$('#hugiModal').removeClass('show'); 
+    	}); //후기모달버튼 닫기 
     </script>
   </head>
   <body>
@@ -534,6 +593,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           type="text"
           class="input_box"
           id="name_box"
+          maxlength="30"
           placeholder=" 관심 키워드를 입력해주세요"
         />
         <div id="modalwish"></div>
@@ -544,4 +604,21 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     </div>
   </div>
   <!-- 모달 -->
+  <!-- 후기 모달 -->
+<div class="hugiModal" id="hugiModal">
+	<div class="hugiModal_body">
+		<div class="hm_head">
+			<div class="hmodal_title">평가해주세요</div>
+			<div class="hclose_btn" id="hclose_btn">X</div>
+		</div>
+		<div class="hm_body">
+			<div class="good"><img src="/resources/pic/emoji/15.png" class="ondoUp"></div>
+			<div class="bad"><img src="/resources/pic/emoji/16.png" class="ondoDown"></div>
+		</div>
+		<div class="hm_footer">
+		</div>
+	</div>
+
+</div>
+<!-- 후기 모달 -->
 </html>

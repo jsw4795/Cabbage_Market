@@ -41,14 +41,15 @@
 	</select>
 	
 	<select id="purchaseList" parameterType="user" resultType="user">
-		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, POST_REGDATE, POST_STATUS
+		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, POST_REGDATE, POST_STATUS, REVIEW
       FROM (
        SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS,
-        ROW_NUMBER() OVER(PARTITION BY P.POST_ID ORDER BY F.FILE_ID) AS RN
+        ROW_NUMBER() OVER(PARTITION BY P.POST_ID ORDER BY F.FILE_ID) AS RN, P.REVIEW
        FROM USERS U, POST P, POST_PIC PP, FILES F
        WHERE U.USER_ID = P.BUYER_ID
        AND P.POST_ID = PP.POST_ID
        AND F.FILE_ID = PP.FILE_ID
+       AND P.POST_STATUS != 'DELETE'
        AND U.USER_ID = #{userId}
       )
       WHERE RN = 1
@@ -57,7 +58,7 @@
 	
 	<!-- 임시방편으로 9시간 추가해서 가져옴 (오라클 시간 안맞는 문제) -->
 	<select id="salesList" parameterType="user" resultType="user">
-		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, POST_REGDATE, POST_STATUS
+		SELECT POST_ID, POST_TITLE, POST_PRICE, FILE_NAME, (POST_REGDATE + (9 / 24)) POST_REGDATE, POST_STATUS
       FROM (
        SELECT P.POST_ID, P.POST_TITLE, P.POST_PRICE, F.FILE_NAME, P.POST_REGDATE, P.POST_STATUS,
         ROW_NUMBER() OVER(PARTITION BY P.POST_ID ORDER BY F.FILE_ID) AS RN
@@ -65,6 +66,7 @@
        WHERE U.USER_ID = P.SELLER_ID
        AND P.POST_ID = PP.POST_ID
        AND F.FILE_ID = PP.FILE_ID
+       AND P.POST_STATUS != 'DELETE'
        AND U.USER_ID = #{userId}
       )
       WHERE RN = 1
@@ -81,6 +83,7 @@
         AND P.POST_ID = PP.POST_ID
         AND U.USER_ID = PL.USER_ID
         AND F.FILE_ID = PP.FILE_ID
+        AND P.POST_STATUS != 'DELETE'
         AND U.USER_ID = #{userId}
        )
        WHERE RN = 1
@@ -157,5 +160,25 @@
 		SELECT * FROM WISH_KEYWORD 
 		WHERE USER_ID = #{userId}
 	</select>
+	
+	<update id="ondoUpDown" parameterType="user">
+        UPDATE USERS U
+        SET U.USER_ONDO = U.USER_ONDO + #{incrementValue}
+        WHERE EXISTS (
+    	SELECT 1	
+    	FROM POST P
+    	WHERE U.USER_ID = P.SELLER_ID
+    	AND P.POST_ID = #{postId}
+		)
+		<selectKey keyProperty="sellerId" order="AFTER" resultType="String">
+			SELECT SELLER_ID FROM POST WHERE POST_ID = #{postId}
+		</selectKey>
+    </update>
+    
+    <update id="reviewInput">
+    	UPDATE POST
+    	SET REVIEW = '1'
+    	WHERE POST_ID = #{postId}
+    </update>
 	
 </mapper>

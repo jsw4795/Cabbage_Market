@@ -51,6 +51,7 @@ public class MainController {
 			
 			int alrim = notiService.getNotiCountById(id);
 			List<NotiVO> alrim2 = notiService.getNotiListById(id);
+			
 			model.addAttribute("alrim", alrim);
 			model.addAttribute("alrim2", alrim2);
 		}

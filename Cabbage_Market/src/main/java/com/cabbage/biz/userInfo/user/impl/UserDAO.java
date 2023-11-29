@@ -87,8 +87,15 @@ public class UserDAO {
 	}
 	
 	public void deleteUser(UserVO vo) {
-		System.out.println("==> Mybatis로 deleteUser 기능 처리");
 		mybatis.update("userDAO.deleteUser", vo);
+	}
+	
+	public void reviewInput(UserVO vo) {
+		mybatis.update("userDAO.reviewInput", vo);
+	}
+	
+	public void ondoUpDown(UserVO vo) {
+		mybatis.update("userDAO.ondoUpDown", vo);
 	}
 
 

@@ -15,7 +15,7 @@ public class NotiVO {
 	private Long notiId;
 	private String userId;
 	private Long postId;
-	private long qaId;
+	private Long qaId;
 	private String notiType;
 	private String notiContent;
 	private String notiUrl;

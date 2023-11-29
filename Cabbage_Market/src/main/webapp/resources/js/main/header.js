@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+$(() => {
+  $(".none-haeun-li.mypage").on("click", function () {
+    location.href = $(this).find(".none-haeun-a").prop("href");
+  });
+});
+
 //알림 갯수 컨트롤
 function toggleDiv(type) {
   var myPageDiv = document.getElementById(type);
@@ -43,4 +49,34 @@ function toggleDiv(type) {
       myPageDiv.style.display = "none";
     }
   }
+}
+function deleteAlrim() {
+  const $test = $("#alrimList .none-haeun-li");
+
+  // 각 li 요소 내의 goNotiDelete 클래스를 가진 요소를 찾아 display 속성을 변경합니다.
+  $test.each((index, li) => {
+    let $goNotiDelete = $(li).find("#goNotiDelete");
+
+    if ($goNotiDelete.css("display") == "none") {
+      $goNotiDelete.css("display", "block");
+    } else {
+      $goNotiDelete.css("display", "none");
+    }
+  });
+}
+
+function goNotiDelete(notiId) {
+  $.ajax("/deleteNoti", {
+    type: "get",
+    data: { notiId: notiId },
+    dataType: "text",
+    success: function (data) {
+      console.log(data);
+      var alrimDiv = document.getElementById("alrim_" + notiId);
+      alrimDiv.style.display = "none";
+    },
+    error: function () {
+      alert("실패~~");
+    },
+  }); // 여기서 중괄호가 누락되었습니다.
 }

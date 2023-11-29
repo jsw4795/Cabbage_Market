@@ -21,7 +21,7 @@ public class LoginCheckFilter implements Filter{
 		{"/", "/All"
 			// User
 		, "/user/login", "/user/logout", "/user/findAccount", "/user/signUp", "/user/loginIn", "/user/joinUser", "/user/ConfirmId"
-		, "/user/ConfirmNick", "/user/ConfirmPhone", "/user/findId", "/user/findPw", "/user/EmailAuth", "/user/EmailAuth2"
+		, "/user/ConfirmNick", "/user/ConfirmPhone", "/user/findId", "/user/findPw", "/user/EmailAuth", "/user/EmailAuth2", "/user/info/*", "/user/salesList"
 			// Search
 		, "/delete-keyword", "/autocomplete", "/recent", "/get_rolling", "/postList", "/morePostList"
 			// Post

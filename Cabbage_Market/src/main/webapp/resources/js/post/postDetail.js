@@ -38,13 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var finishButton = document.getElementById("finishButton");
   var enableButton = document.getElementById("enableButton");
 
-  if (postStatus === "RESERVE") {
-    reserveButton.disabled = true;
-  } else if (postStatus === "FINISH") {
-    finishButton.disabled = true;
-  } else {
-    enableButton.disabled = true;
-  }
+  if (reserveButton != null && finishButton != null && enableButton != null)
+    if (postStatus === "RESERVE") {
+      reserveButton.disabled = true;
+    } else if (postStatus === "FINISH") {
+      finishButton.disabled = true;
+    } else {
+      enableButton.disabled = true;
+    }
 });
 //게시글을 작성한 사람에 따라 다르게 보이게
 document.addEventListener("DOMContentLoaded", function () {
@@ -292,6 +293,14 @@ function reservePost(postId) {
 }
 //게시글 거래완료 전환
 function finishPost(postId) {
+  let chatUser = "";
+  let options = "";
+  if (chatUserJson != "") chatUser = JSON.parse(chatUserJson);
+  if (chatUser != "")
+    options = chatUser.map(
+      (user) => `<option value="${user.userNickname}">${user.userNickname}</option>`
+    );
+
   if (userId != sellerId) {
     Swal.fire({
       title: "오류",
@@ -324,9 +333,44 @@ function finishPost(postId) {
           type: "post",
           data: formData,
           success: function (data) {
-            console.log("성공 + data : " + JSON.stringify(data));
+            //console.log("성공 + data : " + JSON.stringify(data));
             //window.location.href = "/post/getPostList";
-            location.reload();
+            //location.reload();
+
+            Swal.fire({
+              title: "구매자 선택",
+              html: '<select id="buyerName" class="swal2-input">' + options + "</select>",
+              confirmButtonText: "선택",
+              showCancelButton: true,
+              cancelButtonText: "선택안함",
+              confirmButtonColor: "#9DC08B",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const buyerName = Swal.getPopup().querySelector("#buyerName").value;
+                console.log("선택된 구매자 이름:", buyerName);
+
+                $.ajax({
+                  url: "/post/insertBuyer",
+                  type: "post",
+                  data: { userNickname: buyerName, postId: postId },
+                  success: function (data) {
+                    if (data == 1) {
+                      alert("성공");
+                      location.reload();
+                    } else {
+                      alert("실패 - 관리자에게 문의하세요");
+                      location.reload();
+                    }
+                  },
+                  error: function (textStatus) {
+                    alert("실패");
+                    //location.reload();
+                  },
+                });
+              } else {
+                location.reload();
+              }
+            });
           },
           error: function (jqXHR, textStatus, errorThrown) {
             alert("실패" + " textStatus : " + textStatus + " errorThrown : " + errorThrown);

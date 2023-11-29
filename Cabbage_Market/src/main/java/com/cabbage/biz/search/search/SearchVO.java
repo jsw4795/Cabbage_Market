@@ -1,8 +1,11 @@
 package com.cabbage.biz.search.search;
 
-import lombok.*;
-
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

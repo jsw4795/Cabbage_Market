@@ -103,9 +103,9 @@ public class SearchController {
     public String getAllRV(@RequestParam(name = "curPage", required = false) Integer curPage,
                            HttpSession session, String category, String keyword,  Model model) {
         if  (category != null) {
-            int totalC =searchService.countCategoryPostList(category);
+            //int totalC =searchService.countCategoryPostList(category);
+        	//int totalP = (int) Math.ceil((double) totalC / paging);
             int paging = 8;
-            int totalP = (int) Math.ceil((double) totalC / paging);
 
             int test = 1;
             if(curPage != null) {
@@ -119,9 +119,9 @@ public class SearchController {
         }
 
         else if (keyword != null) {
-                int totalC =searchService.countKeywordPostList(keyword);
+                //int totalC =searchService.countKeywordPostList(keyword);
+        	//int totalP = (int) Math.ceil((double) totalC / paging);
                 int paging = 8;
-                int totalP = (int) Math.ceil((double) totalC / paging);
 
                 int test = 1;
                 if(curPage != null) {
@@ -142,7 +142,7 @@ public class SearchController {
         String userId = (String)session.getAttribute("userId");
     	SearchVO vo = new SearchVO();
         vo.setUserId(userId);
-        vo.setSearchKeyword(keyword);
+        vo.setSearchKeyword(keyword.trim());
         if(session != null && userId != null)
         	searchService.insertKeyword(vo);
         
