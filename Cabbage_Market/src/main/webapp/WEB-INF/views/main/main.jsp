@@ -275,7 +275,7 @@
 		</section>
 	</main>
 
-	<!-- header -->
+	<!-- footer -->
 	<%@ include file="/WEB-INF/views/main/inc/footer.jsp" %>
 
 	<div id="fb-root" class=" fb_reset">

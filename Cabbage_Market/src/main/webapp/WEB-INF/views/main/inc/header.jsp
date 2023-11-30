@@ -115,6 +115,12 @@
 																	alt="알림 이미지">
 														</div>
 													</c:if>
+													<c:if test="${alrim2.notiType == '문의글 답변'}">
+												 		<div class="notiPicContainer">
+															<img class="notiPic" src="/resources/pic/img/baechu.png" onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" 
+																	alt="알림 이미지">
+														</div>
+													</c:if>
 										 			
 										 			<div class="titleContainer">
 										 				<span class="title-small" > [${alrim2.notiType } 알림] </span>

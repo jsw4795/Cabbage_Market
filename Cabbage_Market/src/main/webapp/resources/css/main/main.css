@@ -3644,6 +3644,8 @@ main {
     box-sizing: border-box;
     border-radius: 12px;
     border: 1px solid transparent;
+    height: 100%;
+    object-fit: cover;
   }
   /* line 137, app/assets/stylesheets/home/fleamarket.scss */
   .fleamarket-article-list .cards-wrap .card-top .card-category, .fleamarket-article-list .cards-wrap .card .card-category {
@@ -3818,6 +3820,8 @@ main {
     box-sizing: border-box;
     border-radius: 12px;
     border: 1px solid transparent;
+    object-fit: cover;
+    height: 100%;
   }
   /* line 299, app/assets/stylesheets/home/fleamarket.scss */
   .fleamarket-article-list .cards-wrap .card-top .card-category, .fleamarket-article-list .cards-wrap .card .card-category {
@@ -4548,7 +4552,7 @@ main {
 
 #footer-root ._1trxeqs9 ._1trxeqsp {
     color: var(—seed-scale-color-gray-900);
-    font-size: 50px;
+    font-size: 35px;
     font-weight: 700;
 }
 #footer-root ._1trxeqsa {

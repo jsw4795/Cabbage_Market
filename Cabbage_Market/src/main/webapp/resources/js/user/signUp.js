@@ -263,6 +263,7 @@ $(document).ready(function () {
 
   //인증하기 버튼을 눌렀을 때 동작
   $("#emailCheck").click(function () {
+    $(this).attr("disabled", "disabled");
     const userEmail = $("#userEmail").val(); //사용자가 입력한 이메일 값 얻어오기
     submitCheck = false;
 

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<style>
+#footer-root ._1trxeqs9 ._1trxeqsp {
+    color: var(—seed-scale-color-gray-900);
+    font-size: 35px;
+    font-weight: 700;
+}
+</style>
 <div id="footer-root">
 	<div class="light-theme">
 		<footer class="_1trxeqs0">
