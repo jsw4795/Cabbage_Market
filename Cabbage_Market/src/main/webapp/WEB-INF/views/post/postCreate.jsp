@@ -43,10 +43,13 @@
                 <input type="file" id="uploadFile" name="uploadFile" accept="image/*" multiple onchange="previewImages(event)" id="file-input" hidden required="required">
             </div>
             
-            <div>
-			    <ul id="preview-container">
-			    </ul>
-		    </div>
+             <div>
+	             <ul id="preview-container">
+		             <li>
+		             	<p id="fileMsg" style="color: #ccc;">이미지는 꼭 첨부해주세요.</p>
+	             	</li>
+	             </ul>
+	          </div>
 		    
             <label for="postTitle">게시글 제목</label>
             <input type="text" name="postTitle" maxlength="300" id="postTitle" required>

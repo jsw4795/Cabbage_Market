@@ -13,7 +13,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         var userId = $(".sc-kqlzXE.bvAAFa").attr("data-userid");
         
         
-        console.log($(".kHfkPy").length)
         if($(".kHfkPy").length == 0){
         	$(".gmerZt").removeClass("gmerZt").addClass("kHfkPy");
         	salesList();
@@ -80,7 +79,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             data: {"userId" : userId},
             dataType: "json",
             success: function (response) {
-              console.log(response);
               let keywordList = response;
 
               let wishKeywordsDisplay = $("#wishKeywordsDisplay");
@@ -113,12 +111,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       });
 
       $(document).on("click", "#wishKeywordbtn", function (e) {
-        console.log("clickevent");
         $("#modal").addClass("show");
       });
 
       $(document).on("click", "#close_btn", function (e) {
-        console.log("click event");
         $("#modal").removeClass("show");
       });
 
@@ -173,13 +169,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 const postId = $(this).data('postid'); // 해당 후기 버튼의 postID 가져오기
                 $('#hugiModal').data('postid', postId)
                 $('#hugiModal').addClass('show');      
-                console.log('postID:', postId); // 콘솔에 postID 출력 (테스트용)
             });      
             
          // 모달 내부의 이미지 클릭 이벤트 핸들러
             $('#hugiModal').one('click', '.ondoUp', function() {
                 const postId = $('#hugiModal').data('postid'); // 모달 내 postId 가져오기
-                console.log(postId);
                 // postId를 사용하여 Ajax 요청을 보냄
                 $.ajax({
                     type: 'POST',
@@ -198,7 +192,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
             $('#hugiModal').one('click', '.ondoDown', function() {
                 const postId = $('#hugiModal').data('postid'); // 모달 내 postId 가져오기
-                console.log(postId);
                 // postId를 사용하여 Ajax 요청을 보냄
                 $.ajax({
                     type: 'POST',
@@ -434,7 +427,6 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
           return value; 
       }
       $(document).on('click', '#hclose_btn', function (e) {
-    		console.log("click event"); 
     		$('#hugiModal').removeClass('show'); 
     	}); //후기모달버튼 닫기 
     </script>

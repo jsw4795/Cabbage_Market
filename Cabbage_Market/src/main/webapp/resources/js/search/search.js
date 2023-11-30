@@ -26,16 +26,13 @@ function getList(curPage, param, isCategory) {
     type: "get",
     data: data,
     success: function (data) {
-      console.log(data);
       $(".cards-wrap").append(data);
       $("#load").hide();
       isLoading = false;
-      console.log("ajax");
     },
   });
 }
 
-console.log("여기는2번");
 var paging = 8;
 var totalP = document.getElementById("totalCField").value / paging;
 var searchParams = new URLSearchParams(window.location.search);
@@ -52,12 +49,10 @@ $(window).on("scroll", function () {
   var documentHeight = $(document).height();
 
   var isBottom = Math.ceil(scrollTop + windowsHeight) >= documentHeight;
-  console.log(isBottom);
   if (isBottom) {
     if (curPage >= totalP) {
       return false;
     } else {
-      console.log(Math.ceil(scrollTop + windowsHeight), documentHeight);
       isLoading = true;
       $("#load").show();
       curPage++;

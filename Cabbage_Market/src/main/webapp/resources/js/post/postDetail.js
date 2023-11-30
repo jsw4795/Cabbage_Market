@@ -49,9 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //게시글을 작성한 사람에 따라 다르게 보이게
 document.addEventListener("DOMContentLoaded", function () {
-  console.log(sellerId);
-  console.log(userId);
-
   if (postStatus === "FINISH") {
     $(".sellerAction").hide();
   } else if (sellerId === userId) {
@@ -80,9 +77,6 @@ function addWishList(userId, postId) {
       confirmButtonText: "확인", // confirm 버튼 텍스트 지정
     });
   } else {
-    console.log("userId : " + userId);
-    console.log("postId : " + postId);
-
     var form = {
       userId: userId,
       postId: postId,
@@ -94,7 +88,6 @@ function addWishList(userId, postId) {
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(form),
       success: function (result) {
-        console.log("result : " + result);
         Toast.fire({
           icon: "success",
           title: "찜 목록에 추가하였습니다.",
@@ -117,9 +110,6 @@ function deleteWishList(userId, postId) {
   // 로딩 상태를 표시
   loadingOverlay.show();
 
-  console.log("userId : " + userId);
-  console.log("postId : " + postId);
-
   var form = {
     userId: userId,
     postId: postId,
@@ -131,7 +121,6 @@ function deleteWishList(userId, postId) {
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(form),
     success: function (result) {
-      console.log("result : " + result);
       Toast.fire({
         icon: "error",
         title: "찜 목록에서 삭제되었습니다.",
@@ -215,8 +204,6 @@ function deletePost(postId) {
       cancelButtonText: "취소", // cancel 버튼 텍스트 지정
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(postId);
-
         var formData = { postId: postId };
 
         $.ajax({
@@ -224,8 +211,6 @@ function deletePost(postId) {
           type: "post",
           data: formData,
           success: function (data) {
-            console.log("성공 + data : " + JSON.stringify(data));
-
             Toast.fire({
               icon: "error",
               title: "게시글 삭제 완료",
@@ -235,8 +220,6 @@ function deletePost(postId) {
           },
           error: function (jqXHR, textStatus, errorThrown) {
             alert("실패" + " textStatus : " + textStatus + " errorThrown : " + errorThrown);
-            console.log(textStatus);
-            console.log(errorThrown);
           },
         });
       }
@@ -268,8 +251,6 @@ function reservePost(postId) {
       cancelButtonText: "취소", // cancel 버튼 텍스트 지정
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(postId);
-
         var formData = { postId: postId };
 
         $.ajax({
@@ -277,14 +258,11 @@ function reservePost(postId) {
           type: "post",
           data: formData,
           success: function (data) {
-            console.log("성공 + data : " + JSON.stringify(data));
             //window.location.href = "/post/getPostList";
             location.reload();
           },
           error: function (jqXHR, textStatus, errorThrown) {
             alert("실패" + " textStatus : " + textStatus + " errorThrown : " + errorThrown);
-            console.log(textStatus);
-            console.log(errorThrown);
           },
         });
       }
@@ -324,8 +302,6 @@ function finishPost(postId) {
       cancelButtonText: "취소", // cancel 버튼 텍스트 지정
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(postId);
-
         var formData = { postId: postId };
 
         $.ajax({
@@ -333,10 +309,6 @@ function finishPost(postId) {
           type: "post",
           data: formData,
           success: function (data) {
-            //console.log("성공 + data : " + JSON.stringify(data));
-            //window.location.href = "/post/getPostList";
-            //location.reload();
-
             Swal.fire({
               title: "구매자 선택",
               html: '<select id="buyerName" class="swal2-input">' + options + "</select>",
@@ -347,7 +319,6 @@ function finishPost(postId) {
             }).then((result) => {
               if (result.isConfirmed) {
                 const buyerName = Swal.getPopup().querySelector("#buyerName").value;
-                console.log("선택된 구매자 이름:", buyerName);
 
                 $.ajax({
                   url: "/post/insertBuyer",
@@ -374,8 +345,6 @@ function finishPost(postId) {
           },
           error: function (jqXHR, textStatus, errorThrown) {
             alert("실패" + " textStatus : " + textStatus + " errorThrown : " + errorThrown);
-            console.log(textStatus);
-            console.log(errorThrown);
           },
         });
       }
@@ -407,8 +376,6 @@ function enablePost(postId) {
       cancelButtonText: "취소", // cancel 버튼 텍스트 지정
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(postId);
-
         var formData = { postId: postId };
 
         $.ajax({
@@ -416,14 +383,11 @@ function enablePost(postId) {
           type: "post",
           data: formData,
           success: function (data) {
-            console.log("성공 + data : " + JSON.stringify(data));
             //window.location.href = "/post/getPostList";
             location.reload();
           },
           error: function (jqXHR, textStatus, errorThrown) {
             alert("실패" + " textStatus : " + textStatus + " errorThrown : " + errorThrown);
-            console.log(textStatus);
-            console.log(errorThrown);
           },
         });
       }

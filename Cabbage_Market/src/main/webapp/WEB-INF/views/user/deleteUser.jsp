@@ -28,13 +28,11 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click', '#leave_btn', function (e) {
-	    console.log("click event");
 	    
 	    $.ajax({
 	        type: 'POST', // 혹은 GET 방식에 맞게 설정
 	        url: 'leaveUser', // 요청을 보낼 URL
 	        success: function(response) {
-	            console.log('서버 요청 성공:', response);
 	            alert("탈퇴 되었습니다");
 	            window.location.href = 'login'; // 로그인 페이지로 이동하는 예시
 	        },

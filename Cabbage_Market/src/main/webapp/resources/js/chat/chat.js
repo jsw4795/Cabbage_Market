@@ -19,8 +19,6 @@ function init() {
   // 현재 로그인중인 사용자 아이디를 상수로 저장
   userId = $("#root").data("user_id");
 
-  console.log(">> userId : " + userId);
-
   // SSE를 위한 EventSource 생성 (subscribe 요청 보내짐)
   if (userId != undefined) {
     eventSource = new EventSource("/chat/subscribe/" + userId);
@@ -397,7 +395,6 @@ function clickToCloseExitOn() {
       e.preventDefault();
       $(document).off("click.exit");
       let postPrice = $(".reserved-price").text();
-      console.log(postPrice);
       askAgainBeforePayRequest(postPrice);
     } else if ($target.hasClass("css-1idbtsb")) {
       e.preventDefault();
@@ -1054,7 +1051,6 @@ function openPayPage($payDiv) {
     data: { chatRoomId: chatRoomId, countByRoom: countByRoom },
     dataType: "json",
     success: function (chatMessage) {
-      console.log(chatMessage);
       // 찾아진 데이터가 없으면 리턴
       if (chatMessage.chatRoomId != chatRoomId) {
         alertNotification("결제 요청의 대상이 아닙니다.");

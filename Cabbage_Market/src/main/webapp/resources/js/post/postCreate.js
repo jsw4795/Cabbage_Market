@@ -24,10 +24,8 @@ function previewImages(event) {
       }
 
       uploadFilesArray.push(input.files[i]);
-      console.log("uploadFilesArray : " + uploadFilesArray);
 
       let uploadedFiles = input.files;
-      console.log("uploadedFiles : " + uploadedFiles);
 
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -64,16 +62,11 @@ function previewImages(event) {
 }
 
 function removeFileFromArray(obj) {
-  console.log(obj);
-
   let div = $(obj).closest(".preview-item");
-  console.log("div : " + div);
 
   let index = div.index();
-  console.log("index : " + index);
 
   uploadFilesArray.splice(index, 1);
-  console.log("uploadFilesArray : " + uploadFilesArray);
 
   dataTransfer.items.clear();
   //fileArray.forEach(file => { dataTransfer.items.add(file); });
@@ -83,7 +76,6 @@ function removeFileFromArray(obj) {
 
   //남은 배열을 dataTransfer로 처리(Array -> FileList)
   $("#uploadFile")[0].files = dataTransfer.files; //제거 처리된 FileList를 돌려줌
-  console.log("끝");
 }
 
 //공백 판독

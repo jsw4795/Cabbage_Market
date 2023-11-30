@@ -33,9 +33,7 @@ function toggleDiv(type) {
       $.ajax({
         type: "get",
         url: "/updateNoti",
-        success: function (data) {
-          console.log("header에서 읽음으로 변경");
-        },
+        success: function (data) {},
       });
     } else {
       myPageDiv.style.display = "none";
@@ -71,7 +69,6 @@ function goNotiDelete(notiId) {
     data: { notiId: notiId },
     dataType: "text",
     success: function (data) {
-      console.log(data);
       var alrimDiv = document.getElementById("alrim_" + notiId);
       alrimDiv.style.display = "none";
     },

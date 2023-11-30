@@ -53,7 +53,6 @@ searchInput.addEventListener("focus", function () {
     recentResults();
     $(document).on("mousedown.keyword", function (e) {
       let $target = $(e.target);
-      console.log($target);
       if (
         $target.hasClass("input-haeun1") ||
         $target.hasClass("list-group") ||
@@ -106,7 +105,6 @@ function formatPrice(price) {
 
 function displayKeywordResults(results) {
   searchKeyword.innerHTML = "";
-  console.log(results);
   // 결과가 없을 경우 메시지 추가
   if (results.length === 0) {
     displayNoResults();
@@ -141,8 +139,6 @@ function updateAutocompleteResults(query) {
 
   // 요청 보내기
   xhr.send();
-
-  console.log("XHR request sent to: " + url);
 }
 // 최근검색 결과를 표시하는 함수 정의
 function displayRecentResults(results) {
@@ -286,8 +282,6 @@ function recentResults(query) {
 
   // 요청 보내기
   xhr.send();
-
-  console.log("XHR request sent to: " + url);
 }
 // 최근 검색 기록 삭제 함수
 function deleteRecentSearch(searchKeyword) {
@@ -308,8 +302,6 @@ function deleteRecentSearch(searchKeyword) {
 
   // 요청 보내기
   xhr.send();
-
-  console.log("XHR request sent to: " + url);
 }
 
 // ===============인기 검색어 롤링 관련 펑션===========================

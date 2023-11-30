@@ -31,12 +31,6 @@ const Toast = Swal.mixin({
 		var countByRoom = "${countByRoom}";
 		var finalPrice = "${finalPrice}";
 		
-		// 		/chatMessage/successPay		POST 값 2개(chatRoomId, countByRoom)
-		console.log("name : " + name);
-		console.log("amount : " + amount);
-		console.log("buyer_name : " + buyer_name);
-		console.log("chatRoomId : " + chatRoomId);
-		console.log("countByRoom : " + countByRoom);
 		
 		var IMP = window.IMP;
 	    IMP.init("imp50346576");	//가맹점 식별 코드

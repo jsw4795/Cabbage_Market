@@ -45,8 +45,6 @@ function submitForm() {
     contentType: false, // 필수
     processData: false, // 필수
     success: function (data) {
-      console.log("성공 + data : " + JSON.stringify(data));
-
       window.location.href = "/post/getPost/" + $("input[name='postId']").val();
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -59,9 +57,6 @@ function submitForm() {
         cancelButtonColor: "#d33", // cancel 버튼 색깔 지정
         confirmButtonText: "확인", // confirm 버튼 텍스트 지정
       });
-
-      console.log(textStatus);
-      console.log(errorThrown);
     },
   });
 }
@@ -96,10 +91,8 @@ function previewImages(event) {
       }
 
       uploadFilesArray.push(input.files[i]);
-      console.log("uploadFilesArray : " + uploadFilesArray);
 
       let uploadedFiles = input.files;
-      console.log("uploadedFiles : " + uploadedFiles);
 
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -136,16 +129,11 @@ function previewImages(event) {
 }
 
 function removeFileFromArray(obj) {
-  console.log(obj);
-
   let div = $(obj).closest(".preview-item");
-  console.log("div : " + div);
 
   let index = div.index();
-  console.log("index : " + index);
 
   uploadFilesArray.splice(index, 1);
-  console.log("uploadFilesArray : " + uploadFilesArray);
 
   dataTransfer.items.clear();
   uploadFilesArray.forEach((file) => {
@@ -154,7 +142,6 @@ function removeFileFromArray(obj) {
 
   //남은 배열을 dataTransfer로 처리(Array -> FileList)
   $("#uploadFile")[0].files = dataTransfer.files; //제거 처리된 FileList를 돌려줌
-  console.log("끝");
 }
 
 //공백 판독
