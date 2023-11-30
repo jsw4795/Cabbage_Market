@@ -53,6 +53,9 @@
 		UPDATE POST SET POST_CAT_ID = #{postCatId}, POST_TITLE = #{postTitle},
                 POST_PRICE = #{postPrice}, POST_CONTENT = #{postContent}
 		WHERE POST_ID = #{postId}
+		<selectKey keyProperty="userNickname" resultType="String" order="AFTER">
+			SELECT USER_NICKNAME FROM USERS WHERE USER_ID = #{userId}
+		</selectKey>
 	</update>
 	<!-- 사용자가 선택한 이미지파일 제거 -->
 	<delete id="deleteFiles" parameterType="String">

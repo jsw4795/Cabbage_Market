@@ -55,7 +55,7 @@ public class NotiServiceImpl implements NotiService {
     	List<String>  a = checkPostWishList(vo);
 
 		for (String wishUserId : a) {
-		    String b = vo.getSellerId() + "님이 " 
+		    String b = vo.getUserNickname() + "님이 " 
 		    			+ vo.getPostTitle() + "의 가격이 변동되었어요. ";
 		    String url = "/post/getPost/" + vo.getPostId();
 		    NotiVO voN = new NotiVO();

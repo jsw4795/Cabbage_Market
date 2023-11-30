@@ -96,6 +96,9 @@ public class PostController {
     	String userId = (String)session.getAttribute("userId");
     	vo.setUserId(userId);
     	vo.setSellerId(userId);
+    	
+    	PostVO oldPost = postService.getUpdatePage(vo);
+    	
     	//제거한 이미지 처리
     	if(vo.getFileIdArr() == null) {
     		//System.out.println("삭제할 이미지 없음");
@@ -145,7 +148,9 @@ public class PostController {
     		
     	}
     	
-    	notiService.afterUpdatePost(vo);
+    	
+    	if(oldPost.getPostPrice() != vo.getPostPrice())
+    		notiService.afterUpdatePost(vo);
     	
     	return "redirect:/post/getPostList";
     }
