@@ -109,7 +109,7 @@
 											<div class="notification" >
 											 	<div class="notiInfo notiContainer">
 											 	
-												 	<c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 할인' }">
+												 	<c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 변동' }">
 												 		<div class="notiPicContainer">
 															<img class="notiPic" src="/resources/pic/postPic/${alrim2.fileName }" onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" 
 																	alt="알림 이미지">

@@ -370,6 +370,16 @@ public class UserController {
 	@RequestMapping("/wishKeyword")
 	public String wishKeyword(UserVO vo, HttpSession session) {
 		vo.setUserId((String)session.getAttribute("userId"));
+		vo.setWishKeyword(vo.getWishKeyword().trim());
+		
+		if(vo.getWishKeyword().length() == 0) return "redirect:/user/myInfo";
+		
+		List<UserVO> keywordList = userService.keywordList(vo);
+		
+		for(UserVO temp : keywordList) {
+			if(vo.getWishKeyword().equals(temp.getWishKeyword())) return "redirect:/user/myInfo";
+		}
+		
 		userService.wishKeyword(vo);
 		return "redirect:/user/myInfo";
 	}

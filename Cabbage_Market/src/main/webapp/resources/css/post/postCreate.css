@@ -167,3 +167,16 @@ body {
 	margin-top: 15px;
 	margin-bottom: 5px;
 }
+#postContent {
+	resize: none;
+}
+
+#nothingNoti{
+	display: none;
+} 
+#nothingNoti:last-child {
+	display: inline-block;
+}
+#fileMsg{
+	margin-top: 42px;
+}

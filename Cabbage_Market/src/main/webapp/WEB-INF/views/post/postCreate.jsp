@@ -45,7 +45,7 @@
             
              <div>
 	             <ul id="preview-container">
-		             <li>
+		             <li id="nothingNoti">
 		             	<p id="fileMsg" style="color: #ccc;">이미지는 꼭 첨부해주세요.</p>
 	             	</li>
 	             </ul>

@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+textarea {
+	resize: none;
+}
 #container { 
 	width: 700px; margin: auto; 
 	margin-bottom: 3%; /************************ 11/29 수정함! */
