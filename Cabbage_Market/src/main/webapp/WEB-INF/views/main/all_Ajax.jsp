@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>새로올라왔어요 ajax</title>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 </head>

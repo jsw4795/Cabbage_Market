@@ -31,7 +31,7 @@ input[type="submit"]:hover {
 
 
 
-h1, h3 { 
+h1 { 
 	
 	display: flex;
     grid-gap: 1rem;
@@ -78,7 +78,7 @@ textarea[name="qaComment"]:hover {
 }
 
 
-html, body, div, span, object, iframe, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+html, body, div, span, object, iframe, h2, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -86,6 +86,7 @@ html, body, div, span, object, iframe, h2, h3, h4, h5, h6, p, blockquote, pre, a
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
+    padding: 0rem 0rem 0rem;	/* 11/29 추가 */
 }
 body {
     -webkit-overflow-scrolling: touch;
@@ -120,6 +121,7 @@ header {
     color: #111111;
     font-size: 1.7rem;
     line-height: 1.4375rem;
+    margin-left: 0rem;
 }
 
 p {
@@ -128,6 +130,7 @@ p {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+    padding: 0.1rem 0.9rem 0rem;	/* 11/29 추가 */
 }
 
 /* Date 부분 */
@@ -141,14 +144,16 @@ p {
 
 /* Content 부분 */
 .fb__communityDetail__header {
-    padding: 1.25rem 0 0.75rem;
-    margin: 0 0.9375rem;
+    padding: 0rem 0rem 0rem 0rem;
+    margin: 0rem;
     border-bottom: 1px solid #eeeeee;
 }
 
 .fb__communityDetail__contents {
-    padding: 1.25rem 0.9375rem 2.5rem;
+    padding: 0rem;
     white-space: break-all;
+    margin-top: 2rem;
+    margin-bottom: 7rem;
 }
 
 .fb__communityDetail__contents .contents__text.default {
@@ -226,4 +231,19 @@ p {
     line-height: 0.875rem;
 }
 
+
+
+.button-link {
+	display: inline-block;
+    padding: 10px 20px;
+    background-color: #f7f5f5;
+    color: #8a8888;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px; /* 원하는 간격으로 조절하세요 */
+	}
+
+.button-link:hover {
+    background-color: #a3a2a2;
+    }
 

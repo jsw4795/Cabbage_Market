@@ -26,7 +26,6 @@ import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.userInfo.user.UserService;
 import com.cabbage.biz.userInfo.user.UserVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -133,8 +132,6 @@ public class UserController {
 		vo.setUserId((String)session.getAttribute("userId"));
 		UserVO user = userService.userInfo(vo);
 		
-		System.out.println(">> userVO : " + vo);
-		System.out.println(">> user : " + user);
 
 	    // 기존 정보를 유지하기 위해 빈 값인 경우 기존 정보로 대체
 	    if (vo.getUserNickname() == null || vo.getUserNickname().isEmpty()) {
@@ -274,7 +271,6 @@ public class UserController {
 		UserVO user = userService.findId(vo);
 
 		if (user != null) {
-			System.out.println(">> 아이디 존재");
 			redirectAttributes.addFlashAttribute("message", "회원님의 아이디는  [" + user.getUserId() + "] 입니다");
 			return "redirect:/user/login";
 		} else {
@@ -299,7 +295,6 @@ public class UserController {
 		UserVO user = userService.findPw(vo);
 
 		if (user != null) {
-			System.out.println(">> 비밀번호 보여주기");
 			redirectAttributes.addFlashAttribute("message", "회원님의 비밀번호는  [" + user.getUserPassword() + "] 입니다");
 			return "redirect:/user/login";
 		} else {
@@ -311,7 +306,6 @@ public class UserController {
 	@RequestMapping("/purchaseList")
 	@ResponseBody
 	public List<UserVO> purchaseList(UserVO vo, HttpSession session) {
-	    System.out.println("purchaseList 실행");
 	    vo.setUserId((String) session.getAttribute("userId"));
 	    List<UserVO> purchaseList = userService.purchaseList(vo);
 
@@ -430,7 +424,6 @@ public class UserController {
 	
     @RequestMapping("/leaveUser")
 	public String leaveUser(UserVO vo, HttpSession session) {
-		System.out.println(">>> 유저삭제처리");
 		vo.setUserId((String)session.getAttribute("userId"));
 		userService.deleteUser(vo);
 		session.invalidate();

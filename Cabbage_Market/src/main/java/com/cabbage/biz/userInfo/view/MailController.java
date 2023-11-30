@@ -4,11 +4,15 @@ import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cabbage.biz.userInfo.user.UserService;
+import com.cabbage.biz.userInfo.user.UserVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,13 +21,14 @@ import lombok.RequiredArgsConstructor;
 public class MailController {
 	
 	private final JavaMailSenderImpl mailSender;
+	@Qualifier("userService")
+	private final UserService userService;
 
 	//이메일 인증
 	@PostMapping("/user/EmailAuth")
 	@ResponseBody
 	public int emailAuth(String userEmail) {
 		
-		System.out.println("전달 받은 이메일 주소 : " + userEmail);
 		
 		//난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random random = new Random();
@@ -49,16 +54,19 @@ public class MailController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("랜덤숫자 : " + checkNum);
 		return checkNum;
 	}
 	
 	//이메일 인증
 		@PostMapping("/user/EmailAuth2")
 		@ResponseBody
-		public int emailAuth2(String userEmail) {
+		public int emailAuth2(String userEmail, String userId) {
 			
-			System.out.println("전달 받은 이메일 주소 : " + userEmail);
+			
+			
+			UserVO user = userService.getUserByIdAndEmail(userEmail, userEmail);
+			if(user == null)
+				return -1;
 			
 			//난수의 범위 111111 ~ 999999 (6자리 난수)
 			Random random = new Random();
@@ -84,7 +92,6 @@ public class MailController {
 				e.printStackTrace();
 			}
 			
-			System.out.println("랜덤숫자 : " + checkNum);
 			return checkNum;
 		}
 

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css" integrity="sha256-G3IAYJYIQvZgPksNQDbjvxd/Ca1SfCDFwu2s2lt0oGo=" crossorigin="anonymous" />
 <link rel="stylesheet" href="/resources/css/post/postCreate.css">
 <link rel="stylesheet" href="/resources/css/post/postCreateImage.css">
-<link rel="icon" href="/resources/pic/cabbage2.png" type="image/x-icon">
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="/resources/js/post/postCreate.js"></script>
 

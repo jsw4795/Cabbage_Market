@@ -3,7 +3,6 @@ package com.cabbage.biz.userInfo.user.impl;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cabbage.biz.userInfo.user.UserVO;
@@ -14,11 +13,14 @@ import lombok.RequiredArgsConstructor;
 @Repository
 public class UserDAO {
 
-	@Autowired
 	private final SqlSessionTemplate mybatis;
 
 	public UserVO getUser(UserVO vo) {
 		return mybatis.selectOne("userDAO.getUser", vo);
+	}
+	
+	public UserVO getUserByIdAndEmail(UserVO vo) {
+		return mybatis.selectOne("userDAO.getUserByIdAndEmail", vo);
 	}
 
 	public void joinUser(UserVO vo) {

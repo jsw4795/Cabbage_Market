@@ -21,7 +21,6 @@ public class NotificationController {
 	// 추가 //알림 읽으면 unread -> read
 	@RequestMapping("/updateNoti")
 	public void updateNoti(NotiVO vo, HttpSession session) {
-		System.out.println("updateNoti");
         String id = (session.getAttribute("userId")).toString();
         
 		notiService.updateNoti(id);
@@ -29,7 +28,6 @@ public class NotificationController {
 	
 	@RequestMapping("/deleteNoti")
 	public void deleteNoti(@RequestParam("notiId") Long notiId, NotiVO vo) {
-		System.out.println("deleteNoti");
         vo.setNotiId(notiId);
         
 		notiService.deleteNoti(vo);

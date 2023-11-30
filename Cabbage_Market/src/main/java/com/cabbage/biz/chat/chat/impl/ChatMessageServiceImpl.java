@@ -23,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ChatMessageServiceImpl implements ChatMessageService {
 	
-	private static String uploadPath = "/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/chatPic"; // 각자 상황에 맞게 변경
 		
 	private final ChatDAO chatDAO;
 	private final ChatRoomService chatRoomService;

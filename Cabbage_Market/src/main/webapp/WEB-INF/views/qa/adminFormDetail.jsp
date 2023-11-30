@@ -8,15 +8,14 @@
 <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet"/>
    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/qa/adminFormDetail.css">
-<title>관리자모드 댓글 입력/삭제 [adminFormDetail.jsp]</title>
+<title>관리자모드 댓글 입력/삭제</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 </head>
 <body>
 	<div id="container">
 
 		<div title="" class="content-container"></div>
 		<h1 title="" class="">
-			<!-- 세션에서 로그인된 사용자 정보 읽어오기 -->
-			<c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
 				<svg title="" width="1.8rem" height="3rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
@@ -80,7 +79,7 @@
 						<div class="fb__communityDetail__comments js__communityDetail__comments">
 								<!-- 댓글이 있을 때 -->
 					            <c:if test="${not empty admin.qaComment}">
-					                <h3>${admin.qaComment}</h3>
+					                <h3 style="padding: 0.1rem 0.9rem 0rem;">${admin.qaComment}</h3>
 					            </c:if>
 					
 					            <!-- 댓글이 없을 때 -->
@@ -91,80 +90,19 @@
 					                    </p>
 					                    <p>
 					                        <input type="hidden" name="qaId" value="${admin.qaId}">
-					                        <input type="hidden" name="userId" value="${loggedInUser.userId}">
+					                        <input type="hidden" name="userId" value="${loggedInUser}">
 					                        <input type="submit" value="등록">
 					                    </p>
 					                </form>
 					            </c:if>
 								</div>
 								
-								<%-- <!-- 댓글 영역 -->
-								<c:if test="${not empty admin.qaComment}">
-								    <h1>${admin.qaComment}</h1>
-								</c:if>
-								
-								<c:if test="${empty admin.qaComment}">
-								    <p>
-								        <textarea rows="5" cols="50" name="qaComment" placeholder="댓글을 입력하세요"></textarea>
-								    </p>
-								    <p>
-								        <input type="hidden" name="qaId" value="${admin.qaId}">
-								        <input type="hidden" name="userId" value="${loggedInUser.userId}">
-								        <input type="submit" value="댓글 등록">
-								    </p>
-								</c:if>
-
-								
-								<h1>${admin.qaComment }</h1>
-								<!-- 댓글 영역 -->
-
-								<p>
-									<textarea rows="5" cols="50" name="qaComment"
-										placeholder="댓글을 입력하세요"></textarea>
-								</p>
-								<p>
-									<input type="hidden" name="qaId" value="${admin.qaId}">
-									<input type="hidden" name="userId"
-										value="${loggedInUser.userId}"> <input type="submit"
-										value="댓글 등록">
-								</p> --%>
 					</form>
-					<%-- 					<form action="adminCommentAction" method="post">
-					    <textarea name="qaContent" placeholder="댓글을 입력하세요">${adminFormDetail.qaContent}</textarea>
-					    <input type="hidden" name="qaId" value="${adminFormDetail.qaId}">
-					    <input type="hidden" name="action" value="${empty adminFormDetail.qaContent ? 'insert' : 'update'}">
-					    <input type="submit" value="${empty adminFormDetail.qaContent ? '댓글 등록' : '댓글 수정'}">
-					    
-					    <!-- 댓글이 있을 경우에만 삭제 링크 표시 -->
-					    <c:if test="${not empty adminFormDetail.qaContent}">
-					        <a href="deleteAdminComment?qaId=${adminFormDetail.qaId}">삭제</a>
-					    </c:if>
-					</form> --%>
-
-					<!-- 댓글 등록 -->
-					<%-- <form action="adminFormInsert" method="post">
-					    <textarea name="qaContent" placeholder="댓글을 입력하세요"></textarea>
-					    <input type="hidden" name="qaId" value="${adminFormDetail.qaId}">
-					    <input type="submit" value="댓글 등록">
-					</form> --%>
-
-					<!-- 댓글 수정 -->
-					<%-- <form action="updateAdminComment" method="post">
-					    <textarea name="qaContent" placeholder="댓글을 수정하세요">${adminFormDetail.qaContent}</textarea>
-					    <input type="hidden" name="qaId" value="${adminFormDetail.qaId}">
-					    <input type="submit" value="댓글 수정">
-					</form> --%>
-
-					<!-- 댓글 삭제 -->
-					<%-- <c:if test="${not empty adminFormDetail.userId}">
-					    <p>${adminFormDetail.qaContent} 
-					        <a href="deleteAdminComment?qaId=${adminFormDetail.qaId}">삭제</a>
-					    </p>
-					</c:if> --%>
+					
 
 					<p>
-						<a href="adminQaFormList">목록</a>
-						<a href="deleteAdminComment?qaId=${admin.qaId }">삭제</a>	
+						<a href="adminQaFormList" class="button-link">목록</a>
+						<a href="deleteAdminComment?qaId=${admin.qaId }" class="button-link">삭제</a>	
 					</p>
 				</div>
 			</div>

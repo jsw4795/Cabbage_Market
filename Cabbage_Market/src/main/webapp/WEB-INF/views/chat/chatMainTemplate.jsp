@@ -17,7 +17,7 @@
 <title>배추채팅</title>
 <link rel="stylesheet" href="/resources/css/base.css" />
 <link rel="stylesheet" href="/resources/css/chat/chat.css" />
-<link rel="icon" href="/resources/pic/Cabbage_Logo_imgOnly.png" />
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="/resources/js/chat/chat.js"></script>
 </head>

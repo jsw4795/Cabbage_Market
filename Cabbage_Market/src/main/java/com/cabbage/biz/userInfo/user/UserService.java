@@ -5,6 +5,7 @@ import java.util.List;
 public interface UserService {
 	
 	UserVO getUser(UserVO vo);
+	UserVO getUserByIdAndEmail(String userId, String userEmail);
 
 	void joinUser(UserVO vo);
 

@@ -43,21 +43,21 @@
 }
 .sellerAction2{
 	margin-bottom: 10px;
-	margin-top: 15px;
-	position: relative;
-	width: 103px;
+    margin-top: 15px;
+    position: relative;
+    width: 110px;
 }
 
 .changeStatus{
 	cursor: pointer;
-	font-weight: 700;
+    font-weight: 700;
     -webkit-font-smoothing: antialiased;
     background-color: #9DC08B;
     color: white;
     border: 1px solid transparent;
     padding: 6px 12px;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
     border-radius: 0.25rem;
     display: inline-block;
@@ -65,14 +65,14 @@
 }
 .upDel{
 	cursor: pointer;
-	font-weight: 700;
+    font-weight: 700;
     -webkit-font-smoothing: antialiased;
     background-color: #9DC08B;
     color: white;
     border: 1px solid transparent;
     padding: 6px 12px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     border-radius: 0.25rem;
 }

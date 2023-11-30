@@ -124,14 +124,9 @@ function disableSubmitButton() {
 }
 
 function inputOnPriceEventOn() {
-  $(document).on(
-    {
-      keyup: function () {
-        formatCurrency($(this));
-      },
-    },
-    "input#postPrice"
-  );
+  $(document).on("input", "input#postPrice", function () {
+    formatCurrency($(this));
+  });
 }
 
 function formatNumber(n) {

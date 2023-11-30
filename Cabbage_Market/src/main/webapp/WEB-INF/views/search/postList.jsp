@@ -6,11 +6,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>배추 검색화면</title>
+	<title>배추마켓</title>
 	<link rel="stylesheet" href="/resources/css/search/body.css" />
 	<link rel="stylesheet" href="/resources/css/main/showAll.css" />
 	<link rel="stylesheet" href="/resources/css/main/main_included_jiwon.css" />
 	<link rel="stylesheet" href="/resources/css/main/main_haeun.css" />
+	<link rel="icon" href="/resources/pic/img/baechu.png" />
 
 
 	<style>

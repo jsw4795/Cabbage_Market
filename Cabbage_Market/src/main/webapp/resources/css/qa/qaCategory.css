@@ -49,6 +49,8 @@ a {
 
 li {
     text-align: -webkit-match-parent;
+    border-bottom-style: inset;
+    border-width: thin;
 }
 
 

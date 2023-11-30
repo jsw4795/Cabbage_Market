@@ -24,8 +24,7 @@
     letter-spacing: -1%;
     color: var(--seed-scale-color-gray-900);
     align-items: center;
-    margin-left: -5rem;
-    padding: 0 1.6rem 1.6rem 1.6rem;
+    padding: 0 1.6rem 1.6rem 0;
     width: 100;
     border-bottom: 1px solid var(--seed-scale-color-gray-200);
 }
@@ -867,7 +866,7 @@ html {
     gap: 2.4rem;
     border-top: 1px solid var(--seed-scale-color-gray-200);
     margin-top: 7.2rem;
-    margin-left: -1.6rem;
+    margin-left: 0;
     padding: 4rem 1.6rem;
     width: calc(100vw 4rem);
 }

@@ -48,7 +48,7 @@
 	}
 
 .button-link:hover {
-    background-color: #2980b9;
+    background-color: #a3a2a2;
     }
 
 /****************************************/
@@ -116,8 +116,8 @@ body {
 
 /* HEADER 부분 */
 .fb__communityDetail__header {
-    padding: 1.25rem 0 0.75rem;
-    margin: 0 0.9375rem;
+    padding: 0rem;
+    margin: 0rem;
     border-bottom: 1px solid #eeeeee;
 }
 
@@ -141,6 +141,7 @@ header {
     color: #111111;
     font-size: 1.7rem;
     line-height: 1.4375rem;
+    margin-left: 0;
 }
 
 p {
@@ -162,13 +163,13 @@ p {
 
 /* Content 부분 */
 .fb__communityDetail__header {
-    padding: 1.25rem 0 0.75rem;
-    margin: 0 0.9375rem;
+    padding: 0rem;
+    margin: 0rem;
     border-bottom: 1px solid #eeeeee;
 }
 
 .fb__communityDetail__contents {
-    padding: 1.25rem 0.9375rem 2.5rem;
+    padding: rem 0.9375rem 2.5rem;
     white-space: break-all;
 }
 
@@ -187,7 +188,7 @@ p {
 
 /* Comments 댓글 부분 */
 .fb__communityDetail__comments {
-    padding: 1.25rem 0.9rem 2.5rem;		/* 11/29 수정함!!!!*/
+    padding: rem 0.9rem 2.5rem;		/* 11/29 수정함!!!!*/
     border-top: 0.625rem solid #f8f8f8;
 }
 

@@ -148,6 +148,7 @@
     align-items: center;
     margin-left: 50px;
     position: relative;
+    border: 2px solid #9dc08b;
 }
 .img-haeun1 {
 	text-size-adjust: 100%;
@@ -672,7 +673,7 @@
 }
 
 .a-haeun1 {
-	border: 1px solid gray;
+	border: 2px solid #9dc08b;
 	border-radius: 5px;
 	padding-left: 15px;
 }

@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원정보 수정</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/user/signUp.css">
 <script type="text/javascript" src="/resources/js/user/infoUpdate.js"></script>

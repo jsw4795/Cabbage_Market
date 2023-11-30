@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>배추마켓</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 <link rel="stylesheet" href="/resources/css/main/showAll.css" />
 <link rel="stylesheet" href="/resources/css/main/main_included_jiwon.css" />
 <link rel="stylesheet" href="/resources/css/main/main_haeun.css" />

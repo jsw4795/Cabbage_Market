@@ -2,7 +2,6 @@ package com.cabbage.biz.userInfo.user.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cabbage.biz.userInfo.user.UserService;
@@ -14,12 +13,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service("userService")
 public class UserServiceImpl implements UserService {
-	@Autowired
+
 	private final UserDAO userDAO;
 
 	@Override
 	public UserVO getUser(UserVO vo) {
 		return userDAO.getUser(vo);
+	}
+	@Override
+	public UserVO getUserByIdAndEmail(String userId, String userEmail) {
+		return userDAO.getUserByIdAndEmail(UserVO.builder().userId(userId).userEmail(userEmail).build());
 	}
 	
 	@Override

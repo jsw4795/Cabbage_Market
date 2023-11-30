@@ -8,15 +8,14 @@
 <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet"/>
    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/qa/qaFormDetail.css">
-<title>1:1 문의내역 디테일 보기/삭제 [qaFormDetail.jsp]</title>
+<title>1:1 문의내역</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 </head>
 <body>
 	<div id="container">
 
 		<div title="" class="content-container"></div>
 			<h1 title="" class="">
-			<!-- 세션에서 로그인된 사용자 정보 읽어오기 -->
-				<c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
 					<svg title="" width="1.8rem" height="3rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
@@ -41,16 +40,6 @@
 	
 						<!-- 글 정보 -->
 						<div class="header__info">
-							<!-- 유저 이미지 -->
-							<!-- <figure class="header__info__thumb">
-								<a
-									href="/community/userProfile?code=1757faca2bf9b200b3d7825fac53108c&amp;pageMode=userProfile"
-									class="fb__communityDetail__userImageLink"> <img
-									alt="유저이미지" class="profile-image loadimage"
-									src="https://eytzjvrxjleq11337293.cdn.ntruss.com/data/mall_data/images/user_profile/1757faca2bf9b200b3d7825fac53108c/after_aa8cb8d20fd61677980fff04708bf642.jpg"
-									style="">
-								</a>
-							</figure> -->
 						</div>
 					</header>
 					

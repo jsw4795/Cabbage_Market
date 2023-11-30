@@ -104,7 +104,6 @@ public class QaController {
     // 1:1 문의하기 (qaForm.jsp -> qaFormList.jsp로 문의글 전달)
     @PostMapping("/qaFormInsert")
     public String insertQa(QaVO vo, Model model, HttpSession session) throws IllegalStateException, IOException {
-    	System.out.println(">>> insertQa 실행");
 
         // 사용자 ID를 세션에서 가져와서 해당 사용자의 1:1 문의 목록을 가져옴
     	String loggedInUser = (String) session.getAttribute("userId");
@@ -122,9 +121,6 @@ public class QaController {
 		} else if (uploadFile.isEmpty()) {
 			//System.out.println("::: 전달받은 파일 데이터가 없는 경우");
 		} else { //업로드 파일이 존재하는 경우
-			
-			// 원본파일명 구하기
-			String filename = uploadFile.getOriginalFilename();
 			
 		    
 		    // 확장자명 구하기
@@ -198,7 +194,6 @@ public class QaController {
     						@RequestParam(name = "searchKeyword", required = false) String searchKeyword,
     						@ModelAttribute("conditionMap") Map<String, String> conditionMap,
             				Model model, HttpSession session) {
-    	System.out.println(">>> 1:1 문의내역 리스트 보기 -> getQaList 실행!");
     	
     	// 세션에서 로그인된 사용자 정보 읽어오기
     	String loggedInUser = (String) session.getAttribute("userId");
@@ -302,7 +297,6 @@ public class QaController {
 	        // DB에 댓글 저장
 	        qaService.insertAdminComment(qa);
 	        
-	        System.out.println(">>>>"+ qa);
 	        notiService.afterInsertQaAnwser(qa);
 	        
 	        return "redirect:/qa/adminFormDetail?qaId=" + vo.getQaId();

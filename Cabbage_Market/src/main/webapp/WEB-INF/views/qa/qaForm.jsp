@@ -7,18 +7,15 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/qa/qaForm.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <title>문의 작성 페이지 (qaForm.jsp)</title>
+    <title>문의 작성</title>
+    <link rel="icon" href="/resources/pic/img/baechu.png" />
 </head>
 <body id="wv-feedbacks-new">
 
-    <!-- <form action="/qa/qaForm" method="post" enctype="multipart/form-data"> -->
-    <!-- <form action="/qa/qaFormList" method="post">  -->
-    <!-- 세션에서 로그인된 사용자 정보 읽어오기 -->
-    <c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
     <!-- 로그인 정보 출력 -->
     <c:if test="${loggedInUser ne null}">
         <!-- 로그인한 사용자 화면에 출력하기! -->
-        <p style="margin: 3em 16px 16px;">${loggedInUser.userId}님의 소중한 의견 감사합니다.🌿</p>
+        <p style="margin: 3em 16px 16px;">${loggedInUser}님의 소중한 의견 감사합니다.🌿</p>
     </c:if>
 
     <!-- 카테고리 내용 QA_CAT_CONTENT -->
@@ -50,8 +47,10 @@
                 <input data-v-8b136b14="" name="qaTitle" type="text" placeholder="제목을 입력해주세요 :)" class="phone"> <!----></div>
                 <div data-v-38784853="" data-v-8b136b14="" class="text-area">
                     <div data-v-38784853="" class="textarea">
-                        <textarea data-v-38784853="" cols="80" rows="20" name="qaContent" placeholder="여기에 내용을 적어주세요 :)" maxlength="1000" style=" border: none;  overflow: hidden;  resize: none; padding: 10px 10px 10px 10px;"></textarea>
-                     </div>
+                        <textarea data-v-38784853="" cols="80" rows="20" name="qaContent" placeholder="여기에 내용을 적어주세요 :)" 
+                        maxlength="1000" style=" border: none;  overflow: hidden;  resize: none; 
+                        padding: 15px 13.1px 15px 15px; box-sizing: inherit;"></textarea>
+                    </div>
                     <p data-v-38784853="" class="counter text-gray">0/1000</p>
                 </div>
                 <!-- 사진 업로드 부분 -->

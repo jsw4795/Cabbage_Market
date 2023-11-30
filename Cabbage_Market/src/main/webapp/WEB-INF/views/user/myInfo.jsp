@@ -4,7 +4,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>회원 정보</title>
+    <link rel="icon" href="/resources/pic/img/baechu.png" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/user/test.css" />
     <script>

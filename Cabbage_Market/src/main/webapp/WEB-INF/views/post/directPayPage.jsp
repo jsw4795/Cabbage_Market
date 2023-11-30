@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/post/directPayPage.css">
-<link rel="icon" href="/resources/pic/cabbage2.png" type="image/x-icon">
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -148,7 +148,7 @@ const Toast = Swal.mixin({
 	    });
 	}
 </script>
-<title>결제 페이지</title>
+<title>배추 결제</title>
 </head>
 <body>
 

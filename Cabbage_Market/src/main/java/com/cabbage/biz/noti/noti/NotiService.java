@@ -6,7 +6,6 @@ import java.util.Map;
 import com.cabbage.biz.post.post.PostVO;
 import com.cabbage.biz.qa.qa.QaVO;
 import com.cabbage.biz.userInfo.user.UserVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface NotiService {
 	//CRUD 기능 구현 메소드 정의

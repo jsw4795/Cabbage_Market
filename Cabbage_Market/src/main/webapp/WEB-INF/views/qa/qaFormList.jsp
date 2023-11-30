@@ -7,14 +7,13 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/qa/qaFormList.css">
-<title>문의글 목록 [qaFormList.jsp]]</title>
+<title>문의글 목록</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 </head>
 <body>
 	<div id="container">
 		<div title="" class="content-container"></div>
 		<h1 title="" class="">
-			<!-- 세션에서 로그인된 사용자 정보 읽어오기 -->
-			<c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
 				<svg title="" width="1.8rem" height="5rem" viewBox="0 0 474 801"
 					fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="" fill="#FF6F0F"></path> 
@@ -80,23 +79,6 @@
 				</c:forEach>
 			</section>
 
-			<!-- 파일명을 이용하여 이미지 표시 -->
-			<%--  <c:if test="${not empty qa.fileId}">
-					<img src="/path/to/your/image/${qa.fileId}.jpg" alt="QA Image">
-				</c:if> 
-			 		</c:forEach>
-						<c:if test="${empty qaList }">
-							<tr>
-								<td colspan="5" class="center">데이터가 없습니다</td>
-							</tr>
-						</c:if>
-					</tbody>
-				</table>
-
-				<p>
-					<a href="/qa/qaFormList">목록</a>
-				</p>
-			</div>  --%>
 		</div>
 	</div>
 <script>

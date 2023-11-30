@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/qa/adminFormList.css">
-<title>관리자 페이지 [adminFormList.jsp]</title>
+<title>관리자 페이지</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 <style>
 
 </style>

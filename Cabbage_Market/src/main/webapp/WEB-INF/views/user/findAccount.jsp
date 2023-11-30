@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>아이디/비밀번호 찾기</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>   
@@ -47,7 +48,7 @@
 				<h2>비밀번호 찾기</h2>
 				<div class="findinfo">
 					<h4>아이디</h4>
-					<input type="text" name="userId" placeholder="ID"
+					<input type="text" name="userId" id="userIdInpw" placeholder="ID"
 						autocomplete="off" maxlength="16">
 				</div>
 

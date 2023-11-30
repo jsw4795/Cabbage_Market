@@ -290,9 +290,9 @@ public class PostController {
     	List<MultipartFile> uploadFile = vo.getUploadFile();
     	
     	if(uploadFile == null) {
-    		System.out.println("uploadFile 파라미터 전달x");
+    		//System.out.println("uploadFile 파라미터 전달x");
     	}else if(uploadFile.isEmpty()) {
-    		System.out.println("업로드 파일 없음");
+    		//System.out.println("업로드 파일 없음");
     	}else {
     		int maxPostId = postService.getMaxPostId();
     		List<String> filesList = new ArrayList<String>();

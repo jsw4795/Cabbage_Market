@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/qa/qa.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <title>QA 고객센터</title>
+<link rel="icon" href="/resources/pic/img/baechu.png" />
 </head>
 <style>
 
@@ -135,19 +136,11 @@
 </style>
 <body id="qa-index">
 	
-	<!-- 로그인된 사용자 정보 가져오기 -->
-    <%--<c:set var="loggedInUser" value="${sessionScope.loggedInUser}" />
-    
-     <c:if test="${loggedInUser ne null}">
-        <p style="margin: 3em 16px 16px;">${loggedInUser.userId}님 안녕하세요! 🤚</p>
-    </c:if> --%>
     
 	<div title id="faq-wrapper">
-	<a title="" href="qa" id="web-title">
-		<svg title="" width="1.8rem" height="3rem" viewBox="0 0 474 801" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<a title="" href="/" id="web-title">
 			<path d="" fill="#FF6F0F"></path> 
 			<img src="/resources/pic/img/baechu.png" width="45" height="45" />
-		</svg> 
 	<div title>고객센터</div>
 	</a>
     
@@ -162,26 +155,19 @@
 	<div searchBar="" class="search-wrapper ">
 	<div searchBar="" class="input-area-wrapper">
     	<form searchBar="" action="/qa/faqKeywordList" method="get">
-		    <%-- <select name="searchCondition">
-				<c:forEach var="option" items="${conditionMap }">
-					<option value="${option.value }">${option.key }</option>
-				</c:forEach>
-			</select>  --%>
 		    <!-- 돋보기 아이콘 추가 -->
 		    <svg searchBar="" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" id="search-icon">
 		    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.75065 0.833008C3.93068 0.833008 0.833984 3.92971 0.833984 7.74967C0.833984 11.5696 3.93068 14.6663 7.75065 14.6663C9.42056 14.6663 10.9522 14.0746 12.1474 13.0893L16.0292 16.9711C16.2896 17.2314 16.7117 17.2314 16.9721 16.9711C17.2324 16.7107 17.2324 16.2886 16.9721 16.0283L13.0902 12.1465C14.0755 10.9513 14.6673 9.41958 14.6673 7.74967C14.6673 3.92971 11.5706 0.833008 7.75065 0.833008ZM2.16732 7.74967C2.16732 4.66608 4.66706 2.16634 7.75065 2.16634C10.8342 2.16634 13.334 4.66608 13.334 7.74967C13.334 10.8333 10.8342 13.333 7.75065 13.333C4.66706 13.333 2.16732 10.8333 2.16732 7.74967Z" fill="#868B94"></path>
 		    </svg>
 		    <!-- 검색바 입력 필드 -->
 		    <input searchBar="" id="search-bar" type="search" name="searchKeyword" placeholder="궁금한 것을 검색해보세요.">
-  			<!-- <input type="text" name="searchKeyword"> 
-			<input type="submit" value="검색"></td> -->
   		</form>
  	</div>
  	</div></div>
  	
 	<br><br>
 	
-	<h1 style="font-size:23px" >자주 묻는 질문</h1>
+	<h1 style="font-size:23px;">자주 묻는 질문</h1>
 	<br>
 	<!-- FAQ 리스트 -->
 	<div id="faqLists">
@@ -194,22 +180,6 @@
 	</c:forEach>
 	</div>
 	
-	<%-- <c:forEach items="${faqList}" var="faq">
-        <input type="radio" name="accordion" id="answer${faq.faqId}">
-        <label for="answer${faq.faqId}">
-            ${faq.faqTitle}
-            <i class="fas fa-angle-down"></i> <!-- 주의: 여기서 클래스 이름을 수정했습니다. -->
-        </label>
-        <div>
-            <p style="text-align: left;">${faq.faqContent}</p>
-        </div>
-    </c:forEach> --%>
-	
-	
-	
-<!-- 	<div class="faq" style="font-size: 30px;">
-		<button style="font-size: 25px;" type="button" class="collapsible ">배추마켓은 어떤 곳인가요?</button>
-	</div> -->
 	
     
 	<div title="" id="feedback-wrapper" style="margin-bottom: -4rem;" >
@@ -230,16 +200,6 @@
 	<li data-v-4b2e992c="" id="copyright">© 배추마켓</li></ul>
 	</div>
 <script type="text/javascript">
-/*
-$(".collapsible").click(function(){
-	$("#radioFAQ").click();
-	$(".collapsible").next().click(function(){
-		alert('dkjdk');
-		$(".collapsible").hide();
-		$(".content p").next().slideToggle(1000);
-	})
-});
-*/
 $(".collapsible").click(function(){
 	$("#radioFAQ").click();
 	$("#radioFAQ").next().click(function(){
