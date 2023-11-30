@@ -15,6 +15,7 @@ import com.cabbage.biz.chat.chat.ChatRoomService;
 import com.cabbage.biz.chat.chat.ChatRoomVO;
 import com.cabbage.biz.chat.sse.ChatSSEService;
 import com.cabbage.biz.chat.user.UserVO;
+import com.cabbage.biz.common.CommonData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,7 +44,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 			String randomFileName = "CHAT" + "_" + UUID.randomUUID().toString()+ fileExtension; // 카테고리_랜덤글자.확장자
 			
-			File saveFile = new File(uploadPath, randomFileName);
+			File saveFile = new File(CommonData.FILE_UPLOAD_ROOT + "/chatPic/", randomFileName);
 			
 			try {
 				uploadPic.transferTo(saveFile);

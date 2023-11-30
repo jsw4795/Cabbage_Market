@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cabbage.biz.chat.chat.ChatRoomService;
+import com.cabbage.biz.common.CommonData;
 import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.userInfo.user.UserService;
@@ -361,7 +362,7 @@ public class UserController {
 			String savedFilename = "PROFILE_PIC" + UUID.randomUUID().toString() + extension;
 			
 			//물리적 파일 복사
-			String destPathFile = "/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/profilePic/" + savedFilename;
+			String destPathFile = CommonData.FILE_UPLOAD_ROOT + "/profilePic/" + savedFilename;
 			uploadFile.transferTo(new File(destPathFile));
 			vo.setFileName(savedFilename);
 			vo.setUserId((String)session.getAttribute("userId"));

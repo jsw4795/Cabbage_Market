@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cabbage.biz.chat.chat.ChatRoomService;
 import com.cabbage.biz.chat.user.UserService;
+import com.cabbage.biz.common.CommonData;
 import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.noti.noti.NotiVO;
 import com.cabbage.biz.post.post.PostService;
@@ -125,7 +126,7 @@ public class PostController {
     			if(fileName.trim() != "") {
     			String saveFileName = "post" + vo.getPostId() + "_" + UUID.randomUUID().toString() + "." + fileExtension;
     			
-    			list.transferTo(new File("/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/postPic/" + saveFileName));
+    			list.transferTo(new File(CommonData.FILE_UPLOAD_ROOT + "/postPic/" + saveFileName));
     			filesList.add(saveFileName);
     			}
     		}
@@ -304,7 +305,7 @@ public class PostController {
     			if(fileName.trim() != "") {
     			String saveFileName = "post" + maxPostId + "_" + UUID.randomUUID().toString() + "." + fileExtension;
     			
-    			list.transferTo(new File("/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/postPic/" + saveFileName));
+    			list.transferTo(new File(CommonData.FILE_UPLOAD_ROOT + "/postPic/" + saveFileName));
     			filesList.add(saveFileName);
     			}
     		}

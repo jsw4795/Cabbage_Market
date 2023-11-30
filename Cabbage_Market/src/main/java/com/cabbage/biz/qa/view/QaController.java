@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cabbage.biz.common.CommonData;
 import com.cabbage.biz.noti.noti.NotiService;
 import com.cabbage.biz.qa.qa.QaService;
 import com.cabbage.biz.qa.qa.QaVO;
@@ -135,7 +136,7 @@ public class QaController {
 			// 물리적 파일 복사
 			//uploadFile.transferTo(new File("C:/MyStudy/temp/" + savedFilename));
 //			String destPathFile = "/Users/juyeongpark/Downloads/" + fileId;
-			String destPathFile = "/Users/jsw4795/STS3-workspace/itwill/Cabbage_Market_Images/qaPic/" + newFileName;
+			String destPathFile = CommonData.FILE_UPLOAD_ROOT + "/qaPic/" + newFileName;
 			
 			uploadFile.transferTo(new File(destPathFile));
 			
