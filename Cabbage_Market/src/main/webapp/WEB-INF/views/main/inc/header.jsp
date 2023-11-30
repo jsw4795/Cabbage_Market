@@ -106,20 +106,20 @@
 									<li class="none-haeun-li" id="alrim_${alrim2.notiId }">
 										<a class="none-haeun-a" href=${alrim2.notiUrl } style="font-size: 18px;">
 										
-											<div class="music" >
-											 	<div class="musicInfo playerInnerContainer">
+											<div class="notification" >
+											 	<div class="notiInfo notiContainer">
 											 	
 												 	<c:if test="${alrim2.notiType == '키워드' || alrim2.notiType == '가격 할인' }">
-												 		<div class="musicPictureContainer play">
-															<img class="musicPicture-small" src="/resources/pic/postPic/${alrim2.fileName }" onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" 
+												 		<div class="notiPicContainer">
+															<img class="notiPic" src="/resources/pic/postPic/${alrim2.fileName }" onerror="this.onerror=null; this.src='/resources/pic/img/cabbage_icon.png'" 
 																	alt="알림 이미지">
 														</div>
 													</c:if>
 										 			
 										 			<div class="titleContainer">
-										 				<span class="artist-small" data-artist=" data.artist "> [${alrim2.notiType } 알림] </span>
-										 				<div class="musicTitleContainer">
-										 					<span  class="musicTitle-small"> ${alrim2.notiContent } </span>
+										 				<span class="title-small" > [${alrim2.notiType } 알림] </span>
+										 				<div class="notiContentContainer">
+										 					<span  class="notiContent-small"> ${alrim2.notiContent } </span>
 										 				</div>
 										 			</div>
 													

@@ -1,11 +1,15 @@
 @charset "UTF-8";
 #alrimDeleteBtn{
-	margin-left: 240px;
+	margin-left: 244px;
 	background: inherit;
 }
 #alrimDeleteBtn:focus {
 	border: none;
 	outline: none;
+}
+#alrimDeleteBtn > img {
+	width: 20px;
+	height: 20px;
 }
 .alrimContainer b {
 	font-size: 16px;

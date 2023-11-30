@@ -149,24 +149,24 @@ button {
 	overflow: scroll;
 	overflow-x: hidden;
 }
-#playList .music .musicInfo {
+#playList .notification .notiInfo {
 	width: 440px;
 	height: 40px;
 	padding: 12px 12px 12px 20px;
 	margin: 0;
 	display: flex;
 }
-#playList .music .artist-small {
+#playList .notification .title-small {
 	width: 300px;
 }
-.music .musicTitle-small {
+.notification .notiContent-small {
 	width: 300px;
 	font-size: 13px;
 }
-#playList .music .musicTitleContainer {
+#playList .notification .notiContentContainer {
 	width: 300px;
 }
-#playList .music .titleContainer {
+#playList .notification .titleContainer {
 	flex-grow: 0;
 	margin-left: 10px;
 }
@@ -219,14 +219,14 @@ button {
 	align-items: center;
 }
 
-.musicPictureContainer {
+.notiPicContainer {
 	border-radius: 3px;
 	width: 45px;
 	height: 45px;
 	float: left;
 	overflow: hidden;
 }
-.musicPicture-small {
+.notiPic {
 	width: 45px;
 	height: 45spx;
 }
@@ -236,7 +236,7 @@ button {
 	width: 200px;
 	margin-left: 50px;
 }
-.artist-small {
+.title-small {
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -250,7 +250,7 @@ button {
     text-align: left;
 }
 
-.musicTitleContainer {
+.notiContentContainer {
 	overflow: hidden;
     /* white-space: nowrap; */
     text-overflow: ellipsis;
@@ -262,7 +262,7 @@ button {
     text-align: left;
     height: 28px;
 }
-.artist-small:hover, .musicTitleContainer:hover {
+.title-small:hover, .notiContentContainer:hover {
 	color: black;
 }
 
@@ -276,7 +276,7 @@ button {
 	height: 40px;
 	display: inline-block;
 }
-.playerInnerContainer {
+.notiContainer {
 	position: relative;
 	float: left;
 	/* margin-bottom: 10px; */
