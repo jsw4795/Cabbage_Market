@@ -65,9 +65,9 @@
 }
 
 .preview-image {
-	max-width: 70px;
-	max-height: 70px;
-	margin: 5px;
+	object-fit: cover;
+    width: 70px;
+    height: 70px;
 }
 
 .delete-icon {
