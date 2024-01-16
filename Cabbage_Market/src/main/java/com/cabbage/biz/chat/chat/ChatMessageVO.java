@@ -21,7 +21,7 @@ public class ChatMessageVO {
 	private long chatRoomId;
 	private String senderId;
 	private String messageContent;
-	@JsonFormat(pattern = "M/d/yyyy HH:mm:ss zzz", timezone = "UTC") // UTC 시간으로 보내고 자바스크립트에서 로컬 시간으로 바꿈
+	@JsonFormat(pattern = "M/d/yyyy HH:mm:ss", timezone = "Asia/Seoul") // UTC 시간으로 보내고 자바스크립트에서 로컬 시간으로 바꿈
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 저장할 때 이렇게 받아서 저장
 	private LocalDateTime messageTime;
 	private String messageType; // CHAT, PIC, EMOJI, DEL, PAY
